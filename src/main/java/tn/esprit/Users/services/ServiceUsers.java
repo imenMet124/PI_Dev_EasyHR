@@ -1,6 +1,8 @@
 package tn.esprit.Users.services;
 
 import tn.esprit.Users.entities.User;
+import tn.esprit.Users.entities.UserRole;
+import tn.esprit.Users.entities.UserStatus;
 import tn.esprit.Users.utils.Base;
 
 import java.sql.*;
@@ -16,41 +18,41 @@ public class ServiceUsers implements IService<User> {
 
     @Override
     public void ajouter(User user) throws SQLException {
-        String sql = "INSERT INTO `user`(`id_emp`, `nom_emp`, `email`, `phone`, `role`, `position`, `salaire`, `date_embauche`, `statut_emp`, `id_dep`) "
+        String sql = "INSERT INTO `user`(`iyedIdUser`, `iyedNomUser`, `iyedEmailUser`, `iyedPhoneUser`, `iyedRoleUser`, `iyedPositionUser`, `iyedSalaireUser`, `iyedDateEmbaucheUser`, `iyedStatutUser`, `iyedIdDepUser`) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
-        preparedStatement.setInt(1, user.getIdEmp());
-        preparedStatement.setString(2, user.getNomEmp());
-        preparedStatement.setString(3, user.getEmail());
-        preparedStatement.setString(4, user.getPhone());
-        preparedStatement.setString(5, user.getRole());
-        preparedStatement.setString(6, user.getPosition());
-        preparedStatement.setDouble(7, user.getSalaire());
-        preparedStatement.setDate(8, new java.sql.Date(user.getDateEmbauche().getTime()));
-        preparedStatement.setString(9, user.getStatutEmp());
-        preparedStatement.setInt(10, user.getIdDep());
+        preparedStatement.setInt(1, user.getIyedIdUser());
+        preparedStatement.setString(2, user.getIyedNomUser());
+        preparedStatement.setString(3, user.getIyedEmailUser());
+        preparedStatement.setString(4, user.getIyedPhoneUser());
+        preparedStatement.setString(5, user.getIyedRoleUser().name());  // Convert enum to string
+        preparedStatement.setString(6, user.getIyedPositionUser());
+        preparedStatement.setDouble(7, user.getIyedSalaireUser());
+        preparedStatement.setDate(8, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
+        preparedStatement.setString(9, user.getIyedStatutUser().name());  // Convert enum to string
+        preparedStatement.setInt(10, user.getIyedIdDepUser());
 
         preparedStatement.executeUpdate();
     }
 
     @Override
     public void modifier(User user) throws SQLException {
-        String sql = "UPDATE `user` SET `nom_emp` = ?, `email` = ?, `phone` = ?, `role` = ?, `position` = ?, `salaire` = ?, `date_embauche` = ?, `statut_emp` = ?, `id_dep` = ? "
-                + "WHERE `id_emp` = ?";
+        String sql = "UPDATE `user` SET `iyedNomUser` = ?, `iyedEmailUser` = ?, `iyedPhoneUser` = ?, `iyedRoleUser` = ?, `iyedPositionUser` = ?, `iyedSalaireUser` = ?, `iyedDateEmbaucheUser` = ?, `iyedStatutUser` = ?, `iyedIdDepUser` = ? "
+                + "WHERE `iyedIdUser` = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, user.getNomEmp());
-        preparedStatement.setString(2, user.getEmail());
-        preparedStatement.setString(3, user.getPhone());
-        preparedStatement.setString(4, user.getRole());
-        preparedStatement.setString(5, user.getPosition());
-        preparedStatement.setDouble(6, user.getSalaire());
-        preparedStatement.setDate(7, new java.sql.Date(user.getDateEmbauche().getTime()));
-        preparedStatement.setString(8, user.getStatutEmp());
-        preparedStatement.setInt(9, user.getIdDep());
-        preparedStatement.setInt(10, user.getIdEmp());
+        preparedStatement.setString(1, user.getIyedNomUser());
+        preparedStatement.setString(2, user.getIyedEmailUser());
+        preparedStatement.setString(3, user.getIyedPhoneUser());
+        preparedStatement.setString(4, user.getIyedRoleUser().name());  // Convert enum to string
+        preparedStatement.setString(5, user.getIyedPositionUser());
+        preparedStatement.setDouble(6, user.getIyedSalaireUser());
+        preparedStatement.setDate(7, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
+        preparedStatement.setString(8, user.getIyedStatutUser().name());  // Convert enum to string
+        preparedStatement.setInt(9, user.getIyedIdDepUser());
+        preparedStatement.setInt(10, user.getIyedIdUser());
 
         int rowsUpdated = preparedStatement.executeUpdate();
         if (rowsUpdated > 0) {
@@ -62,7 +64,7 @@ public class ServiceUsers implements IService<User> {
 
     @Override
     public void supprimer(int id) throws SQLException {
-        String sql = "DELETE FROM `user` WHERE `id_emp` = ?";
+        String sql = "DELETE FROM `user` WHERE `iyedIdUser` = ?";
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setInt(1, id);
@@ -83,16 +85,16 @@ public class ServiceUsers implements IService<User> {
         ResultSet rs = statement.executeQuery(sql);
         while (rs.next()) {
             users.add(new User(
-                    rs.getInt("id_emp"),
-                    rs.getString("nom_emp"),
-                    rs.getString("email"),
-                    rs.getString("phone"),
-                    rs.getString("role"),
-                    rs.getString("position"),
-                    rs.getDouble("salaire"),
-                    rs.getDate("date_embauche"),
-                    rs.getString("statut_emp"),
-                    rs.getInt("id_dep")
+                    rs.getInt("iyedIdUser"),
+                    rs.getString("iyedNomUser"),
+                    rs.getString("iyedEmailUser"),
+                    rs.getString("iyedPhoneUser"),
+                    UserRole.valueOf(rs.getString("iyedRoleUser")),  // Convert string to enum
+                    rs.getString("iyedPositionUser"),
+                    rs.getDouble("iyedSalaireUser"),
+                    rs.getDate("iyedDateEmbaucheUser"),
+                    UserStatus.valueOf(rs.getString("iyedStatutUser")),  // Convert string to enum
+                    rs.getInt("iyedIdDepUser")
             ));
         }
 

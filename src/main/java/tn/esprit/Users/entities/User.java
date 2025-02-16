@@ -3,126 +3,126 @@ package tn.esprit.Users.entities;
 import java.util.Date;
 
 public class User {
-    private int idEmp;
-    private String nomEmp;
-    private String email;
-    private String phone;
-    private String role;
-    private String position;
-    private double salaire;
-    private Date dateEmbauche;
-    private String statutEmp;
-    private int idDep;
+    private int iyedIdUser;
+    private String iyedNomUser;
+    private String iyedEmailUser;
+    private String iyedPhoneUser;
+    private UserRole iyedRoleUser;  // Enum for role
+    private String iyedPositionUser;
+    private double iyedSalaireUser;
+    private Date iyedDateEmbaucheUser;
+    private UserStatus iyedStatutUser;  // Assuming you have a UserStatus enum
+    private int iyedIdDepUser;
 
     // Constructor
-    public User(int idEmp, String nomEmp, String email, String phone, String role, String position, double salaire, Date dateEmbauche, String statutEmp, int idDep) {
-        this.idEmp = idEmp;
-        this.nomEmp = nomEmp;
-        this.email = email;
-        this.phone = phone;
-        this.role = role;
-        this.position = position;
-        this.salaire = salaire;
-        this.dateEmbauche = dateEmbauche;
-        this.statutEmp = statutEmp;
-        this.idDep = idDep;
+    public User(int iyedIdUser, String iyedNomUser, String iyedEmailUser, String iyedPhoneUser, UserRole iyedRoleUser, String iyedPositionUser, double iyedSalaireUser, Date iyedDateEmbaucheUser, UserStatus iyedStatutUser, int iyedIdDepUser) {
+        this.iyedIdUser = iyedIdUser;
+        this.iyedNomUser = iyedNomUser;
+        this.iyedEmailUser = iyedEmailUser;
+        this.iyedPhoneUser = iyedPhoneUser;
+        this.iyedRoleUser = iyedRoleUser;
+        this.iyedPositionUser = iyedPositionUser;
+        this.iyedSalaireUser = iyedSalaireUser;
+        this.iyedDateEmbaucheUser = iyedDateEmbaucheUser;
+        this.iyedStatutUser = iyedStatutUser;
+        this.iyedIdDepUser = iyedIdDepUser;
     }
 
     // Getters and Setters
-    public int getIdEmp() {
-        return idEmp;
+    public int getIyedIdUser() {
+        return iyedIdUser;
     }
 
-    public void setIdEmp(int idEmp) {
-        this.idEmp = idEmp;
+    public void setIyedIdUser(int iyedIdUser) {
+        this.iyedIdUser = iyedIdUser;
     }
 
-    public String getNomEmp() {
-        return nomEmp;
+    public String getIyedNomUser() {
+        return iyedNomUser;
     }
 
-    public void setNomEmp(String nomEmp) {
-        this.nomEmp = nomEmp;
+    public void setIyedNomUser(String iyedNomUser) {
+        this.iyedNomUser = iyedNomUser;
     }
 
-    public String getEmail() {
-        return email;
+    public String getIyedEmailUser() {
+        return iyedEmailUser;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIyedEmailUser(String iyedEmailUser) {
+        this.iyedEmailUser = iyedEmailUser;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getIyedPhoneUser() {
+        return iyedPhoneUser;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setIyedPhoneUser(String iyedPhoneUser) {
+        this.iyedPhoneUser = iyedPhoneUser;
     }
 
-    public String getRole() {
-        return role;
+    public UserRole getIyedRoleUser() {
+        return iyedRoleUser;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setIyedRoleUser(UserRole iyedRoleUser) {
+        this.iyedRoleUser = iyedRoleUser;
     }
 
-    public String getPosition() {
-        return position;
+    public String getIyedPositionUser() {
+        return iyedPositionUser;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setIyedPositionUser(String iyedPositionUser) {
+        this.iyedPositionUser = iyedPositionUser;
     }
 
-    public double getSalaire() {
-        return salaire;
+    public double getIyedSalaireUser() {
+        return iyedSalaireUser;
     }
 
-    public void setSalaire(double salaire) {
-        this.salaire = salaire;
+    public void setIyedSalaireUser(double iyedSalaireUser) {
+        this.iyedSalaireUser = iyedSalaireUser;
     }
 
-    public Date getDateEmbauche() {
-        return dateEmbauche;
+    public Date getIyedDateEmbaucheUser() {
+        return iyedDateEmbaucheUser;
     }
 
-    public void setDateEmbauche(Date dateEmbauche) {
-        this.dateEmbauche = dateEmbauche;
+    public void setIyedDateEmbaucheUser(Date iyedDateEmbaucheUser) {
+        this.iyedDateEmbaucheUser = iyedDateEmbaucheUser;
     }
 
-    public String getStatutEmp() {
-        return statutEmp;
+    public UserStatus getIyedStatutUser() {
+        return iyedStatutUser;
     }
 
-    public void setStatutEmp(String statutEmp) {
-        this.statutEmp = statutEmp;
+    public void setIyedStatutUser(UserStatus iyedStatutUser) {
+        this.iyedStatutUser = iyedStatutUser;
     }
 
-    public int getIdDep() {
-        return idDep;
+    public int getIyedIdDepUser() {
+        return iyedIdDepUser;
     }
 
-    public void setIdDep(int idDep) {
-        this.idDep = idDep;
+    public void setIyedIdDepUser(int iyedIdDepUser) {
+        this.iyedIdDepUser = iyedIdDepUser;
     }
 
     // toString method for easy printing
     @Override
     public String toString() {
         return "User{" +
-                "idEmp=" + idEmp +
-                ", nomEmp='" + nomEmp + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", role='" + role + '\'' +
-                ", position='" + position + '\'' +
-                ", salaire=" + salaire +
-                ", dateEmbauche=" + dateEmbauche +
-                ", statutEmp='" + statutEmp + '\'' +
-                ", idDep=" + idDep +
+                "iyedIdUser=" + iyedIdUser +
+                ", iyedNomUser='" + iyedNomUser + '\'' +
+                ", iyedEmailUser='" + iyedEmailUser + '\'' +
+                ", iyedPhoneUser='" + iyedPhoneUser + '\'' +
+                ", iyedRoleUser='" + iyedRoleUser + '\'' +
+                ", iyedPositionUser='" + iyedPositionUser + '\'' +
+                ", iyedSalaireUser=" + iyedSalaireUser +
+                ", iyedDateEmbaucheUser=" + iyedDateEmbaucheUser +
+                ", iyedStatutUser='" + iyedStatutUser + '\'' +
+                ", iyedIdDepUser=" + iyedIdDepUser +
                 '}';
     }
 }
