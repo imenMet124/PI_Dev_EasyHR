@@ -12,10 +12,10 @@ public class User {
     private double iyedSalaireUser;
     private Date iyedDateEmbaucheUser;
     private UserStatus iyedStatutUser;  // Assuming you have a UserStatus enum
-    private int iyedIdDepUser;
+    private Department iyedDepartment;  // Reference to Department
 
     // Constructor
-    public User(int iyedIdUser, String iyedNomUser, String iyedEmailUser, String iyedPhoneUser, UserRole iyedRoleUser, String iyedPositionUser, double iyedSalaireUser, Date iyedDateEmbaucheUser, UserStatus iyedStatutUser, int iyedIdDepUser) {
+    public User(int iyedIdUser, String iyedNomUser, String iyedEmailUser, String iyedPhoneUser, UserRole iyedRoleUser, String iyedPositionUser, double iyedSalaireUser, Date iyedDateEmbaucheUser, UserStatus iyedStatutUser, Department iyedDepartment) {
         this.iyedIdUser = iyedIdUser;
         this.iyedNomUser = iyedNomUser;
         this.iyedEmailUser = iyedEmailUser;
@@ -25,7 +25,7 @@ public class User {
         this.iyedSalaireUser = iyedSalaireUser;
         this.iyedDateEmbaucheUser = iyedDateEmbaucheUser;
         this.iyedStatutUser = iyedStatutUser;
-        this.iyedIdDepUser = iyedIdDepUser;
+        this.iyedDepartment = iyedDepartment;
     }
 
     // Getters and Setters
@@ -101,12 +101,12 @@ public class User {
         this.iyedStatutUser = iyedStatutUser;
     }
 
-    public int getIyedIdDepUser() {
-        return iyedIdDepUser;
+    public Department getIyedDepartment() {
+        return iyedDepartment;
     }
 
-    public void setIyedIdDepUser(int iyedIdDepUser) {
-        this.iyedIdDepUser = iyedIdDepUser;
+    public void setIyedDepartment(Department iyedDepartment) {
+        this.iyedDepartment = iyedDepartment;
     }
 
     // toString method for easy printing
@@ -122,7 +122,7 @@ public class User {
                 ", iyedSalaireUser=" + iyedSalaireUser +
                 ", iyedDateEmbaucheUser=" + iyedDateEmbaucheUser +
                 ", iyedStatutUser='" + iyedStatutUser + '\'' +
-                ", iyedIdDepUser=" + iyedIdDepUser +
+                ", iyedDepartment=" + iyedDepartment.getIyedNomDep() +  // Display department name
                 '}';
     }
 }

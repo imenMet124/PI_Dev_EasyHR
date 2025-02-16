@@ -1,5 +1,6 @@
 package tn.esprit.Users.services;
 
+import tn.esprit.Users.entities.Department;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceUsers implements IService<User> {
-    private Connection connection;
+    private final Connection connection;
 
     public ServiceUsers() {
         connection = Base.getInstance().getConnection();
@@ -18,86 +19,185 @@ public class ServiceUsers implements IService<User> {
 
     @Override
     public void ajouter(User user) throws SQLException {
-        String sql = "INSERT INTO `user`(`iyedIdUser`, `iyedNomUser`, `iyedEmailUser`, `iyedPhoneUser`, `iyedRoleUser`, `iyedPositionUser`, `iyedSalaireUser`, `iyedDateEmbaucheUser`, `iyedStatutUser`, `iyedIdDepUser`) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `user` (`iyedNomUser`, `iyedEmailUser`, `iyedPhoneUser`, `iyedRoleUser`, `iyedPositionUser`, `iyedSalaireUser`, `iyedDateEmbaucheUser`, `iyedStatutUser`, `iyedIdDepUser`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, user.getIyedNomUser());
+            preparedStatement.setString(2, user.getIyedEmailUser());
+            preparedStatement.setString(3, user.getIyedPhoneUser());
+            preparedStatement.setString(4, user.getIyedRoleUser().name());
+            preparedStatement.setString(5, user.getIyedPositionUser());
+            preparedStatement.setDouble(6, user.getIyedSalaireUser());
+            preparedStatement.setDate(7, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
+            preparedStatement.setString(8, user.getIyedStatutUser().name());
+            preparedStatement.setObject(9, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
 
-        preparedStatement.setInt(1, user.getIyedIdUser());
-        preparedStatement.setString(2, user.getIyedNomUser());
-        preparedStatement.setString(3, user.getIyedEmailUser());
-        preparedStatement.setString(4, user.getIyedPhoneUser());
-        preparedStatement.setString(5, user.getIyedRoleUser().name());  // Convert enum to string
-        preparedStatement.setString(6, user.getIyedPositionUser());
-        preparedStatement.setDouble(7, user.getIyedSalaireUser());
-        preparedStatement.setDate(8, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
-        preparedStatement.setString(9, user.getIyedStatutUser().name());  // Convert enum to string
-        preparedStatement.setInt(10, user.getIyedIdDepUser());
+            preparedStatement.executeUpdate();
 
-        preparedStatement.executeUpdate();
+            // Get the generated user ID
+            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+                if (rs.next()) {
+                    user.setIyedIdUser(rs.getInt(1));  // Set the new user ID
+                }
+            }
+        }
     }
+
+
 
     @Override
     public void modifier(User user) throws SQLException {
-        String sql = "UPDATE `user` SET `iyedNomUser` = ?, `iyedEmailUser` = ?, `iyedPhoneUser` = ?, `iyedRoleUser` = ?, `iyedPositionUser` = ?, `iyedSalaireUser` = ?, `iyedDateEmbaucheUser` = ?, `iyedStatutUser` = ?, `iyedIdDepUser` = ? "
-                + "WHERE `iyedIdUser` = ?";
+        String sql = "UPDATE `user` SET `iyedNomUser`=?, `iyedEmailUser`=?, `iyedPhoneUser`=?, `iyedRoleUser`=?, `iyedPositionUser`=?, `iyedSalaireUser`=?, `iyedDateEmbaucheUser`=?, `iyedStatutUser`=?, `iyedIdDepUser`=? WHERE `iyedIdUser`=?";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1, user.getIyedNomUser());
-        preparedStatement.setString(2, user.getIyedEmailUser());
-        preparedStatement.setString(3, user.getIyedPhoneUser());
-        preparedStatement.setString(4, user.getIyedRoleUser().name());  // Convert enum to string
-        preparedStatement.setString(5, user.getIyedPositionUser());
-        preparedStatement.setDouble(6, user.getIyedSalaireUser());
-        preparedStatement.setDate(7, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
-        preparedStatement.setString(8, user.getIyedStatutUser().name());  // Convert enum to string
-        preparedStatement.setInt(9, user.getIyedIdDepUser());
-        preparedStatement.setInt(10, user.getIyedIdUser());
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, user.getIyedNomUser());
+            preparedStatement.setString(2, user.getIyedEmailUser());
+            preparedStatement.setString(3, user.getIyedPhoneUser());
+            preparedStatement.setString(4, user.getIyedRoleUser().name());
+            preparedStatement.setString(5, user.getIyedPositionUser());
+            preparedStatement.setDouble(6, user.getIyedSalaireUser());
+            preparedStatement.setDate(7, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
+            preparedStatement.setString(8, user.getIyedStatutUser().name());
+            preparedStatement.setObject(9, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
+            preparedStatement.setInt(10, user.getIyedIdUser());
 
-        int rowsUpdated = preparedStatement.executeUpdate();
-        if (rowsUpdated > 0) {
-            System.out.println("L'utilisateur a été mis à jour avec succès !");
-        } else {
-            System.out.println("Aucun utilisateur trouvé avec cet ID.");
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("L'utilisateur a été mis à jour avec succès !");
+            } else {
+                System.out.println("Aucune mise à jour effectuée pour l'utilisateur !");
+            }
         }
     }
+
 
     @Override
     public void supprimer(int id) throws SQLException {
         String sql = "DELETE FROM `user` WHERE `iyedIdUser` = ?";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setInt(1, id);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, id);
 
-        int rowsDeleted = preparedStatement.executeUpdate();
-        if (rowsDeleted > 0) {
-            System.out.println("L'utilisateur a été supprimé avec succès !");
-        } else {
-            System.out.println("Aucun utilisateur trouvé avec cet ID.");
+            int rowsDeleted = preparedStatement.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("L'utilisateur a été supprimé avec succès !");
+            } else {
+                System.out.println("Aucun utilisateur trouvé avec cet ID.");
+            }
         }
     }
 
     @Override
     public List<User> afficher() throws SQLException {
         List<User> users = new ArrayList<>();
-        String sql = "SELECT * FROM `user`";
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(sql);
-        while (rs.next()) {
-            users.add(new User(
-                    rs.getInt("iyedIdUser"),
-                    rs.getString("iyedNomUser"),
-                    rs.getString("iyedEmailUser"),
-                    rs.getString("iyedPhoneUser"),
-                    UserRole.valueOf(rs.getString("iyedRoleUser")),  // Convert string to enum
-                    rs.getString("iyedPositionUser"),
-                    rs.getDouble("iyedSalaireUser"),
-                    rs.getDate("iyedDateEmbaucheUser"),
-                    UserStatus.valueOf(rs.getString("iyedStatutUser")),  // Convert string to enum
-                    rs.getInt("iyedIdDepUser")
-            ));
+        String sql = "SELECT u.*, d.iyedNomDep, d.iyedDescriptionDep, d.iyedLocationDep " +
+                "FROM `user` u " +
+                "LEFT JOIN `department` d ON u.iyedIdDepUser = d.iyedIdDep";
+
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+
+            while (rs.next()) {
+                // Create Department object
+                Department department = new Department(
+                        rs.getInt("iyedIdDepUser"),
+                        rs.getString("iyedNomDep"),
+                        rs.getString("iyedDescriptionDep"),
+                        rs.getString("iyedLocationDep"),
+                        new ArrayList<>(),  // Employees list not fetched here
+                        null  // Manager not fetched here
+                );
+
+                // Create User object
+                User user = new User(
+                        rs.getInt("iyedIdUser"),
+                        rs.getString("iyedNomUser"),
+                        rs.getString("iyedEmailUser"),
+                        rs.getString("iyedPhoneUser"),
+                        UserRole.valueOf(rs.getString("iyedRoleUser")),  // Convert string to enum
+                        rs.getString("iyedPositionUser"),
+                        rs.getDouble("iyedSalaireUser"),
+                        rs.getDate("iyedDateEmbaucheUser"),
+                        UserStatus.valueOf(rs.getString("iyedStatutUser")),  // Convert string to enum
+                        department  // Assign department object
+                );
+
+                users.add(user);
+            }
         }
 
         return users;
     }
+    public User getById(int id) throws SQLException {
+        String query = "SELECT u.*, d.iyedNomDep, d.iyedIdDep " +
+                "FROM user u " +
+                "LEFT JOIN department d ON u.iyedIdDepUser = d.iyedIdDep " +
+                "WHERE u.iyedIdUser = ?";
+        PreparedStatement ps = connection.prepareStatement(query);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            Department department = rs.getInt("iyedIdDep") != 0 ?
+                    new Department(rs.getInt("iyedIdDep"), rs.getString("iyedNomDep"), null, null, null, null) : null;
+
+            return new User(
+                    rs.getInt("iyedIdUser"),
+                    rs.getString("iyedNomUser"),
+                    rs.getString("iyedEmailUser"),
+                    rs.getString("iyedPhoneUser"),
+                    UserRole.valueOf(rs.getString("iyedRoleUser")),
+                    rs.getString("iyedPositionUser"),
+                    rs.getDouble("iyedSalaireUser"),
+                    rs.getDate("iyedDateEmbaucheUser"),
+                    UserStatus.valueOf(rs.getString("iyedStatutUser")),
+                    department
+            );
+        }
+        return null;
+    }
+
+    private User buildUserFromResultSet(ResultSet rs) throws SQLException {
+        return new User(
+                rs.getInt("iyedIdUser"),
+                rs.getString("iyedNomUser"),
+                rs.getString("iyedEmailUser"),
+                rs.getString("iyedPhoneUser"),
+                UserRole.valueOf(rs.getString("iyedRoleUser")),  // Convert string to enum
+                rs.getString("iyedPositionUser"),
+                rs.getDouble("iyedSalaireUser"),
+                rs.getDate("iyedDateEmbaucheUser"),
+                UserStatus.valueOf(rs.getString("iyedStatutUser")),  // Convert string to enum
+                new Department(rs.getInt("iyedIdDepUser"), null, null, null, new ArrayList<>(), null) // Only department ID
+        );
+    }
+    public List<User> getUsersByDepartment(int departmentId) throws SQLException {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM `user` WHERE `iyedIdDepUser` = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, departmentId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    users.add(buildUserFromResultSet(rs));
+                }
+            }
+        }
+
+        return users;
+    }
+    public int getLastInsertedId() throws SQLException {
+        String sql = "SELECT LAST_INSERT_ID() AS id";
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        }
+        return 0;  // Return 0 if no ID is found
+    }
+
+
+
 }
+
