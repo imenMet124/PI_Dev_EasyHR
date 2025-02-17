@@ -5,34 +5,32 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Base {
-    private final String URL = "jdbc:mysql://localhost:3306/UserDB"; // Database URL for User
-    private final String USER = "root"; // Database username
-    private final String PSW = ""; // Database password
+    private static Base instance;
+    private Connection connection;
 
-    private Connection connection; // Database connection object
-    private static Base instance; // Singleton instance
-
-    // Private constructor to prevent instantiation from outside
     private Base() {
         try {
-            // Establish the database connection
-            connection = DriverManager.getConnection(URL, USER, PSW);
-            System.out.println("Connected to the User database.");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserDB", "root", "");
         } catch (SQLException e) {
-            System.out.println("Failed to connect to the User database: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    // Singleton instance getter
-    public static Base getInstance() {
+    public static synchronized Base getInstance() {
         if (instance == null) {
             instance = new Base();
         }
         return instance;
     }
 
-    // Getter for the database connection
     public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) { // Reconnect if closed
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserDB", "root", "");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return connection;
     }
 }

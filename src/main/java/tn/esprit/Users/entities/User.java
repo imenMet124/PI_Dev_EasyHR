@@ -28,6 +28,7 @@ public class User {
         this.iyedDepartment = iyedDepartment;
     }
 
+
     // Getters and Setters
     public int getIyedIdUser() {
         return iyedIdUser;

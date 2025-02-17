@@ -8,12 +8,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ServiceDepartment implements IService<Department> {
     private final Connection connection;
     private final ServiceUsers serviceUsers;  // To fetch users
 
     public ServiceDepartment() {
-        connection = Base.getInstance().getConnection();
+        connection = Base.getInstance().getConnection();  // Reuse the same connection
         serviceUsers = new ServiceUsers();  // Initialize user service
     }
 
@@ -37,7 +38,6 @@ public class ServiceDepartment implements IService<Department> {
             }
         }
     }
-
 
     @Override
     public void modifier(Department department) throws SQLException {
@@ -117,6 +117,7 @@ public class ServiceDepartment implements IService<Department> {
                 manager
         );
     }
+
     public Department getDepartmentWithManager(int departmentId) throws SQLException {
         String sql = "SELECT d.*, u.iyedNomUser AS managerName " +
                 "FROM department d " +
@@ -150,6 +151,7 @@ public class ServiceDepartment implements IService<Department> {
         }
         return null;  // Return null if no department is found
     }
+
     public int getLastInsertedId() throws SQLException {
         String sql = "SELECT LAST_INSERT_ID() AS id";
         try (Statement statement = connection.createStatement();
@@ -161,5 +163,61 @@ public class ServiceDepartment implements IService<Department> {
         return 0;  // Return 0 if no ID is found
     }
 
-}
+        private static final String URL = "jdbc:mysql://localhost:3306/UserDB"; // Replace with your database URL
+        private static final String USER = "root"; // Replace with your database username
+        private static final String PASSWORD = ""; // Replace with your database password
+
+    public int getDepartmentIdByName(String name) {
+        String query = "SELECT iyedIdDep FROM department WHERE iyedNomDep = ?";
+        int departmentId = -1; // Default value if not found
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the department name as a parameter
+            stmt.setString(1, name);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Retrieve the result
+                    departmentId = rs.getInt("iyedIdDep");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return departmentId;
+    }
+    }
+
+//        String query = "SELECT iyedIdDep FROM department WHERE iyedNomDep = ?";
+//        if (connection == null) {
+//            System.out.println("Connection is null!");
+//            return 0;
+//        } else {
+//            System.out.println("Connection is valid.");
+//        }
+//        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+//            stmt.setString(1, name);
+//
+//            try (ResultSet resultSet = stmt.executeQuery()) {
+//                if (resultSet.next()) {
+//                    return resultSet.getInt("iyedIdDep");
+//                } else {
+//                    System.out.println("No department found for name: " + name);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            System.out.println("Error fetching department ID for: " + name);
+//            e.printStackTrace();  // Print the full exception details
+//            throw e;
+//        }
+//        return 0;  // Return 0 if not found
+
+
+
+
+
 
