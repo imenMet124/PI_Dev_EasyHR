@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Users.controller.AfficherUsersController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <VBox spacing="10" alignment="TOP_CENTER" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <!-- Search Bar -->
+        <HBox spacing="10">
+            <Label text="Search:"/>
+            <TextField fx:id="searchField" promptText="Enter user name..."/>
+            <Button text="Search" onAction="#handleSearch"/>
+        </HBox>
+
+        <!-- TableView for Users -->
+        <TableView fx:id="userTable" prefHeight="400.0">
+            <columns>
+                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
+                <TableColumn fx:id="colEmail" text="Email" prefWidth="200"/>
+                <TableColumn fx:id="colPhone" text="Phone" prefWidth="120"/>
+                <TableColumn fx:id="colRole" text="Role" prefWidth="100"/>
+                <TableColumn fx:id="colPosition" text="Position" prefWidth="150"/>
+                <TableColumn fx:id="colSalary" text="Salary" prefWidth="100"/>
+                <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="colHireDate" text="Hire Date"/>
+
+                <TableColumn fx:id="colDepartment" text="Department" prefWidth="150"/>
+            </columns>
+        </TableView>
+
+        <!-- Buttons for CRUD Operations -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Add User" fx:id="btnAdd" onAction="#handleAdd"/>
+            <Button text="Edit User" fx:id="btnEdit" onAction="#handleEdit"/>
+            <Button text="Delete User" fx:id="btnDelete" onAction="#handleDelete"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

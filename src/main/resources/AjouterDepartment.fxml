@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.AjouterDepartmentController" prefHeight="400.0" prefWidth="600.0">
+
+    <!-- Title -->
+    <Label text="Add New Department" layoutX="220" layoutY="20" style="-fx-font-size: 18px;"/>
+
+    <!-- Department Name -->
+    <Label text="Department Name:" layoutX="40" layoutY="60"/>
+    <TextField fx:id="nameField" layoutX="150" layoutY="60" prefWidth="400"/>
+
+    <!-- Department Description -->
+    <Label text="Description:" layoutX="40" layoutY="100"/>
+    <TextArea fx:id="descriptionArea" layoutX="150" layoutY="100" prefWidth="400" prefHeight="100"/>
+
+    <!-- Department Location -->
+    <Label text="Location:" layoutX="40" layoutY="220"/>
+    <TextField fx:id="locationField" layoutX="150" layoutY="220" prefWidth="400"/>
+
+    <!-- Department Manager -->
+    <Label text="Manager:" layoutX="40" layoutY="260"/>
+    <ComboBox fx:id="managerComboBox" layoutX="150" layoutY="260" prefWidth="400"/>
+
+    <!-- Save Button -->
+    <Button text="Save" layoutX="250" layoutY="320" onAction="#handleSaveDepartment"/>
+
+    <!-- Back Button -->
+    <Button text="Back" layoutX="150" layoutY="320" onAction="#handleBack"/>
+
+</AnchorPane>

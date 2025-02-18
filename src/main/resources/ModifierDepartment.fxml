@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Users.controller.ModifierDepartmentController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <Label text="Edit Department" layoutX="250.0" layoutY="20.0" />
+
+    <Label text="Department Name:" layoutX="50.0" layoutY="70.0" />
+    <TextField fx:id="departmentNameField" layoutX="150.0" layoutY="70.0" />
+
+    <Label text="Description:" layoutX="50.0" layoutY="110.0" />
+    <TextField fx:id="descriptionField" layoutX="150.0" layoutY="110.0" />
+
+    <Label text="Location:" layoutX="50.0" layoutY="150.0" />
+    <TextField fx:id="locationField" layoutX="150.0" layoutY="150.0" />
+
+    <Label text="Manager:" layoutX="50.0" layoutY="190.0" />
+    <ComboBox fx:id="managerComboBox" layoutX="150.0" layoutY="190.0" prefWidth="300.0" />
+
+    <Button text="Save Changes" layoutX="250.0" layoutY="250.0" onAction="#handleSaveChanges"/>
+</AnchorPane>

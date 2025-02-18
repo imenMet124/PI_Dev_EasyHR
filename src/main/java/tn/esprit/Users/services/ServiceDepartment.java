@@ -163,7 +163,7 @@ public class ServiceDepartment implements IService<Department> {
         return 0;  // Return 0 if no ID is found
     }
 
-        private static final String URL = "jdbc:mysql://localhost:3306/UserDB"; // Replace with your database URL
+        private static final String URL = "jdbc:mysql://localhost:3306/Base"; // Replace with your database URL
         private static final String USER = "root"; // Replace with your database username
         private static final String PASSWORD = ""; // Replace with your database password
 
@@ -189,6 +189,23 @@ public class ServiceDepartment implements IService<Department> {
         }
 
         return departmentId;
+    }
+    public List<String> getDepartmentNames() {
+        List<String> departmentNames = new ArrayList<>();
+        //departmentNames.add("No Department"); // Default option
+
+        String query = "SELECT iyedNomDep FROM department";
+
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
+                departmentNames.add(rs.getString("iyedNomDep"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return departmentNames;
     }
     }
 

@@ -1,0 +1,165 @@
+.vbox-container {
+    -fx-background-color: #CBC3E3; /* Beige */
+    -fx-background-radius: 10px;
+    -fx-padding: 15px;
+
+    /* Assure que l'arrondi est bien appliqué */
+    -fx-background-insets: 0;
+}
+/* hbox-style.css */
+.hbox-style {
+    -fx-background-color: lightblue;
+    -fx-background-radius: 10px;
+    -fx-padding: 15px;
+    -fx-background-insets: 0;
+    -fx-alignment: center;
+}
+.borderpane-style {
+    -fx-background-color: beige; /* Couleur de fond */
+    -fx-background-radius: 10px;     /* Rayon des coins arrondis */
+    -fx-padding: 15px;               /* Espacement intérieur */
+    -fx-background-insets: 0;        /* Aucun décalage pour l'arrière-plan */
+    -fx-alignment: center;            /* Alignement du contenu au centre */
+}
+.textfield-modern-white {
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-background-radius: 15px;   /* Coins arrondis */
+    -fx-border-radius: 15px;       /* Coins arrondis pour la bordure */
+    -fx-border-color: #cccccc;     /* Couleur de la bordure */
+    -fx-border-width: 1px;         /* Épaisseur de la bordure */
+    -fx-padding: 10px;             /* Espacement intérieur */
+    -fx-font-size: 14px;           /* Taille de la police */
+    -fx-font-family: "Arial";      /* Police de caractères */
+    -fx-text-fill: #333333;        /* Couleur du texte */
+    -fx-prompt-text-fill: #999999; /* Couleur du texte d'invite (placeholder) */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 5); /* Ombre portée */
+}
+
+.textfield-modern-white:focused {
+    -fx-background-color: #ffffff; /* Fond blanc reste inchangé */
+    -fx-border-color: #4a90e2;     /* Bordure bleue lorsqu'il est focusé */
+    -fx-effect: dropshadow(three-pass-box, rgba(74,144,226,0.2), 10, 0, 0, 10); /* Ombre plus prononcée */
+}
+.textarea-modern {
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-background-radius: 10px;   /* Coins arrondis */
+    -fx-border-radius: 10px;       /* Coins arrondis pour la bordure */
+    -fx-border-color: #d0d0d0;     /* Bordure grise claire */
+    -fx-border-width: 1px;         /* Épaisseur fine de la bordure */
+    -fx-padding: 10px;             /* Espacement intérieur */
+    -fx-font-size: 14px;           /* Taille de la police */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif; /* Police moderne */
+    -fx-text-fill: #333333;        /* Couleur du texte */
+    -fx-prompt-text-fill: #a0a0a0; /* Couleur du texte d'invite (placeholder) */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 5); /* Ombre portée légère */
+}
+
+.textarea-modern:focused {
+    -fx-border-color: #4a90e2;     /* Bordure bleue lorsqu'il est focusé */
+    -fx-effect: dropshadow(three-pass-box, rgba(74,144,226,0.2), 10, 0, 0, 10); /* Ombre plus prononcée */
+}
+.combobox-modern {
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-background-radius: 10px;   /* Coins arrondis */
+    -fx-border-radius: 10px;       /* Coins arrondis pour la bordure */
+    -fx-border-color: #d0d0d0;     /* Bordure grise claire */
+    -fx-border-width: 1px;         /* Épaisseur fine de la bordure */
+    -fx-padding: 5px;              /* Espacement intérieur */
+    -fx-font-size: 14px;           /* Taille de la police */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif; /* Police moderne */
+    -fx-text-fill: #333333;        /* Couleur du texte */
+    -fx-prompt-text-fill: #a0a0a0; /* Couleur du texte d'invite (placeholder) */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 5); /* Ombre portée légère */
+}
+
+.combobox-modern .arrow-button {
+    -fx-background-color: transparent; /* Fond transparent pour le bouton de la flèche */
+}
+
+.combobox-modern .arrow {
+    -fx-background-color: #333333; /* Couleur de la flèche */
+}
+
+.combobox-modern:focused {
+    -fx-border-color: #4a90e2;     /* Bordure bleue lorsqu'il est focusé */
+    -fx-effect: dropshadow(three-pass-box, rgba(74,144,226,0.2), 10, 0, 0, 10); /* Ombre plus prononcée */
+}
+
+.combobox-modern .list-cell {
+    -fx-background-color: #ffffff; /* Fond blanc pour les cellules de la liste */
+    -fx-text-fill: #333333;        /* Couleur du texte dans les cellules */
+}
+
+.combobox-modern .list-view {
+    -fx-background-color: #ffffff; /* Fond blanc pour la liste déroulante */
+    -fx-background-radius: 10px;   /* Coins arrondis pour la liste déroulante */
+    -fx-border-radius: 10px;       /* Coins arrondis pour la bordure de la liste */
+    -fx-border-color: #d0d0d0;     /* Bordure grise claire pour la liste */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 5); /* Ombre portée légère */
+}
+.button-modern {
+    -fx-background-color: linear-gradient(to bottom, #4a90e2, #357abd); /* Dégradé de bleu */
+    -fx-background-radius: 15px;   /* Coins arrondis */
+    -fx-border-radius: 15px;       /* Coins arrondis pour la bordure */
+    -fx-border-color: transparent; /* Bordure transparente par défaut */
+    -fx-border-width: 2px;         /* Épaisseur de la bordure */
+    -fx-text-fill: white;          /* Couleur du texte */
+    -fx-font-size: 14px;           /* Taille de la police */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif; /* Police moderne */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 5); /* Ombre portée */
+    -fx-padding: 10px 20px;        /* Espacement intérieur */
+    -fx-cursor: hand;              /* Curseur en forme de main */
+}
+
+.button-modern:hover {
+    -fx-background-color: linear-gradient(to bottom, #5aa1ff, #4a90e2); /* Dégradé plus clair au survol */
+    -fx-border-color: #ffffff;     /* Bordure blanche au survol */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 15, 0, 0, 10); /* Ombre plus prononcée */
+}
+
+
+
+.list-view-modern .list-cell {
+    -fx-background-color: transparent; /* Fond transparent pour les cellules */
+    -fx-text-fill: #333333;           /* Couleur du texte */
+    -fx-font-size: 14px;               /* Taille de la police */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif; /* Police moderne */
+    -fx-padding: 10px;                 /* Espacement intérieur des cellules */
+}
+
+.list-view-modern .list-cell:filled:hover {
+    -fx-background-color: #f0f0f0; /* Fond gris clair au survol */
+    -fx-text-fill: #000000;        /* Couleur du texte au survol */
+}
+
+.list-view-modern .list-cell:filled:selected {
+    -fx-background-color: #4a90e2; /* Fond bleu pour la sélection */
+    -fx-text-fill: white;          /* Texte blanc pour la sélection */
+}
+
+.list-view-modern .list-cell:empty {
+    -fx-background-color: transparent; /* Fond transparent pour les cellules vides */
+}
+.list-view-modern {
+    -fx-background-color: #ffffff; /* Fond blanc */
+    -fx-background-radius: 10px;   /* Coins arrondis */
+    -fx-border-radius: 10px;       /* Coins arrondis pour la bordure */
+    -fx-border-color: #d0d0d0;     /* Bordure grise claire */
+    -fx-border-width: 1px;         /* Épaisseur fine de la bordure */
+    -fx-padding: 5px;              /* Espacement intérieur */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 5); /* Ombre portée légère */
+}
+
+.list-view-modern .list-cell {
+    -fx-background-color: transparent; /* Fond transparent pour les cellules */
+    -fx-text-fill: #333333;           /* Couleur du texte */
+    -fx-font-size: 14px;               /* Taille de la police */
+    -fx-font-family: "Segoe UI", "Arial", sans-serif; /* Police moderne */
+    -fx-padding: 10px;                 /* Espacement intérieur des cellules */
+}
+
+
+
+.list-view-modern .list-cell:empty {
+    -fx-background-color: transparent; /* Fond transparent pour les cellules vides */
+}

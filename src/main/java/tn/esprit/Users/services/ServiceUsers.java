@@ -199,6 +199,65 @@ public class ServiceUsers implements IService<User> {
 
 
 
+    private static final String URL = "jdbc:mysql://localhost:3306/Base"; // Replace with your database URL
+    private static final String USER = "root"; // Replace with your database username
+    private static final String PASSWORD = ""; // Replace with your database password
+
+    public int getUserIdByName(String name) {
+        String query = "SELECT iyedIdUser FROM user WHERE iyedNomUser = ?";
+        int userId = -1; // Default value if not found
+
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            // Set the user name as a parameter
+            stmt.setString(1, name);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    // Retrieve the result (user id)
+                    userId = rs.getInt("iyedIdUser");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userId;
+    }
+    public List<String> getUserNames() {
+        List<String> userNames = new ArrayList<>();
+        String sql = "SELECT iyedNomUser FROM user";
+
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            while (rs.next()) {
+                userNames.add(rs.getString("iyedNomUser"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return userNames;
+    }
+    public User getUserByName(String name) {
+        String query = "SELECT * FROM user WHERE iyedNomUser = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, name);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return buildUserFromResultSet(rs);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 
 
 }

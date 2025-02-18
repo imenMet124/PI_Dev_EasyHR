@@ -10,7 +10,7 @@ public class Base {
 
     private Base() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserDB", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Base", "root", "");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -26,7 +26,7 @@ public class Base {
     public Connection getConnection() {
         try {
             if (connection == null || connection.isClosed()) { // Reconnect if closed
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/UserDB", "root", "");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Base", "root", "");
             }
         } catch (SQLException e) {
             e.printStackTrace();
