@@ -1,7 +1,11 @@
 package tn.esprit.Users.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
@@ -9,6 +13,8 @@ import tn.esprit.Users.services.ServiceUsers;
 import tn.esprit.Users.utils.Base;
 import tn.esprit.Users.entities.Department;
 import tn.esprit.Users.services.ServiceDepartment;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -146,7 +152,24 @@ public class AjouterUserController {
                 }
             }
         }
+
     }
+    @FXML
+    private void handleBackToAfficherUser() {
+        try {
+            // Load the AfficherUser FXML file
+            Parent root = FXMLLoader.load(getClass().getResource("AfficherUser.fxml"));
+
+            // Get the current stage and set the new scene
+            Stage stage = (Stage) nameField.getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Optionally show an alert for errors
+        }
+    }
+
 
 
 }

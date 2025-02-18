@@ -13,7 +13,7 @@ public class MainFX extends Application {
             SceneController.setPrimaryStage(primaryStage);
 
             // Load the initial scene, for example, the "Afficher Users" scene
-            SceneController.loadAfficherDepartmentsScene();
+            SceneController.loadMainMenuScene();
 
             // Show the primary stage
             primaryStage.show();

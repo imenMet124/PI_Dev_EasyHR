@@ -22,7 +22,9 @@
               <ComboBox fx:id="statusBox" layoutX="300.0" layoutY="70.0" promptText="Select Status" styleClass="combobox-modern" stylesheets="@Style.css" />
 
               <DatePicker fx:id="datePicker" layoutX="299.0" layoutY="211.0" promptText="Select Hire Date" stylesheets="@Style.css" />
-      <VBox layoutX="-2.0" prefHeight="400.0" prefWidth="58.0" styleClass="hbox-style" stylesheets="@Style.css" />
+       <Button layoutX="299.0" layoutY="306.0" onAction="#handleBackToAfficherUser" styleClass="button-modern" stylesheets="@Style.css" text="Back to User List" />
+
+       <VBox layoutX="-2.0" prefHeight="400.0" prefWidth="58.0" styleClass="hbox-style" stylesheets="@Style.css" />
       <HBox layoutX="55.0" layoutY="2.0" prefHeight="48.0" prefWidth="544.0" styleClass="vbox-container" stylesheets="@Style.css" />
    </children>
 

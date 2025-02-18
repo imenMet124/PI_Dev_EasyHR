@@ -120,12 +120,9 @@ public class AfficherUsersController {
     // Add user
     @FXML
     private void handleAdd() {
-        try {
-            SceneController.loadAddUserScene(); // Navigate to the "Add User" scene
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        SceneController.openAjouterUserScene(); // Open in a new window
     }
+
 
     // Edit user
     @FXML

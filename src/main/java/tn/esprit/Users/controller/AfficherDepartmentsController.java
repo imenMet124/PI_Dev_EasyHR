@@ -101,8 +101,9 @@ public class AfficherDepartmentsController {
 
     @FXML
     private void handleAdd() {
-        SceneController.loadAjouterDepartmentScene(); // Navigate to the "Add User" scene
+        SceneController.openAjouterDepartmentScene(); // Open in a new window
     }
+
 
     @FXML
     private void handleEdit() {
