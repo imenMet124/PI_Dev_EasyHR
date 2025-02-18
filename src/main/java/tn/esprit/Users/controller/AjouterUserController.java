@@ -81,6 +81,7 @@ public class AjouterUserController {
 
     @FXML
     private void handleAddUser() {
+        if (!validateUserInputs()) return;
         PreparedStatement pst = null; // Declare pst outside try
 
         try {
@@ -170,6 +171,59 @@ public class AjouterUserController {
         }
     }
 
+    private boolean validateUserInputs() {
+        String name = nameField.getText().trim();
+        String email = emailField.getText().trim();
+        String phone = phoneField.getText().trim();
+        String salaryText = salaryField.getText().trim();
+
+        // Check empty fields
+        if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || salaryText.isEmpty()) {
+            showAlert("Invalid Input", "All fields must be filled!");
+            return false;
+        }
+
+        // Email validation
+        if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+            showAlert("Invalid Email", "Please enter a valid email address!");
+            return false;
+        }
+
+        // Phone number validation (only digits, 8-15 chars)
+        if (!phone.matches("\\d{8,15}")) {
+            showAlert("Invalid Phone Number", "Phone number must be 8-15 digits long!");
+            return false;
+        }
+
+        // Salary validation (numeric and non-negative)
+        try {
+            double salary = Double.parseDouble(salaryText);
+            if (salary < 0) {
+                showAlert("Invalid Salary", "Salary cannot be negative!");
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Salary", "Salary must be a valid number!");
+            return false;
+        }
+
+        // Date validation (cannot be in the future)
+        if (datePicker.getValue() != null && datePicker.getValue().isAfter(java.time.LocalDate.now())) {
+            showAlert("Invalid Date", "Hire date cannot be in the future!");
+            return false;
+        }
+
+        return true; // ✅ All validations passed
+    }
+
+    // ✅ Alert function
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 
 }

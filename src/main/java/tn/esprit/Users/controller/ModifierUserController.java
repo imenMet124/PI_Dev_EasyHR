@@ -8,10 +8,8 @@ import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
 import tn.esprit.Users.services.ServiceUsers;
 import tn.esprit.Users.services.ServiceDepartment;
-import tn.esprit.Users.utils.Base;
-import java.sql.Connection;
+
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -53,10 +51,8 @@ public class ModifierUserController {
         salaryField.setText(String.valueOf(user.getIyedSalaireUser()));
 
         // Fix for Date conversion:
-        // Convert java.util.Date to java.sql.Date if needed and set it to the DatePicker
         java.util.Date utilDate = user.getIyedDateEmbaucheUser();
         if (utilDate != null) {
-            // Convert java.util.Date to java.sql.Date and then to LocalDate for DatePicker
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             datePicker.setValue(sqlDate.toLocalDate());
         }
@@ -79,12 +75,6 @@ public class ModifierUserController {
         }
     }
 
-
-
-
-
-
-
     @FXML
     private void initialize() {
         roleBox.getItems().setAll(UserRole.values());
@@ -100,6 +90,11 @@ public class ModifierUserController {
         if (selectedUser == null) {
             System.out.println("No user selected for modification.");
             return;
+        }
+
+        // Input Validation
+        if (!validateInputs()) {
+            return;  // If validation fails, exit method
         }
 
         try {
@@ -145,6 +140,77 @@ public class ModifierUserController {
         // Close the window
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
+    }
+
+    // Input validation for all fields
+    private boolean validateInputs() {
+        String name = nameField.getText().trim();
+        String email = emailField.getText().trim();
+        String phone = phoneField.getText().trim();
+        UserRole role = roleBox.getValue();
+        String position = positionField.getText().trim();
+        String salaryText = salaryField.getText().trim();
+        UserStatus status = statusBox.getValue();
+        String departmentName = departmentBox.getValue();
+
+        // Validate name
+        if (name.isEmpty()) {
+            showAlert("Input Error", "Name cannot be empty.");
+            return false;
+        }
+
+        // Validate email
+        if (email.isEmpty()) {
+            showAlert("Input Error", "Email cannot be empty.");
+            return false;
+        }
+        if (!isValidEmail(email)) {
+            showAlert("Input Error", "Invalid email format.");
+            return false;
+        }
+
+        // Validate phone
+        if (phone.isEmpty()) {
+            showAlert("Input Error", "Phone cannot be empty.");
+            return false;
+        }
+
+        // Validate role, position, and status
+        if (role == null) {
+            showAlert("Input Error", "Role must be selected.");
+            return false;
+        }
+        if (position.isEmpty()) {
+            showAlert("Input Error", "Position cannot be empty.");
+            return false;
+        }
+        if (salaryText.isEmpty()) {
+            showAlert("Input Error", "Salary cannot be empty.");
+            return false;
+        }
+        try {
+            Double.parseDouble(salaryText);  // Validate salary
+        } catch (NumberFormatException e) {
+            showAlert("Input Error", "Salary must be a valid number.");
+            return false;
+        }
+        if (status == null) {
+            showAlert("Input Error", "Status must be selected.");
+            return false;
+        }
+
+        // Validate department
+        if (departmentName == null || departmentName.isEmpty()) {
+            showAlert("Input Error", "Department must be selected.");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Method to check if the email format is valid
+    private boolean isValidEmail(String email) {
+        return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
 
     // Show alert message

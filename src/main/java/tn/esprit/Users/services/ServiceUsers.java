@@ -32,7 +32,12 @@ public class ServiceUsers implements IService<User> {
             preparedStatement.setString(8, user.getIyedStatutUser().name());
             preparedStatement.setObject(9, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
 
-            preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            // Check if the email already exists in the database
+            if (rowsAffected == 0) {
+                throw new SQLException("Email already exists in the database.");
+            }
 
             // Get the generated user ID
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
@@ -40,8 +45,17 @@ public class ServiceUsers implements IService<User> {
                     user.setIyedIdUser(rs.getInt(1));  // Set the new user ID
                 }
             }
+        } catch (SQLException e) {
+            // Handle unique email constraint violation (usually error code 1062 for MySQL)
+            if (e.getSQLState().equals("23000")) {
+                // Unique constraint violation for email
+                throw new SQLException("Email is already taken. Please use a different one.");
+            } else {
+                throw e; // Rethrow other SQLExceptions
+            }
         }
     }
+
 
 
 
@@ -256,6 +270,7 @@ public class ServiceUsers implements IService<User> {
         }
         return null;
     }
+
 
 
 
