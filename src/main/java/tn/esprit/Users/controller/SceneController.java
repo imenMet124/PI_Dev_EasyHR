@@ -18,7 +18,7 @@ public class SceneController {
     // Load the Main Menu (ONLY ONCE, never closed)
     public static void loadMainMenuScene() {
         try {
-            Parent root = FXMLLoader.load(SceneController.class.getResource("/AfficherUsers.fxml"));
+            Parent root = FXMLLoader.load(SceneController.class.getResource("/AfficherDepartments.fxml"));
             primaryStage.setScene(new Scene(root));
             primaryStage.setTitle("Main Menu");
             primaryStage.show(); // Ensure it stays open

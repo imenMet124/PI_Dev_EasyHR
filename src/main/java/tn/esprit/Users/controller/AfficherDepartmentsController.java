@@ -9,8 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import tn.esprit.Users.entities.Department;
@@ -24,18 +23,7 @@ import java.util.List;
 public class AfficherDepartmentsController {
 
     @FXML
-    private TableView<Department> departmentTable;
-
-    @FXML
-    private TableColumn<Department, String> colId;
-    @FXML
-    private TableColumn<Department, String> colName;
-    @FXML
-    private TableColumn<Department, String> colDescription;
-    @FXML
-    private TableColumn<Department, String> colLocation;
-    @FXML
-    private TableColumn<Department, String> colManager;
+    private ListView<Department> departmentListView; // Change to ListView
 
     @FXML
     private TextField searchField; // For the search functionality
@@ -49,21 +37,11 @@ public class AfficherDepartmentsController {
 
     @FXML
     public void initialize() {
-        // Initialize the TableView with department data
-        departmentTable.setItems(getDepartments()); // Method to get departments
+        // Initialize the ListView with department data
+        departmentListView.setItems(getDepartments()); // Method to get departments
 
-        // Set up the TableColumns with data from the Department class
-        colId.setCellValueFactory(param -> new SimpleStringProperty(String.valueOf(param.getValue().getIyedIdDep())));
-        colName.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIyedNomDep()));
-        colDescription.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIyedDescriptionDep()));
-        colLocation.setCellValueFactory(param -> new SimpleStringProperty(param.getValue().getIyedLocationDep()));
-
-        // Manager column uses a custom property to display manager name
-        colManager.setCellValueFactory(param -> {
-            User manager = param.getValue().getIyedManager();
-            return new SimpleStringProperty(manager != null ? manager.getIyedNomUser() : "No Manager");
-        });
-
+        // Set a custom cell factory to display department information
+        departmentListView.setCellFactory(param -> new DepartmentListCell());
     }
 
     // Method to get departments from the service
@@ -93,9 +71,9 @@ public class AfficherDepartmentsController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            departmentTable.setItems(filteredDepartments);
+            departmentListView.setItems(filteredDepartments);
         } else {
-            departmentTable.setItems(getDepartments());
+            departmentListView.setItems(getDepartments());
         }
     }
 
@@ -104,10 +82,9 @@ public class AfficherDepartmentsController {
         SceneController.openAjouterDepartmentScene(); // Open in a new window
     }
 
-
     @FXML
     private void handleEdit() {
-        Department selectedDepartment = departmentTable.getSelectionModel().getSelectedItem();
+        Department selectedDepartment = departmentListView.getSelectionModel().getSelectedItem();
         if (selectedDepartment != null) {
             try {
                 // Load the ModifierDepartment.fxml file
@@ -119,7 +96,7 @@ public class AfficherDepartmentsController {
                 controller.setDepartmentData(selectedDepartment);
 
                 // Get the current stage and set the new scene
-                Stage stage = (Stage) departmentTable.getScene().getWindow();
+                Stage stage = (Stage) departmentListView.getScene().getWindow();
                 stage.setScene(new Scene(root));
 
             } catch (IOException e) {
@@ -130,11 +107,9 @@ public class AfficherDepartmentsController {
         }
     }
 
-
-
     @FXML
     private void handleDelete() {
-        Department selectedDepartment = departmentTable.getSelectionModel().getSelectedItem();
+        Department selectedDepartment = departmentListView.getSelectionModel().getSelectedItem();
         if (selectedDepartment != null) {
             // Show confirmation dialog
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this department?");
@@ -142,7 +117,7 @@ public class AfficherDepartmentsController {
                 if (response == ButtonType.OK) {
                     try {
                         serviceDepartment.supprimer(selectedDepartment.getIyedIdDep()); // Delete the department
-                        departmentTable.setItems(getDepartments()); // Refresh the table
+                        departmentListView.setItems(getDepartments()); // Refresh the ListView
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
@@ -158,5 +133,26 @@ public class AfficherDepartmentsController {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    // Custom ListCell to display department details
+    private class DepartmentListCell extends javafx.scene.control.ListCell<Department> {
+        @Override
+        protected void updateItem(Department department, boolean empty) {
+            super.updateItem(department, empty);
+
+            if (empty || department == null) {
+                setText(null);
+            } else {
+                // Set department details in the cell
+                String departmentInfo = "ID: " + department.getIyedIdDep() + "\n" +
+                        "Name: " + department.getIyedNomDep() + "\n" +
+                        "Description: " + department.getIyedDescriptionDep() + "\n" +
+                        "Location: " + department.getIyedLocationDep() + "\n" +
+                        "Manager: " + (department.getIyedManager() != null ? department.getIyedManager().getIyedNomUser() : "No Manager");
+
+                setText(departmentInfo);
+            }
+        }
     }
 }

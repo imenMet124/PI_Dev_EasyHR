@@ -16,16 +16,10 @@
             <Button text="Search" onAction="#handleSearch"/>
         </HBox>
 
-        <!-- TableView for Departments -->
-        <TableView fx:id="departmentTable" prefHeight="400.0">
-            <columns>
-                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
-                <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
-                <TableColumn fx:id="colDescription" text="Description" prefWidth="200"/>
-                <TableColumn fx:id="colLocation" text="Location" prefWidth="150"/>
-                <TableColumn fx:id="colManager" text="Manager" prefWidth="150"/>
-            </columns>
-        </TableView>
+        <!-- ListView for Departments -->
+        <ListView fx:id="departmentListView" prefHeight="400.0">
+            <!-- The items will be populated dynamically from the controller -->
+        </ListView>
 
         <!-- Buttons for CRUD Operations -->
         <HBox spacing="10" alignment="CENTER">

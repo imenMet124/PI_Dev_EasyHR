@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="5" style="-fx-padding: 10; -fx-border-color: #ddd;">
+
+    <Label fx:id="lblId" style="-fx-font-weight: bold;"/>
+    <Label fx:id="lblName"/>
+    <Label fx:id="lblDescription"/>
+    <Label fx:id="lblLocation"/>
+    <Label fx:id="lblManager"/>
+
+</VBox>
