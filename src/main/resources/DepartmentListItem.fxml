@@ -7,7 +7,7 @@
       xmlns:fx="http://javafx.com/fxml"
       spacing="5" style="-fx-padding: 10; -fx-border-color: #ddd;">
 
-    <Label fx:id="lblId" style="-fx-font-weight: bold;"/>
+
     <Label fx:id="lblName"/>
     <Label fx:id="lblDescription"/>
     <Label fx:id="lblLocation"/>

@@ -144,9 +144,8 @@ public class AfficherDepartmentsController {
             if (empty || department == null) {
                 setText(null);
             } else {
-                // Set department details in the cell
-                String departmentInfo = "ID: " + department.getIyedIdDep() + "\n" +
-                        "Name: " + department.getIyedNomDep() + "\n" +
+                // Set department details in the cell without the ID
+                String departmentInfo = "Name: " + department.getIyedNomDep() + "\n" +
                         "Description: " + department.getIyedDescriptionDep() + "\n" +
                         "Location: " + department.getIyedLocationDep() + "\n" +
                         "Manager: " + (department.getIyedManager() != null ? department.getIyedManager().getIyedNomUser() : "No Manager");
@@ -155,4 +154,5 @@ public class AfficherDepartmentsController {
             }
         }
     }
+
 }

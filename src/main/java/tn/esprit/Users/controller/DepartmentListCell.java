@@ -13,7 +13,7 @@ import java.io.IOException;
 public class DepartmentListCell extends ListCell<Department> {
 
     @FXML private VBox vbox;
-    @FXML private Label lblId;
+
     @FXML private Label lblName;
     @FXML private Label lblDescription;
     @FXML private Label lblLocation;
@@ -39,7 +39,7 @@ public class DepartmentListCell extends ListCell<Department> {
             setGraphic(null);
         } else {
             // Set department details
-            lblId.setText(String.valueOf(department.getIyedIdDep()));
+
             lblName.setText(department.getIyedNomDep());
             lblDescription.setText(department.getIyedDescriptionDep());
             lblLocation.setText(department.getIyedLocationDep());
