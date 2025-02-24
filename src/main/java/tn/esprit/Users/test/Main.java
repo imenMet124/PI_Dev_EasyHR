@@ -1,5 +1,6 @@
 package tn.esprit.Users.test;
 
+import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.Users.entities.Department;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
@@ -7,7 +8,6 @@ import tn.esprit.Users.entities.UserStatus;
 import tn.esprit.Users.services.ServiceUsers;
 import tn.esprit.Users.services.ServiceDepartment;
 import tn.esprit.Users.utils.Base;
-
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -27,6 +27,7 @@ public class Main {
                     "Iyed Blick",                  // iyedNomUser
                     "iyed.blick@example.com",      // iyedEmailUser
                     "667788990",                   // iyedPhoneUser
+                    "hashed_password",             // Hashed password placeholder (use BCrypt to hash this)
                     UserRole.EMPLOYE,              // iyedRoleUser
                     "Software Engineer",           // iyedPositionUser
                     9000.0,                        // iyedSalaireUser
@@ -66,6 +67,11 @@ public class Main {
         } catch (SQLException e) {
             System.out.println("SQL Error: " + e.getMessage());
         }
+        String enteredPassword = "4";
+        String storedHash = "$2a$10$iBSroGUz4DT1NQiBBKFmCe3ZRPlaitXXlUgEjq4rNbweOS23Eavfm"; // Copy from DB
+
+        boolean match = BCrypt.checkpw(enteredPassword, storedHash);
+        System.out.println("Password Match? " + match);
+
     }
 }
-

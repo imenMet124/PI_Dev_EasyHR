@@ -159,7 +159,6 @@ public class ModifierUserController {
             return false;
         }
 
-        // Validate email
         if (email.isEmpty()) {
             showAlert("Input Error", "Email cannot be empty.");
             return false;
@@ -169,13 +168,11 @@ public class ModifierUserController {
             return false;
         }
 
-        // Validate phone
         if (phone.isEmpty()) {
             showAlert("Input Error", "Phone cannot be empty.");
             return false;
         }
 
-        // Validate role, position, and status
         if (role == null) {
             showAlert("Input Error", "Role must be selected.");
             return false;
@@ -199,7 +196,6 @@ public class ModifierUserController {
             return false;
         }
 
-        // Validate department
         if (departmentName == null || departmentName.isEmpty()) {
             showAlert("Input Error", "Department must be selected.");
             return false;
@@ -208,12 +204,11 @@ public class ModifierUserController {
         return true;
     }
 
-    // Method to check if the email format is valid
     private boolean isValidEmail(String email) {
         return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
 
-    // Show alert message
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

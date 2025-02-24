@@ -1,6 +1,7 @@
 package tn.esprit.Users.entities;
 
 import java.util.Date;
+import org.mindrot.jbcrypt.BCrypt;
 
 public class User {
     private int iyedIdUser;
@@ -11,15 +12,20 @@ public class User {
     private String iyedPositionUser;
     private double iyedSalaireUser;
     private Date iyedDateEmbaucheUser;
-    private UserStatus iyedStatutUser;  // Assuming you have a UserStatus enum
+    private UserStatus iyedStatutUser;  // Enum for status
     private Department iyedDepartment;  // Reference to Department
+    private String iyedPasswordUser;  // New attribute for password
 
-    // Constructor
-    public User(int iyedIdUser, String iyedNomUser, String iyedEmailUser, String iyedPhoneUser, UserRole iyedRoleUser, String iyedPositionUser, double iyedSalaireUser, Date iyedDateEmbaucheUser, UserStatus iyedStatutUser, Department iyedDepartment) {
+    // Constructor with password
+    public User(int iyedIdUser, String iyedNomUser, String iyedEmailUser, String iyedPhoneUser,
+                String iyedPasswordUser, UserRole iyedRoleUser, String iyedPositionUser,
+                double iyedSalaireUser, Date iyedDateEmbaucheUser, UserStatus iyedStatutUser,
+                Department iyedDepartment) {
         this.iyedIdUser = iyedIdUser;
         this.iyedNomUser = iyedNomUser;
         this.iyedEmailUser = iyedEmailUser;
         this.iyedPhoneUser = iyedPhoneUser;
+        this.iyedPasswordUser = iyedPasswordUser;
         this.iyedRoleUser = iyedRoleUser;
         this.iyedPositionUser = iyedPositionUser;
         this.iyedSalaireUser = iyedSalaireUser;
@@ -28,6 +34,15 @@ public class User {
         this.iyedDepartment = iyedDepartment;
     }
 
+    // Method to hash the password before storing
+    private String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    // Method to check if a given password matches the stored hash
+    public boolean checkPassword(String plainPassword) {
+        return BCrypt.checkpw(plainPassword, this.iyedPasswordUser);
+    }
 
     // Getters and Setters
     public int getIyedIdUser() {
@@ -110,6 +125,14 @@ public class User {
         this.iyedDepartment = iyedDepartment;
     }
 
+    public String getIyedPasswordUser() {
+        return iyedPasswordUser;
+    }
+
+    public void setIyedPasswordUser(String iyedPasswordUser) {
+        this.iyedPasswordUser = iyedPasswordUser;
+    }
+
     // toString method for easy printing
     @Override
     public String toString() {
@@ -123,7 +146,8 @@ public class User {
                 ", iyedSalaireUser=" + iyedSalaireUser +
                 ", iyedDateEmbaucheUser=" + iyedDateEmbaucheUser +
                 ", iyedStatutUser='" + iyedStatutUser + '\'' +
-                ", iyedDepartment=" + iyedDepartment.getIyedNomDep() +  // Display department name
+                ", iyedDepartment=" + (iyedDepartment != null ? iyedDepartment.getIyedNomDep() : "No Department") +
+                ", iyedPasswordUser='******'" + // Hide actual password in toString
                 '}';
     }
 }

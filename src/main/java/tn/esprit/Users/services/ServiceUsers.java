@@ -5,7 +5,7 @@ import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
 import tn.esprit.Users.utils.Base;
-
+import org.mindrot.jbcrypt.BCrypt;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +19,31 @@ public class ServiceUsers implements IService<User> {
 
     @Override
     public void ajouter(User user) throws SQLException {
-        String sql = "INSERT INTO `user` (`iyedNomUser`, `iyedEmailUser`, `iyedPhoneUser`, `iyedRoleUser`, `iyedPositionUser`, `iyedSalaireUser`, `iyedDateEmbaucheUser`, `iyedStatutUser`, `iyedIdDepUser`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO `user` (`iyedNomUser`, `iyedEmailUser`, `iyedPhoneUser`, `iyedPasswordUser`, `iyedRoleUser`, `iyedPositionUser`, `iyedSalaireUser`, `iyedDateEmbaucheUser`, `iyedStatutUser`, `iyedIdDepUser`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getIyedNomUser());
             preparedStatement.setString(2, user.getIyedEmailUser());
             preparedStatement.setString(3, user.getIyedPhoneUser());
-            preparedStatement.setString(4, user.getIyedRoleUser().name());
-            preparedStatement.setString(5, user.getIyedPositionUser());
-            preparedStatement.setDouble(6, user.getIyedSalaireUser());
-            preparedStatement.setDate(7, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
-            preparedStatement.setString(8, user.getIyedStatutUser().name());
-            preparedStatement.setObject(9, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
+            preparedStatement.setString(4, user.getIyedPasswordUser()); // New
+            preparedStatement.setString(5, user.getIyedRoleUser().name());
+            preparedStatement.setString(6, user.getIyedPositionUser());
+            preparedStatement.setDouble(7, user.getIyedSalaireUser());
+            java.util.Date embaucheDate = user.getIyedDateEmbaucheUser();
+            if (embaucheDate == null) {
+                embaucheDate = new java.util.Date(System.currentTimeMillis()); // Default to current date
+            }
 
-            int rowsAffected = preparedStatement.executeUpdate();
+            preparedStatement.setDate(8, new java.sql.Date(embaucheDate.getTime()));
+            preparedStatement.setString(9, user.getIyedStatutUser().name());
+            preparedStatement.setObject(10, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
+            System.out.println("🔑 Stored Hashed Password: " + user.getIyedPasswordUser());
+
+
+
+        int rowsAffected = preparedStatement.executeUpdate();
+            System.out.println("SQL Query: " + preparedStatement.toString());
+
 
             // Check if the email already exists in the database
             if (rowsAffected == 0) {
@@ -61,21 +72,33 @@ public class ServiceUsers implements IService<User> {
 
     @Override
     public void modifier(User user) throws SQLException {
-        String sql = "UPDATE `user` SET `iyedNomUser`=?, `iyedEmailUser`=?, `iyedPhoneUser`=?, `iyedRoleUser`=?, `iyedPositionUser`=?, `iyedSalaireUser`=?, `iyedDateEmbaucheUser`=?, `iyedStatutUser`=?, `iyedIdDepUser`=? WHERE `iyedIdUser`=?";
-
+        String sql = "UPDATE `user` SET `iyedNomUser`=?, `iyedEmailUser`=?, `iyedPhoneUser`=?, `iyedPasswordUser`=?, `iyedRoleUser`=?, `iyedPositionUser`=?, `iyedSalaireUser`=?, `iyedDateEmbaucheUser`=?, `iyedStatutUser`=?, `iyedIdDepUser`=? WHERE `iyedIdUser`=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, user.getIyedNomUser());
             preparedStatement.setString(2, user.getIyedEmailUser());
             preparedStatement.setString(3, user.getIyedPhoneUser());
-            preparedStatement.setString(4, user.getIyedRoleUser().name());
-            preparedStatement.setString(5, user.getIyedPositionUser());
-            preparedStatement.setDouble(6, user.getIyedSalaireUser());
-            preparedStatement.setDate(7, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
-            preparedStatement.setString(8, user.getIyedStatutUser().name());
-            preparedStatement.setObject(9, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
-            preparedStatement.setInt(10, user.getIyedIdUser());
+            preparedStatement.setString(4, user.getIyedPasswordUser()); // New
+            preparedStatement.setString(5, user.getIyedRoleUser().name());
+            preparedStatement.setString(6, user.getIyedPositionUser());
+            preparedStatement.setDouble(7, user.getIyedSalaireUser());
+            preparedStatement.setDate(8, new java.sql.Date(user.getIyedDateEmbaucheUser().getTime()));
+            preparedStatement.setString(9, user.getIyedStatutUser().name());
+            preparedStatement.setObject(10, (user.getIyedDepartment() != null) ? user.getIyedDepartment().getIyedIdDep() : null);
+            preparedStatement.setInt(11, user.getIyedIdUser());
 
-            int rowsAffected = preparedStatement.executeUpdate();
+
+
+        int rowsAffected = preparedStatement.executeUpdate();
+            String checkSql = "SELECT iyedPasswordUser FROM `user` WHERE iyedEmailUser = ?";
+            try (PreparedStatement checkStmt = connection.prepareStatement(checkSql)) {
+                checkStmt.setString(1, user.getIyedEmailUser());
+                try (ResultSet rs = checkStmt.executeQuery()) {
+                    if (rs.next()) {
+                        String storedHashedPassword = rs.getString("iyedPasswordUser");
+                        System.out.println("🔑 Stored Hashed Password in DB: " + storedHashedPassword);
+                    }
+                }
+            }
             if (rowsAffected > 0) {
                 System.out.println("L'utilisateur a été mis à jour avec succès !");
             } else {
@@ -122,12 +145,13 @@ public class ServiceUsers implements IService<User> {
                         null  // Manager not fetched here
                 );
 
-                // Create User object
+                // Create User object with all 11 arguments (including password)
                 User user = new User(
                         rs.getInt("iyedIdUser"),
                         rs.getString("iyedNomUser"),
                         rs.getString("iyedEmailUser"),
                         rs.getString("iyedPhoneUser"),
+                        rs.getString("iyedPasswordUser"), // Added missing password field
                         UserRole.valueOf(rs.getString("iyedRoleUser")),  // Convert string to enum
                         rs.getString("iyedPositionUser"),
                         rs.getDouble("iyedSalaireUser"),
@@ -142,6 +166,7 @@ public class ServiceUsers implements IService<User> {
 
         return users;
     }
+
     public User getById(int id) throws SQLException {
         String query = "SELECT u.*, d.iyedNomDep, d.iyedIdDep " +
                 "FROM user u " +
@@ -160,6 +185,7 @@ public class ServiceUsers implements IService<User> {
                     rs.getString("iyedNomUser"),
                     rs.getString("iyedEmailUser"),
                     rs.getString("iyedPhoneUser"),
+                    rs.getString("iyedPasswordUser"), // New
                     UserRole.valueOf(rs.getString("iyedRoleUser")),
                     rs.getString("iyedPositionUser"),
                     rs.getDouble("iyedSalaireUser"),
@@ -177,6 +203,7 @@ public class ServiceUsers implements IService<User> {
                 rs.getString("iyedNomUser"),
                 rs.getString("iyedEmailUser"),
                 rs.getString("iyedPhoneUser"),
+                rs.getString("iyedPasswordUser"), // New
                 UserRole.valueOf(rs.getString("iyedRoleUser")),  // Convert string to enum
                 rs.getString("iyedPositionUser"),
                 rs.getDouble("iyedSalaireUser"),
@@ -271,6 +298,96 @@ public class ServiceUsers implements IService<User> {
         return null;
     }
 
+
+
+    public User login(String email, String plainPassword) throws SQLException {
+        String sql = "SELECT * FROM `user` WHERE iyedEmailUser = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setString(1, email);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    String hashedPassword = rs.getString("iyedPasswordUser");
+
+                    // Debugging: Print passwords
+                    System.out.println("Entered Password: " + plainPassword);
+                    System.out.println("Hashed password from DB: " + hashedPassword);
+
+                    // ✅ Verify password
+                    if (BCrypt.checkpw(plainPassword, hashedPassword)) {
+                        String email1 = rs.getString("iyedEmailUser");
+                        String name = rs.getString("iyedNomUser");
+                        String phone = rs.getString("iyedPhoneUser");
+                        int departmentId = rs.getInt("iyedIdDepUser");
+
+                        // Fetch department details based on departmentId
+                        Department department = fetchDepartment(departmentId);
+
+                        // Create the User object with the department included
+                        return new User(
+                                rs.getInt("iyedIdUser"),
+                                name,
+                                email1,
+                                phone,
+                                hashedPassword,  // Hashed password from the database
+                                UserRole.valueOf(rs.getString("iyedRoleUser")),
+                                rs.getString("iyedPositionUser"),
+                                rs.getDouble("iyedSalaireUser"),
+                                rs.getDate("iyedDateEmbaucheUser"),
+                                UserStatus.valueOf(rs.getString("iyedStatutUser")),
+                                department // Pass the department object
+                        );
+                    } else {
+                        System.out.println("❌ Password mismatch");
+                    }
+                }
+            }
+        }
+
+        return null; // ❌ No user found or password incorrect
+    }
+
+    // Helper method to fetch department details based on departmentId
+    private Department fetchDepartment(int departmentId) throws SQLException {
+        String sql = "SELECT * FROM `department` WHERE iyedIdDep = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, departmentId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return new Department(
+                            rs.getInt("iyedIdDep"),
+                            rs.getString("iyedNomDep"),
+                            rs.getString("iyedDescriptionDep"),
+                            rs.getString("iyedLocationDep"),
+                            new ArrayList<>(),
+                            null // Assuming manager information is null
+                    );
+                }
+            }
+        }
+        return null; // Department not found
+    }
+
+
+
+
+
+    public boolean isEmailTaken(String email) {
+        String query = "SELECT COUNT(*) FROM `user` WHERE `iyedEmailUser` = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email); // Set the email parameter
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // If count > 0, email is already taken
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle exception
+        }
+        return false; // Email not found
+    }
 
 
 
