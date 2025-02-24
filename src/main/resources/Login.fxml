@@ -1,29 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.ImageView?>
 
-<GridPane fx:id="loginPane" xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.LoginController">
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.LoginController">
     <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
+        <Insets top="40" right="40" bottom="40" left="40"/>
     </padding>
 
-    <!-- Title -->
-    <Label text="User Login" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+    <children>
+        <VBox spacing="20" alignment="CENTER">
+            <!-- Title -->
+            <Label text="User Login" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.9, 2, 2);"/>
 
-    <!-- Email -->
-    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200"/>
+            <!-- Form fields in GridPane -->
+            <GridPane vgap="15" hgap="10" alignment="CENTER">
+                <children>
+                    <!-- Username -->
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                    <TextField fx:id="emailField" promptText="Enter your email" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="250" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-border-radius: 10px; -fx-padding: 10px;"/>
 
-    <!-- Password -->
-    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200"/>
+                    <!-- Password -->
+                    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+                    <PasswordField fx:id="passwordField" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="250" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-border-radius: 10px; -fx-padding: 10px;"/>
 
-    <!-- Login Button -->
-    <Button text="Login" fx:id="loginButton" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#handleLogin"/>
+                    <!-- Login Button -->
+                    <Button fx:id="loginButton" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleLogin"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-size: 16px; -fx-border-radius: 8px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 5, 0.5, 2, 2);"/>
+                </children>
+            </GridPane>
 
-    <!-- Error Message -->
-    <Label fx:id="errorLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" style="-fx-text-fill: red;"/>
+            <!-- Error Message -->
+            <Label fx:id="errorLabel" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
 
-</GridPane>
+            <!-- Image -->
+            <ImageView fx:id="backgroundImage" fitWidth="300" fitHeight="200" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 5, 5);"/>
+        </VBox>
+    </children>
+</StackPane>

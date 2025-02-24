@@ -16,22 +16,12 @@
             <Button text="Search" onAction="#handleSearch"/>
         </HBox>
 
-        <!-- TableView for Users -->
-        <TableView fx:id="userTable" prefHeight="400.0">
-            <columns>
-                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
-                <TableColumn fx:id="colName" text="Name" prefWidth="150"/>
-                <TableColumn fx:id="colEmail" text="Email" prefWidth="200"/>
-                <TableColumn fx:id="colPhone" text="Phone" prefWidth="120"/>
-                <TableColumn fx:id="colRole" text="Role" prefWidth="100"/>
-                <TableColumn fx:id="colPosition" text="Position" prefWidth="150"/>
-                <TableColumn fx:id="colSalary" text="Salary" prefWidth="100"/>
-                <TableColumn fx:id="colStatus" text="Status" prefWidth="100"/>
-                <TableColumn fx:id="colHireDate" text="Hire Date"/>
-
-                <TableColumn fx:id="colDepartment" text="Department" prefWidth="150"/>
-            </columns>
-        </TableView>
+        <!-- ListView for Users -->
+        <ListView fx:id="userListView" prefHeight="400.0">
+            <items>
+                <!-- The items will be populated dynamically from the controller -->
+            </items>
+        </ListView>
 
         <!-- Buttons for CRUD Operations -->
         <HBox spacing="10" alignment="CENTER">

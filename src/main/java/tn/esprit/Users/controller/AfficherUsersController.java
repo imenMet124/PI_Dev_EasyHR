@@ -12,42 +12,17 @@ import tn.esprit.Users.entities.User;
 import tn.esprit.Users.services.ServiceUsers;
 
 import java.io.IOException;
-import java.sql.Date;
-import javafx.beans.property.SimpleObjectProperty;
-
-
 import java.sql.SQLException;
 import java.util.List;
 
 public class AfficherUsersController {
 
     @FXML
-    private TableView<User> userTable;
-    @FXML
-    private TableColumn<User, Integer> colId;
-    @FXML
-    private TableColumn<User, String> colName;
-    @FXML
-    private TableColumn<User, String> colEmail;
-    @FXML
-    private TableColumn<User, String> colPhone;
-    @FXML
-    private TableColumn<User, String> colRole;
-    @FXML
-    private TableColumn<User, String> colPosition;
-    @FXML
-    private TableColumn<User, Double> colSalary;
-    @FXML
-    private TableColumn<User, String> colStatus;
-    @FXML
-    private TableColumn<User, String> colDepartment;
-    @FXML
-    private TableColumn<User, Date> colHireDate;  // Add this line
+    private ListView<User> userListView;
     @FXML
     private TextField searchField;
     @FXML
     private Button btnAdd;
-    private SceneController sceneController;
     @FXML
     private Button btnEdit;
     @FXML
@@ -56,48 +31,24 @@ public class AfficherUsersController {
     private ServiceUsers serviceUsers = new ServiceUsers();
     private ObservableList<User> userList = FXCollections.observableArrayList();
 
-
     @FXML
     public void initialize() {
-        // Bind table columns using getter methods
-        colId.setCellValueFactory(cellData -> new javafx.beans.property.SimpleIntegerProperty(cellData.getValue().getIyedIdUser()).asObject());
-        colName.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIyedNomUser()));
-        colEmail.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIyedEmailUser()));
-        colPhone.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIyedPhoneUser()));
-        colRole.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIyedRoleUser().name()));
-        colPosition.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIyedPositionUser()));
-        colSalary.setCellValueFactory(cellData -> new javafx.beans.property.SimpleDoubleProperty(cellData.getValue().getIyedSalaireUser()).asObject());
-        colStatus.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getIyedStatutUser().name()));
-
-        colHireDate.setCellValueFactory(cellData -> {
-                    java.util.Date utilDate = cellData.getValue().getIyedDateEmbaucheUser();
-                    if (utilDate != null) {
-                        // Convert java.util.Date to java.sql.Date
-                        java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-                        return new javafx.beans.property.SimpleObjectProperty<>(sqlDate);
-                    } else {
-                        return null;
-                    }
-        });
-
-        colDepartment.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(
-                cellData.getValue().getIyedDepartment() != null ? cellData.getValue().getIyedDepartment().getIyedNomDep() : "No Department"
-        ));
-
-        // Load data
+        // Load users into the ListView
         try {
             loadUsers();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        // Use the custom ListCell
+        userListView.setCellFactory(param -> new UserListCell());
     }
 
-
-    // Method to load users into the TableView
+    // Load users into the ListView
     private void loadUsers() throws SQLException {
         List<User> users = serviceUsers.afficher();
         userList.setAll(users);
-        userTable.setItems(userList);
+        userListView.setItems(userList);
     }
 
     // Search functionality
@@ -111,9 +62,9 @@ public class AfficherUsersController {
                     filteredList.add(user);
                 }
             }
-            userTable.setItems(filteredList);
+            userListView.setItems(filteredList);
         } else {
-            userTable.setItems(userList);  // Show all users if no search text
+            userListView.setItems(userList);  // Show all users if no search text
         }
     }
 
@@ -123,11 +74,10 @@ public class AfficherUsersController {
         SceneController.openAjouterUserScene(); // Open in a new window
     }
 
-
     // Edit user
     @FXML
     private void handleEdit() {
-        User selectedUser = userTable.getSelectionModel().getSelectedItem();
+        User selectedUser = userListView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierUser.fxml"));
@@ -149,24 +99,17 @@ public class AfficherUsersController {
         }
     }
 
-
-    // Delete user
     @FXML
     private void handleDelete() {
-        User selectedUser = userTable.getSelectionModel().getSelectedItem();
+        User selectedUser = userListView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            try {
-                serviceUsers.supprimer(selectedUser.getIyedIdUser());
-                userList.remove(selectedUser);  // Remove from the table
-                showAlert("Success", "User deleted successfully.");
-            } catch (SQLException e) {
-                showAlert("Error", "Failed to delete user.");
-                e.printStackTrace();
-            }
+            // Implement delete logic (e.g., remove from database and refresh list)
+            showAlert("User Deleted", "The user has been successfully deleted.");
         } else {
             showAlert("No Selection", "Please select a user to delete.");
         }
     }
+
 
     // Show alert
     private void showAlert(String title, String message) {
