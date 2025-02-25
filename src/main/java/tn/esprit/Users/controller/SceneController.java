@@ -2,66 +2,105 @@ package tn.esprit.Users.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
+import tn.esprit.Users.entities.Department;
+import tn.esprit.Users.entities.User;
 
 import java.io.IOException;
 
 public class SceneController {
-    private static Stage primaryStage; // Main Menu Stage
 
-    // Set the primary stage from MainFX (called once)
-    public static void setPrimaryStage(Stage stage) {
-        primaryStage = stage;
+    private static BorderPane mainPane; // Reference to mainPane in MainMenu
+
+    // Set mainPane from MainMenuController
+    public static void setMainPane(BorderPane pane) {
+        mainPane = pane;
     }
 
-    // Load the Main Menu (ONLY ONCE, never closed)
-    public static void loadMainMenuScene() {
+    // Load an FXML page into the center of mainPane
+    private static void loadPage(String fxmlPath) {
+        if (mainPane == null) {
+            System.out.println("MainPane not set in SceneController!");
+            return;
+        }
         try {
-            Parent root = FXMLLoader.load(SceneController.class.getResource("/AfficherDepartments.fxml"));
-            primaryStage.setScene(new Scene(root));
-            primaryStage.setTitle("Main Menu");
-            primaryStage.show(); // Ensure it stays open
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource(fxmlPath));
+            Parent newView = loader.load();
+            mainPane.setCenter(newView); // Load content into the center
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Method for specifically loading ModifierDepartment page with data
+    private static void loadPageForModifier(String fxmlPath, Department department) {
+        if (mainPane == null) {
+            System.out.println("MainPane not set in SceneController!");
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource(fxmlPath));
+            Parent newView = loader.load();
+
+            // Pass the department data to the controller
+            ModifierDepartmentController controller = loader.getController();
+            controller.setDepartmentData(department);
+
+            mainPane.setCenter(newView); // Load content into the center of mainPane
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Open a new window for other pages
-    private static void openNewWindow(String fxmlPath, String title) {
+    // Load an FXML page into the center of mainPane and pass user data to the controller
+    private static void loadUserPage(String fxmlPath, User user) {
+        if (mainPane == null) {
+            System.out.println("MainPane not set in SceneController!");
+            return;
+        }
         try {
-            Parent root = FXMLLoader.load(SceneController.class.getResource(fxmlPath));
-            Stage newStage = new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.setTitle(title);
-            newStage.show();
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource(fxmlPath));
+            Parent newView = loader.load();
+
+            // Pass user data to the controller if it's not null
+            if (user != null) {
+                if (user instanceof User) {
+                    ModifierUserController controller = loader.getController();
+                    controller.setUserData(user); // Pass user data
+                }
+            }
+
+            mainPane.setCenter(newView); // Load content into the center
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Methods to open other pages in new windows
+
+    // Methods to load specific pages inside mainPane
     public static void openAjouterUserScene() {
-        openNewWindow("/AjouterUser.fxml", "Ajouter User");
+        loadPage("/AjouterUser.fxml");
     }
 
     public static void openAfficherUsersScene() {
-        openNewWindow("/AfficherUsers.fxml", "Afficher Users");
+        loadPage("/AfficherUsers.fxml");
     }
 
     public static void openAjouterDepartmentScene() {
-        openNewWindow("/AjouterDepartment.fxml", "Ajouter Department");
+        loadPage("/AjouterDepartment.fxml");
     }
 
     public static void openAfficherDepartmentsScene() {
-        openNewWindow("/AfficherDepartments.fxml", "Afficher Departments");
+        loadPage("/AfficherDepartments.fxml");
     }
 
-    public static void openModifierDepartmentScene() {
-        openNewWindow("/ModifierDepartment.fxml", "Modifier Department");
+    // Method to open the ModifierUser page
+    public static void openModifierUserScene(User user) {
+        loadUserPage("/ModifierUser.fxml", user); // Load the page and pass the user data
     }
 
-    public static void openModifierUserScene() {
-        openNewWindow("/ModifierUser.fxml", "Modifier User");
+
+    public static void openModifierDepartmentScene(Department department) {
+        loadPageForModifier("/ModifierDepartment.fxml", department);
     }
+
 }

@@ -86,26 +86,14 @@ public class AfficherDepartmentsController {
     private void handleEdit() {
         Department selectedDepartment = departmentListView.getSelectionModel().getSelectedItem();
         if (selectedDepartment != null) {
-            try {
-                // Load the ModifierDepartment.fxml file
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierDepartment.fxml"));
-                Parent root = loader.load();
-
-                // Get the controller and pass the selected department data
-                ModifierDepartmentController controller = loader.getController();
-                controller.setDepartmentData(selectedDepartment);
-
-                // Get the current stage and set the new scene
-                Stage stage = (Stage) departmentListView.getScene().getWindow();
-                stage.setScene(new Scene(root));
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            // Pass the selected department to the SceneController to load ModifierDepartment
+            SceneController.openModifierDepartmentScene(selectedDepartment);
         } else {
             showAlert("No department selected", "Please select a department to edit.");
         }
     }
+
+
 
     @FXML
     private void handleDelete() {

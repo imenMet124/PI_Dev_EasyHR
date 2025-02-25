@@ -1,8 +1,17 @@
 package tn.esprit.Users.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
 
 public class MainMenuController {
+
+    @FXML
+    private BorderPane mainPane; // Reference from FXML
+
+    @FXML
+    public void initialize() {
+        SceneController.setMainPane(mainPane); // Link mainPane to SceneController
+    }
 
     @FXML
     private void goToAjouterUser() {
@@ -24,13 +33,11 @@ public class MainMenuController {
         SceneController.openAfficherDepartmentsScene();
     }
 
-    @FXML
-    private void goToModifierUser() {
-        SceneController.openModifierUserScene();
-    }
 
-    @FXML
-    private void goToModifierDepartment() {
-        SceneController.openModifierDepartmentScene();
+
+
+
+    public void handleLogout() {
+        System.out.println("Logout clicked!");
     }
 }

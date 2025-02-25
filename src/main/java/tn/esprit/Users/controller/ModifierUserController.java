@@ -123,15 +123,18 @@ public class ModifierUserController {
             serviceUsers.modifier(selectedUser);
             System.out.println("User updated successfully!");
 
-            // Close the window
-            Stage stage = (Stage) nameField.getScene().getWindow();
-            stage.close();
+            // Show success message
+            showAlert("Success", "User updated successfully!", Alert.AlertType.INFORMATION);
+
+            // Optionally, you can leave the window open or close it as needed
+            // Stage stage = (Stage) nameField.getScene().getWindow();
+            // stage.close();
 
         } catch (SQLException e) {
             e.printStackTrace();
-            showAlert("Error", "Failed to update user.");
+            showAlert("Error", "Failed to update user.", Alert.AlertType.ERROR);
         } catch (Exception e) {
-            showAlert("Error", "Invalid input. Please check all fields.");
+            showAlert("Error", "Invalid input. Please check all fields.", Alert.AlertType.ERROR);
         }
     }
 
@@ -155,49 +158,49 @@ public class ModifierUserController {
 
         // Validate name
         if (name.isEmpty()) {
-            showAlert("Input Error", "Name cannot be empty.");
+            showAlert("Input Error", "Name cannot be empty.", Alert.AlertType.ERROR);
             return false;
         }
 
         if (email.isEmpty()) {
-            showAlert("Input Error", "Email cannot be empty.");
+            showAlert("Input Error", "Email cannot be empty.", Alert.AlertType.ERROR);
             return false;
         }
         if (!isValidEmail(email)) {
-            showAlert("Input Error", "Invalid email format.");
+            showAlert("Input Error", "Invalid email format.", Alert.AlertType.ERROR);
             return false;
         }
 
         if (phone.isEmpty()) {
-            showAlert("Input Error", "Phone cannot be empty.");
+            showAlert("Input Error", "Phone cannot be empty.", Alert.AlertType.ERROR);
             return false;
         }
 
         if (role == null) {
-            showAlert("Input Error", "Role must be selected.");
+            showAlert("Input Error", "Role must be selected.", Alert.AlertType.ERROR);
             return false;
         }
         if (position.isEmpty()) {
-            showAlert("Input Error", "Position cannot be empty.");
+            showAlert("Input Error", "Position cannot be empty.", Alert.AlertType.ERROR);
             return false;
         }
         if (salaryText.isEmpty()) {
-            showAlert("Input Error", "Salary cannot be empty.");
+            showAlert("Input Error", "Salary cannot be empty.", Alert.AlertType.ERROR);
             return false;
         }
         try {
             Double.parseDouble(salaryText);  // Validate salary
         } catch (NumberFormatException e) {
-            showAlert("Input Error", "Salary must be a valid number.");
+            showAlert("Input Error", "Salary must be a valid number.", Alert.AlertType.ERROR);
             return false;
         }
         if (status == null) {
-            showAlert("Input Error", "Status must be selected.");
+            showAlert("Input Error", "Status must be selected.", Alert.AlertType.ERROR);
             return false;
         }
 
         if (departmentName == null || departmentName.isEmpty()) {
-            showAlert("Input Error", "Department must be selected.");
+            showAlert("Input Error", "Department must be selected.", Alert.AlertType.ERROR);
             return false;
         }
 
@@ -208,9 +211,8 @@ public class ModifierUserController {
         return email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$");
     }
 
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

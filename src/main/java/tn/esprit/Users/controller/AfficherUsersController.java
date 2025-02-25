@@ -79,25 +79,13 @@ public class AfficherUsersController {
     private void handleEdit() {
         User selectedUser = userListView.getSelectionModel().getSelectedItem();
         if (selectedUser != null) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierUser.fxml"));
-                Parent root = loader.load();
-
-                ModifierUserController controller = loader.getController();
-                controller.setUserData(selectedUser); // Pass user data to edit form
-
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Edit User");
-                stage.show();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            // Pass the selected user to SceneController to load ModifierUser
+            SceneController.openModifierUserScene(selectedUser);
         } else {
             showAlert("No Selection", "Please select a user to edit.");
         }
     }
+
 
     @FXML
     private void handleDelete() {
