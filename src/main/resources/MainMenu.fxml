@@ -20,15 +20,18 @@
     </top>
 
     <!-- ✅ Sidebar Navigation -->
+    <!-- ✅ Sidebar Navigation -->
     <left>
         <VBox id="sidebar" spacing="10" style="-fx-background-color: #34495E; -fx-padding: 15;">
             <Label text="Navigation"
                    style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: bold;
-                          -fx-padding: 10px 0; -fx-underline: true;"/>
+                      -fx-padding: 10px 0; -fx-underline: true;"/>
             <Button text="Ajouter User" onAction="#goToAjouterUser" styleClass="sidebar-button" maxWidth="200"/>
             <Button text="Afficher Users" onAction="#goToAfficherUsers" styleClass="sidebar-button" maxWidth="200"/>
             <Button text="Ajouter Department" onAction="#goToAjouterDepartment" styleClass="sidebar-button" maxWidth="200"/>
             <Button text="Afficher Departments" onAction="#goToAfficherDepartments" styleClass="sidebar-button" maxWidth="200"/>
+            <!-- Add a button for the User Profile -->
+            <Button text="User Profile" onAction="#goToUserProfile" styleClass="sidebar-button" maxWidth="200"/>
         </VBox>
     </left>
 

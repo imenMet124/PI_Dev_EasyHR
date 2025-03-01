@@ -31,6 +31,7 @@ public class SceneController {
             e.printStackTrace();
         }
     }
+
     // Method for specifically loading ModifierDepartment page with data
     private static void loadPageForModifier(String fxmlPath, Department department) {
         if (mainPane == null) {
@@ -75,7 +76,6 @@ public class SceneController {
         }
     }
 
-
     // Methods to load specific pages inside mainPane
     public static void openAjouterUserScene() {
         loadPage("/AjouterUser.fxml");
@@ -98,9 +98,18 @@ public class SceneController {
         loadUserPage("/ModifierUser.fxml", user); // Load the page and pass the user data
     }
 
-
     public static void openModifierDepartmentScene(Department department) {
         loadPageForModifier("/ModifierDepartment.fxml", department);
     }
 
+    // Method to open the Main Menu scene
+    public static void openMainMenuScene() {
+        loadPage("/MainMenu.fxml"); // Main menu does not require any data, so pass null
+    }
+
+    // Method to open the User Profile scene
+
+    public static void openUserProfileScene() {
+        loadPage("/UserProfile.fxml"); // Load the profile page
+    }
 }

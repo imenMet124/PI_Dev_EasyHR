@@ -10,34 +10,46 @@ public class MainMenuController {
 
     @FXML
     public void initialize() {
-        SceneController.setMainPane(mainPane); // Link mainPane to SceneController
+        if (mainPane != null) {
+            SceneController.setMainPane(mainPane); // Link mainPane to SceneController
+        } else {
+            System.err.println("mainPane is null in MainMenuController!");
+        }
     }
 
     @FXML
     private void goToAjouterUser() {
+        System.out.println("Navigating to Ajouter User...");
         SceneController.openAjouterUserScene();
     }
 
     @FXML
     private void goToAfficherUsers() {
+        System.out.println("Navigating to Afficher Users...");
         SceneController.openAfficherUsersScene();
     }
 
     @FXML
     private void goToAjouterDepartment() {
+        System.out.println("Navigating to Ajouter Department...");
         SceneController.openAjouterDepartmentScene();
     }
 
     @FXML
     private void goToAfficherDepartments() {
+        System.out.println("Navigating to Afficher Departments...");
         SceneController.openAfficherDepartmentsScene();
     }
 
+    @FXML
+    private void goToUserProfile() {
+        System.out.println("Navigating to User Profile...");
+        SceneController.openUserProfileScene();
+    }
 
-
-
-
-    public void handleLogout() {
+    @FXML
+    private void handleLogout() {
         System.out.println("Logout clicked!");
+        // Add logout logic here (e.g., clear session, return to login screen)
     }
 }
