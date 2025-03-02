@@ -133,7 +133,7 @@ public class SceneController {
     }
     public static void openVerificationCodeScene(String verificationCode) {
         try {
-            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/VerificationCode.fxml"));
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/ClockInOut.fxml"));
             Parent root = loader.load();
             VerificationCodeController controller = loader.getController();
             controller.setVerificationCode(verificationCode); // Pass the verification code
@@ -155,4 +155,8 @@ public class SceneController {
             e.printStackTrace();
         }
     }
+    public static void openClockInOutScene() {
+        loadPage("/ClockInOut.fxml"); // Load the Clock In/Out page
+    }
+
 }

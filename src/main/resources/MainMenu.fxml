@@ -32,6 +32,8 @@
             <Button text="Afficher Departments" onAction="#goToAfficherDepartments" styleClass="sidebar-button" maxWidth="200"/>
             <!-- Add a button for the User Profile -->
             <Button text="User Profile" onAction="#goToUserProfile" styleClass="sidebar-button" maxWidth="200"/>
+            <Button text="Clock In/Out" onAction="#goToClockInOut" styleClass="sidebar-button" maxWidth="200"/>
+
         </VBox>
     </left>
 

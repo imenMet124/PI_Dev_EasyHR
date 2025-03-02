@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="15.0" xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.ClockInOutController">
+    <Label text="Clock In/Out" style="-fx-font-size: 24px;"/>
+
+    <!-- Webcam Feed -->
+    <ImageView fx:id="webcamView" fitWidth="320" fitHeight="240"/>
+
+    <!-- ComboBox for Clock In/Out -->
+    <HBox alignment="CENTER" spacing="10">
+        <ComboBox fx:id="clockActionComboBox" promptText="Select Action"/>
+    </HBox>
+
+    <!-- Capture Button -->
+    <Button text="Capture and Process" onAction="#handleCaptureAndProcess"/>
+
+    <!-- Status Messages -->
+    <Label fx:id="statusLabel"/>
+</VBox>

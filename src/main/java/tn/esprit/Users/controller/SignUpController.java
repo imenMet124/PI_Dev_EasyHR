@@ -1,17 +1,33 @@
 package tn.esprit.Users.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import javafx.embed.swing.SwingNode;
+import javafx.scene.layout.VBox;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
 import tn.esprit.Users.services.ServiceUsers;
-import tn.esprit.Users.utils.Base;
+import tn.esprit.Users.utils.KairosAPI;
 import org.mindrot.jbcrypt.BCrypt;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import javax.imageio.ImageIO;
+import tn.esprit.Users.services.UserPhotoService;
+
+
 
 public class SignUpController {
 
@@ -20,18 +36,106 @@ public class SignUpController {
 
     @FXML
     private Label successLabel;
+
     @FXML
     private TextField nameField;
+
     @FXML
     private TextField emailField;
+
     @FXML
     private TextField phoneField;
+
     @FXML
     private PasswordField passwordField;
+
     @FXML
     private PasswordField confirmPasswordField;
 
+    @FXML
+    private ImageView webcamView;
+
+    private Webcam webcam;
+    private File capturedImageFile;
+
     private final ServiceUsers serviceUsers = new ServiceUsers();
+    private final UserPhotoService userPhotoService = new UserPhotoService();
+    @FXML
+    private void initialize() {
+        // Initialize the webcam
+        startWebcam();
+    }
+
+    private void startWebcam() {
+        webcam = Webcam.getDefault();
+
+        if (webcam == null) {
+            errorLabel.setText("No webcam detected.");
+            return;
+        }
+
+        // Set resolution to at least 640x480 to meet Kairos API requirements
+        webcam.setViewSize(new Dimension(640, 480));
+
+        if (webcam.isOpen()) {
+            errorLabel.setText("Webcam is already in use. Attempting to restart...");
+            try {
+                webcam.close();
+                errorLabel.setText("Webcam released. Reopening...");
+            } catch (Exception e) {
+                errorLabel.setText("Failed to release webcam: " + e.getMessage());
+                return;
+            }
+        }
+
+        try {
+            webcam.open();
+
+            WebcamPanel webcamPanel = new WebcamPanel(webcam);
+            webcamPanel.setFPSDisplayed(true);
+            webcamPanel.setDisplayDebugInfo(true);
+
+            SwingNode swingNode = new SwingNode();
+            createSwingContent(swingNode, webcamPanel);
+
+            VBox parent = (VBox) webcamView.getParent();
+            parent.getChildren().remove(webcamView);
+            parent.getChildren().add(swingNode);
+
+            errorLabel.setText("Webcam started successfully.");
+        } catch (Exception e) {
+            errorLabel.setText("Error initializing webcam: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void createSwingContent(SwingNode swingNode, WebcamPanel webcamPanel) {
+        SwingUtilities.invokeLater(() -> swingNode.setContent(webcamPanel));
+    }
+
+    public void releaseWebcam() {
+        if (webcam != null && webcam.isOpen()) {
+            webcam.close();
+        }
+    }
+
+    @FXML
+    private void handleCaptureImage() {
+        if (webcam != null) {
+            // Capture the image from the webcam
+            BufferedImage bufferedImage = webcam.getImage();
+            if (bufferedImage != null) {
+                try {
+                    // Save the image to a file
+                    capturedImageFile = new File("captured_image.jpg");
+                    ImageIO.write(bufferedImage, "jpg", capturedImageFile);
+                    successLabel.setText("Image captured successfully!");
+                } catch (IOException e) {
+                    errorLabel.setText("Error capturing image: " + e.getMessage());
+                }
+            }
+        }
+    }
 
     @FXML
     private void handleSignUp() {
@@ -39,7 +143,7 @@ public class SignUpController {
         String email = emailField.getText().trim();
         String phone = phoneField.getText().trim();
         String password = passwordField.getText().trim();
-        String confirmPassword = confirmPasswordField.getText().trim(); // Get the text of the confirm password field
+        String confirmPassword = confirmPasswordField.getText().trim();
 
         // Validate fields
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
@@ -50,12 +154,18 @@ public class SignUpController {
         // Check if passwords match
         if (!password.equals(confirmPassword)) {
             errorLabel.setText("Passwords do not match.");
-            return; // Stop the process if passwords don't match
+            return;
         }
 
-        // Check if the email is already taken (you can implement this check if needed)
+        // Check if the email is already taken
         if (serviceUsers.isEmailTaken(email)) {
             errorLabel.setText("Email is already taken.");
+            return;
+        }
+
+        // Check if an image was captured
+        if (capturedImageFile == null) {
+            errorLabel.setText("Please capture an image before signing up.");
             return;
         }
 
@@ -63,32 +173,70 @@ public class SignUpController {
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
         System.out.println("🔑 Hashed password before inserting into DB: " + hashedPassword);
 
-        // Create a new User object (password will now be hashed)
+        // Create a new User object (without photo)
         User newUser = new User(0, name, email, phone, hashedPassword, UserRole.EMPLOYE, "New Position", 3000.00, null, UserStatus.ACTIVE, null);
 
         try {
-            serviceUsers.ajouter(newUser);  // Add the user to the database
-            successLabel.setText("User signed up successfully!");
-        } catch (SQLException e) {
-            errorLabel.setText("Error during sign up: " + e.getMessage());
+            // Add the user to the database
+            serviceUsers.ajouter(newUser);
+
+            // Get the newly created user ID
+            int userId = serviceUsers.getLastInsertedUserId();
+            if (userId <= 0) {
+                errorLabel.setText("Error retrieving user ID.");
+                return;
+            }
+
+
+
+            // Define the path to save the image (inside src/main/resources)
+            String imagePath = "src/main/resources/images/users/" + userId + ".jpg";
+            File destinationFile = new File(imagePath);
+
+
+            // Save the captured image to the file
+            ImageIO.write(ImageIO.read(capturedImageFile), "jpg", destinationFile);
+
+            // Store image path in the UserPhoto table or as part of the User entity (depending on how you set it up)
+            UserPhotoService userPhotoService = new UserPhotoService();
+            userPhotoService.addUserPhoto(userId, imagePath); // Store the image path in the database
+
+            successLabel.setText("User signed up and image saved successfully!");
+            releaseWebcam();
+        } catch (SQLException | IOException e) {
+            errorLabel.setText("Error during sign-up: " + e.getMessage());
         }
     }
 
 
 
-    private void showError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
-    }
-
-    private void showSuccess(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Success");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+    // Helper method to check if the enrollment was successful
+    private boolean isEnrollmentSuccessful(String kairosResponse) {
+        try {
+            JSONObject jsonResponse = new JSONObject(kairosResponse);
+            // Check if the response contains an "images" array
+            if (jsonResponse.has("images")) {
+                JSONArray images = jsonResponse.getJSONArray("images");
+                if (images.length() > 0) {
+                    JSONObject firstImage = images.getJSONObject(0);
+                    // Check if the transaction status is "success"
+                    if (firstImage.has("transaction") && firstImage.getJSONObject("transaction").has("status")) {
+                        String status = firstImage.getJSONObject("transaction").getString("status");
+                        return "success".equalsIgnoreCase(status);
+                    }
+                }
+            }
+            // Check for errors in the response
+            if (jsonResponse.has("Errors")) {
+                JSONArray errors = jsonResponse.getJSONArray("Errors");
+                if (errors.length() > 0) {
+                    JSONObject firstError = errors.getJSONObject(0);
+                    System.err.println("Kairos Error: " + firstError.getString("Message"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -431,6 +431,16 @@ public class ServiceUsers implements IService<User> {
             return rowsUpdated > 0; // Return true if the password was updated successfully
         }
     }
+    public int getLastInsertedUserId() throws SQLException {
+        String sql = "SELECT LAST_INSERT_ID() AS id";
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        }
+        return 0;  // Return 0 if no ID is found
+    }
 
 
 

@@ -52,4 +52,10 @@ public class MainMenuController {
         System.out.println("Logout clicked!");
         // Add logout logic here (e.g., clear session, return to login screen)
     }
+
+    @FXML
+    private void goToClockInOut() {
+        System.out.println("Navigating to Clock In/Out...");
+        SceneController.openClockInOutScene(); // Load the Clock In/Out page
+    }
 }
