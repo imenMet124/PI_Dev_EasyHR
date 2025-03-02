@@ -245,4 +245,27 @@ public class ServiceCandidature implements IService<Candidature> {
         }
         return candidatures;
     }
+    public List<String> afficherCandidaturesFormatees() throws SQLException {
+        List<String> formattedCandidatures = new ArrayList<>();
+        List<Candidature> candidatures = afficher();
+
+        for (Candidature candidature : candidatures) {
+            String details = String.format(
+                    "🆔 ID Candidat: %d | 👤 %s %s | 📧 %s | 📞 %s | 💼 Exp: %s | 🛠️ Comp: %s | 🟢 Dispo: %s | 📌 Offre: %s",
+                    candidature.getCandidat().getIdCandidat(),
+                    candidature.getCandidat().getNom(),
+                    candidature.getCandidat().getPrenom(),
+                    candidature.getCandidat().getEmail(),
+                    candidature.getCandidat().getPhone(),
+                    candidature.getCandidat().getExperienceInterne(),
+                    candidature.getCandidat().getCompetence(),
+                    candidature.getCandidat().getDisponibilite(),
+                    candidature.getOffre().getTitrePoste()
+            );
+            formattedCandidatures.add(details);
+        }
+
+        return formattedCandidatures;
+    }
+
 }

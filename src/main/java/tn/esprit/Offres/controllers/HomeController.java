@@ -75,7 +75,7 @@ public class HomeController {
 
     @FXML
     private void ouvrirPageCandidatures(MouseEvent event) {
-        chargerVue("/ViewCandidature.fxml");
+        chargerVue("/Candidatures.fxml");
     }
 
     @FXML

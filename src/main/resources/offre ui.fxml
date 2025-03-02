@@ -22,6 +22,8 @@
                <Button style="-fx-background-color: transparent; -fx-text-fill: white;" text="Accueil" />
                <Button style="-fx-background-color: transparent; -fx-text-fill: white;" text="Offres d'Emploi" />
                <Button style="-fx-background-color: transparent; -fx-text-fill: white;" text="Paramètres" />
+
+
            </children>
         </VBox>
 

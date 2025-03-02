@@ -1,14 +1,19 @@
 package tn.esprit.Offres.controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import tn.esprit.Offres.entities.Offre;
 import tn.esprit.Offres.services.ServiceOffres;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -85,6 +90,19 @@ public class AdminOffresController {
             offresContainer.getChildren().clear();
             afficherOffres();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void afficherCandidatures() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Candidatures.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Liste des Candidatures");
+            stage.show();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

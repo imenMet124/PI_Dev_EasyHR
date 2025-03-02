@@ -20,7 +20,14 @@ public class Offre {
     }
 
     public enum StatutOffre {
-        EN_COURS, OUVERT, FERME
+        EN_COURS, OUVERT, FERME;
+        public static StatutOffre fromString(String statut) {
+            try {
+                return StatutOffre.valueOf(statut);
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return EN_COURS; // Default value
+            }
+        }
     }
 
     // Liste des départements possibles

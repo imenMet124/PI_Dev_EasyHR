@@ -37,7 +37,7 @@
                   <Insets top="20.0" />
                </VBox.margin></Button>
 
-                <Button fx:id="candidature" mnemonicParsing="false" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
+                <Button fx:id="afficherCandidaturesButton" mnemonicParsing="false" onAction="#afficherCandidatures" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin></Button>

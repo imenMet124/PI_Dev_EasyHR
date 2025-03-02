@@ -14,7 +14,7 @@ public class ViewCandidaturePage extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewCandidature.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Candidatures.fxml"));
         Parent root = loader.load();
         ViewCandidature controller = loader.getController();
 
