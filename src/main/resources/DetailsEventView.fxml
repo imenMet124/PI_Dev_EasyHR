@@ -6,6 +6,7 @@
 
 <?import javafx.scene.text.TextFlow?>
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.evenement.controllers.DetailsEventsController">
 
@@ -35,12 +36,27 @@
                     <Label fx:id="titreLabel" styleClass="event-title-bold"/>
 
                 </VBox>
-
                 <VBox spacing="5" alignment="CENTER_LEFT">
                     <Label text="Description :" styleClass="label-description"/>
                     <TextFlow fx:id="descriptionContainer" styleClass="description-text"/>
-                </VBox>
 
+                    <!-- Sélection de la langue -->
+                    <HBox spacing="10">
+                        <Label text="Traduire en :" styleClass="label-translate"/>
+                        <ChoiceBox fx:id="languageChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Anglais"/>
+                                    <String fx:value="Espagnol"/>
+                                    <String fx:value="Allemand"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </HBox>
+
+                    <!-- Bouton de traduction -->
+                    <Button fx:id="translateButton" text="🔄 Traduire" onAction="#handleTranslate" styleClass="translate-button"/>
+                </VBox>
                 <GridPane hgap="10" vgap="10">
                     <columnConstraints>
                         <ColumnConstraints minWidth="150" prefWidth="150"/>
