@@ -20,6 +20,9 @@ public class Candidat {
     public Candidat(int idCandidat, String nomCandidat, String prenomCandidat, String emailCandidat, String telephoneCandidat, String posteActuel, String departement, String experienceInterne, String competence, StatuCandidat statuCandidat, Disponibilite disponibilite) {
     }
 
+    public Candidat(int idCandidat) {
+    }
+
     public enum StatuCandidat {
         EN_ATTENTE, EN_COURS, SHORTLISTE, ENTREVUE, ACCEPTE, REFUSE
     }

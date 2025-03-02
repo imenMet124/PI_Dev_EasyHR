@@ -1,71 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.geometry.*?>
+<?import java.net.*?>
 <?import javafx.scene.image.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.awt.Image?>
+<?import javafx.scene.image.ImageView?>
 
-<ScrollPane prefHeight="403.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.ViewController">
-   <content>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <VBox prefHeight="400.0" prefWidth="87.0" styleClass="vbox-container" stylesheets="@Style.css">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.AjoutController">
+
+   <stylesheets>
+      <String fx:value="listOffre.css" />
+      <String fx:value="styles.css" />
+   </stylesheets>
+   <children>
+   
+      <HBox spacing="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+      <children>
+            <!-- Sidebar -->
+            <VBox alignment="TOP_LEFT" prefWidth="250.0" spacing="10" styleClass="sidebar" stylesheets="@styles.css">
                <children>
-                  <ImageView fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/Logo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../Downloads/Capture_d_écran_2025-02-18_002646-removebg-preview.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../Downloads/Capture_d_écran_2025-02-18_002620-removebg-preview.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../Downloads/Capture_d_écran_2025-02-18_002700-removebg-preview.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="53.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../../../Downloads/Capture_d_écran_2025-02-18_002557-removebg-preview.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="60.0" />
-                     </VBox.margin>
-                  </ImageView>
+                  <ImageView fx:id="logoImage" fitHeight="600" fitWidth="200" preserveRatio="true" styleClass="logo" />
+                  <Button onAction="#goToIndex" styleClass="sidebar-button" stylesheets="@style1.css" text="Dashboard" />
+                  <Button styleClass="sidebar-button" text="Evenements" />
+                  <Button styleClass="sidebar-button" text="Taches" />
+                  <Button styleClass="sidebar-button" text="Offres" />
+                  <Button styleClass="sidebar-button" text="Formations" />
+                  <Button styleClass="sidebar-button" text="Utilisateurs" />
                </children>
             </VBox>
-            <HBox layoutX="100.0" layoutY="7.0" prefHeight="55.0" prefWidth="501.0" styleClass="hbox-style" stylesheets="@Style.css">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Offre Interne" />
-               </children>
-            </HBox>
-            <ListView fx:id="listC" layoutX="104.0" layoutY="171.0" prefHeight="222.0" prefWidth="456.0" styleClass="list-view-modern" stylesheets="@Style.css" />
-            <ImageView fitHeight="106.0" fitWidth="151.0" layoutX="254.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@images/viewoff.png" />
-               </image>
-            </ImageView>
+      
+            <!-- Main Content -->
+            <VBox spacing="20" styleClass="main-content" stylesheets="@listOffre.css" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" HBox.hgrow="ALWAYS">
+         <children>
+         
+                  <!-- Header Section -->
+                  <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header-container">
+            <children>
+                        <Text styleClass="header-title" text="Gestion des Offres" />
+            
+                        <Region HBox.hgrow="ALWAYS" />
+            
+                        <Button onAction="#handleAddOffer" style="-fx-background-color: #fbaa00;" styleClass="action-button" text="Ajouter Offre">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="PLUS" size="16" styleClass="action-icon" />
+                           </graphic>
+                        </Button>
+            
+                        <Button onAction="#handleRefresh" styleClass="action-button" text="Actualiser">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="REFRESH" size="16" styleClass="action-icon" />
+                           </graphic>
+                        </Button>
+            </children>
+                  </HBox>
+         
+                  <!-- Offer List Section -->
+                  <ListView fx:id="offerListView" maxHeight="Infinity" prefHeight="600" styleClass="offer-list" VBox.vgrow="ALWAYS">
+                     <stylesheets>
+                        <URL value="@listOffre.css" />
+                        <URL value="@styles.css" />
+                     </stylesheets>
+                  </ListView>
          </children>
-      </AnchorPane>
-   </content>
-</ScrollPane>
+            </VBox>
+      </children>
+   
+      </HBox>
+   </children>
+</AnchorPane>

@@ -49,7 +49,7 @@ public class Main {
             Offre offreExistante = new Offre(1, "Développeur Java",
                     "Développement d'applications Java",
                     utilDatePub, // ✅ Maintenant correct
-                    "Ouverte", "Informatique", "Recruteur1");
+                    Offre.StatutOffre.valueOf("FERME"), "Informatique", "Recruteur1");
 
             //  Créer une candidature avec ces données
             Candidature candidature = new Candidature(1, candidatExistant, offreExistante,

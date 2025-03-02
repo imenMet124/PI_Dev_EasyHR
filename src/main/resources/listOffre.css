@@ -1,0 +1,208 @@
+/* Style général */
+.root {
+    -fx-background-color: #F4F5FA;
+    -fx-padding: 20px;
+    -fx-font-family: 'Arial';
+}
+
+/* En-tête */
+.header-container {
+    -fx-background-color: white;
+    -fx-padding: 15px;
+    -fx-border-radius: 8px;
+    -fx-border-color: #E5E5E5;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 3);
+}
+
+.header-title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #E5E5E5;
+    -fx-border-radius: 8px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 3);
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #6A5ACD;
+    -fx-border-radius: 8px 8px 0 0;
+    -fx-padding: 8px;
+}
+
+.table-view .column-header {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #D1C4E9;
+}
+
+.table-cell {
+    -fx-padding: 10px;
+    -fx-alignment: CENTER_LEFT;
+}
+
+/* Boutons */
+.action-button {
+    -fx-background-color: #6A5ACD;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 8px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.action-button:hover {
+    -fx-background-color: #5A4BCF;
+}
+
+/* Boutons icônes */
+.icon-button {
+    -fx-background-radius: 50%;
+    -fx-background-color: #6A5ACD;
+    -fx-padding: 10px;
+    -fx-shape: "M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z";
+}
+
+.icon-button:hover {
+    -fx-background-color: #5A4BCF;
+}
+
+/* Actions dans la TableView */
+.action-col-button {
+    -fx-background-radius: 50%;
+    -fx-padding: 10px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.modify-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-shape: "M19 3h-4.18c-.42 0-.83.17-1.13.47L12 5.17 10.31 3.47C10.01 3.17 9.6 3 9.18 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z";
+}
+
+.delete-button {
+    -fx-background-color: #F44336;
+    -fx-text-fill: white;
+    -fx-shape: "M16 9v10H8V9h8m-1.5-6H9.5l-1 1H5v2h14V4h-3.5l-1-1z";
+}
+
+.details-button {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+    -fx-shape: "M12 4.5C7.305 4.5 3.5 8.305 3.5 13S7.305 21.5 12 21.5 20.5 17.695 20.5 13 16.695 4.5 12 4.5zM13 17h-2v-2h2v2zm0-4h-2V7h2v6z";
+}
+
+.modify-button:hover {
+    -fx-background-color: #45A049;
+}
+
+.delete-button:hover {
+    -fx-background-color: #D32F2F;
+}
+
+.details-button:hover {
+    -fx-background-color: #1976D2;
+}
+.action-icon {
+    -fx-icon-color: white !important;
+    -fx-fill: white !important;
+}
+/* Style de la ListView */
+.event-list {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Style des éléments de la liste */
+.event-list .list-cell {
+    -fx-background-color: white;
+    -fx-border-color: #E5E5E5;
+    -fx-border-radius: 8px;
+    -fx-padding: 12px;
+    -fx-spacing: 15px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+}
+
+.event-list .list-cell:hover {
+    -fx-background-color: #F8F9FB;
+}
+
+/* Style des cellules sélectionnées */
+.event-list .list-cell:selected {
+    -fx-background-color: #E5E7EB;
+    -fx-text-fill: black;
+}
+
+/* Style des labels */
+.event-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
+}
+
+/* Style des titres en gras */
+.event-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: #333;
+}
+
+/* Conteneur principal des événements */
+.event-container {
+    -fx-padding: 12px;
+    -fx-background-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-color: #E5E5E5;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+/* Assurer que le bouton est parfaitement rond */
+.event-action-button {
+    -fx-background-radius: 50%;
+    -fx-shape: "M50,25a25,25 0 1,1 -50,0a25,25 0 1,1 50,0"; /* Force un vrai cercle */
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.15), 4, 0, 0, 2);
+}
+
+
+.delete-button {
+    -fx-background-color: #F44336 !important; /* Rouge */
+}
+
+.details-button {
+    -fx-background-color: #2196F3 !important; /* Bleu */
+}
+
+
+.delete-button:hover {
+    -fx-background-color: #D32F2F !important;
+}
+
+.details-button:hover {
+    -fx-background-color: #1976D2 !important;
+}
+
+/* Style des icônes blanches */
+.event-icon {
+    -fx-fill: white !important;
+    -fx-scale-x: 1.0;
+    -fx-scale-y: 1.0;
+}

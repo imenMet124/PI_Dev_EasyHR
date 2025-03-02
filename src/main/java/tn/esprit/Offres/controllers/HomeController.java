@@ -68,6 +68,32 @@ public class HomeController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void ouvrirPageOffres(MouseEvent event) {
+        chargerVue("/ViewOffre.fxml");
+    }
+
+    @FXML
+    private void ouvrirPageCandidatures(MouseEvent event) {
+        chargerVue("/ViewCandidature.fxml");
+    }
+
+    @FXML
+    private void ouvrirPageAjout(MouseEvent event) {
+        chargerVue("/Ajout.fxml");
+    }
+
+    private void chargerVue(String cheminFxml) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(cheminFxml));
+            Parent root = loader.load();
+            Stage stage = (Stage) ajoutC.getScene().getWindow(); // Récupère la fenêtre actuelle
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

@@ -121,5 +121,31 @@ public class ServiceCandidat implements IService<Candidat> {
         return candidats;
     }
 
+    public Candidat getCandidatById(int idCandidat) {
+        String sql = "SELECT * FROM candidat WHERE idCandidat = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, idCandidat);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Candidat candidat = new Candidat();
+                candidat.setIdCandidat(resultSet.getInt("idCandidat"));
+                candidat.setNom(resultSet.getString("nomCandidat"));
+                candidat.setPrenom(resultSet.getString("prenomCandidat"));
+                candidat.setEmail(resultSet.getString("emailCandidat"));
+                candidat.setPhone(resultSet.getString("telephoneCandidat"));
+                candidat.setExperienceInterne(resultSet.getString("experienceInterne"));
+                candidat.setCompetence(resultSet.getString("competence"));
+                candidat.setDisponibilite(Candidat.Disponibilite.valueOf(resultSet.getString("disponibilite")));
+
+                return candidat;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("❌ Erreur SQL lors de la récupération du candidat : " + e.getMessage());
+        }
+        return null;
+    }
 
 }

@@ -1,0 +1,33 @@
+/* ✅ Style général */
+.container {
+    -fx-background-color: #F8EDEB;
+}
+
+/* ✅ Partie gauche */
+.left-pane {
+    -fx-background-color: #916EA7;
+    -fx-pref-width: 350px;
+    -fx-alignment: center;
+}
+
+/* ✅ Partie droite */
+.right-pane {
+    -fx-padding: 30;
+    -fx-spacing: 20;
+}
+
+/* ✅ Boutons */
+.upload-button {
+    -fx-background-color: #FFB6B9;
+    -fx-text-fill: white;
+}
+
+.cancel-button {
+    -fx-background-color: #748CF1;
+    -fx-text-fill: white;
+}
+
+.save-button {
+    -fx-background-color: #FD9999;
+    -fx-text-fill: white;
+}

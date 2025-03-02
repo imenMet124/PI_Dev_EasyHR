@@ -1,79 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.text.*?>
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<ScrollPane prefHeight="450.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.AjoutController">
-   <content>
-      <AnchorPane prefHeight="444.0" prefWidth="678.0">
-         <children>
-            <VBox layoutX="6.0" layoutY="5.0" prefHeight="439.0" prefWidth="79.0" styleClass="vbox-container" stylesheets="@Style.css">
-               <children>
-                  <ImageView fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
+<AnchorPane prefHeight="450.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.AjoutController">
+
+    <children>
+        <!-- Barre latérale du menu -->
+        <VBox prefHeight="450.0" prefWidth="200.0" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
+            <children>
+                <ImageView fitHeight="87.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
                         <Image url="@images/Logo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="10.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="45.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icon1.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="30.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="43.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icon2.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icon3.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <ImageView fitHeight="59.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@images/icon4.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="80.0" />
-                     </VBox.margin>
-                  </ImageView>
-               </children></VBox>
-            <HBox layoutX="100.0" layoutY="5.0" prefHeight="52.0" prefWidth="634.0" styleClass="hbox-style" stylesheets="@Style.css">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Offre" />
-               </children></HBox>
-            <TextField id="a" fx:id="titre" layoutX="123.0" layoutY="108.0" prefHeight="22.0" prefWidth="200.0" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-            <TextArea id="b" fx:id="desc" layoutX="123.0" layoutY="176.0" prefHeight="136.0" prefWidth="234.0" styleClass="textarea-modern" stylesheets="@Style.css" />
-            <TextField fx:id="dep" layoutX="388.0" layoutY="119.0" prefHeight="22.0" prefWidth="200.0" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-            <TextField id="c" fx:id="date" layoutX="123.0" layoutY="346.0" prefHeight="22.0" prefWidth="200.0" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-            <TextField fx:id="rec" layoutX="388.0" layoutY="196.0" prefHeight="22.0" prefWidth="200.0" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-            <Text layoutX="139.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre" />
-            <Text layoutX="139.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" />
-            <Text layoutX="139.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date " />
-            <Text layoutX="397.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Departement" wrappingWidth="91.0" />
-            <Text layoutX="397.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recruteur Responsable" />
-            <Text layoutX="402.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statut" />
-            <Button fx:id="ajoutButton" layoutX="398.0" layoutY="344.0" mnemonicParsing="false" onAction="#ajouterOffre" styleClass="button-modern" stylesheets="@Style.css" text="Ajouter" />
-            <TextField fx:id="stat" layoutX="388.0" layoutY="281.0" prefHeight="22.0" prefWidth="200.0" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-         </children>
-      </AnchorPane>
-   </content>
-</ScrollPane>
+                    </image>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </ImageView>
+
+                <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard" />
+
+                <Button fx:id="accueil" mnemonicParsing="false"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;"
+                        text="Accueil">
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Button>
+
+                <Button fx:id="ajout" mnemonicParsing="false"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;"
+                        text="Ajoute Une Offre">
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Button>
+
+                <Button fx:id="gestion" mnemonicParsing="false"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;"
+                        text="Gérer Les Offres">
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </Button>
+
+                <Button fx:id="candidature" mnemonicParsing="false"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;"
+                        text="Gérer Candidatures" />
+            </children>
+        </VBox>
+
+        <!-- Contenu principal -->
+        <VBox layoutX="200.0" prefWidth="539.0" style="-fx-padding: 20;">
+            <children>
+                <!-- Titre -->
+                <HBox alignment="CENTER_LEFT" prefHeight="50.0">
+                    <children>
+                        <Label style="-fx-font-size: 22; -fx-font-weight: bold; -fx-text-fill: #333;" text="Ajouter Offre" />
+                    </children>
+                </HBox>
+
+                <!-- Champs du formulaire -->
+                <GridPane hgap="10" vgap="15">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="30" />
+                        <RowConstraints minHeight="30" />
+                        <RowConstraints minHeight="30" />
+                        <RowConstraints minHeight="30" />
+                        <RowConstraints minHeight="30" />
+                        <RowConstraints minHeight="30" />
+                    </rowConstraints>
+
+                    <children>
+                        <Label text="Titre:" />
+                        <TextField fx:id="titre" prefWidth="250.0"
+                                   style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="1" />
+
+                        <Label text="Description:" GridPane.rowIndex="1" />
+                        <TextArea fx:id="desc" prefHeight="80.0" prefWidth="250.0"
+                                  style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="1" />
+
+                        <Label text="Département:" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="departementComboBox" prefWidth="250.0"
+                                  style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="2" />
+
+                        <Label text="Date:" GridPane.rowIndex="3" />
+                        <TextField fx:id="date" style="-fx-background-radius: 5; -fx-border-radius: 5;"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                        <Label text="Recruteur Responsable:" GridPane.rowIndex="4" />
+                        <TextField fx:id="rec" style="-fx-background-radius: 5; -fx-border-radius: 5;"
+                                   GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                        <Label text="Statut:" GridPane.rowIndex="5" />
+                        <ComboBox fx:id="statutComboBox" prefWidth="250.0"
+                                  style="-fx-background-radius: 5; -fx-border-radius: 5;" GridPane.columnIndex="1"
+                                  GridPane.rowIndex="5" />
+                    </children>
+                </GridPane>
+
+                <!-- Bouton Ajouter -->
+                <Button fx:id="ajoutButton" onAction="#ajouterOffre"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-padding: 10 20;"
+                        text="Ajouter">
+                    <VBox.margin>
+                        <Insets left="250.0" top="10.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+
+    </children>
+</AnchorPane>

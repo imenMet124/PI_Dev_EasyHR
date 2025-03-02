@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Offres.controllers.AcceuilController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <!-- Barre latérale du menu -->
+        <VBox prefWidth="180.0" prefHeight="400.0" style="-fx-background-color: #2C3E50; -fx-padding: 15;">
+            <children>
+                <!-- Logo -->
+                <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/Logo.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets bottom="15.0" />
+                    </VBox.margin>
+                </ImageView>
+
+                <Label style="-fx-font-size: 18; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard" />
+
+                <Button fx:id="accueil" text="Accueil"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets top="12.0" />
+                    </VBox.margin>
+                </Button>
+
+                <Button fx:id="ajout" text="Ajoute Une Offre"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets top="12.0" />
+                    </VBox.margin>
+                </Button>
+
+                <Button fx:id="gestion" text="Gérer Les Offres"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets top="12.0" />
+                    </VBox.margin>
+                </Button>
+
+                <Button fx:id="candidature" text="Gérer Candidatures"
+                        style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;">
+                    <VBox.margin>
+                        <Insets top="12.0" />
+                    </VBox.margin>
+                </Button>
+            </children>
+        </VBox>
+
+        <!-- Contenu principal -->
+        <VBox layoutX="180.0" prefWidth="420.0" prefHeight="400.0" style="-fx-padding: 15;">
+            <children>
+                <Label text="Bienvenue sur la page d'accueil"
+                       style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" />
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

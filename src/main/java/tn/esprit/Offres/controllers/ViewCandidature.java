@@ -46,6 +46,7 @@ public class ViewCandidature {
             } else {
 
                 setText(
+
                         "Candidat: " + item.getCandidat().getIdCandidat() + " "  +
                                 " | Offre: " + item.getOffre().getTitrePoste() +
                                 " | Statut: " + item.getStatutCandidature() +

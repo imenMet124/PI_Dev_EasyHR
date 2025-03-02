@@ -12,10 +12,9 @@ public class PageOffre extends Application {
     }
     @Override
     public void start(Stage secondaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ViewOffre.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/offre ui.fxml"));
         Parent root = loader.load();
-        ViewCandidature controller = loader.getController();
-
+        OffresController controller = loader.getController();
         Scene scene = new Scene(root);
         secondaryStage.setScene(scene);
         secondaryStage.show();

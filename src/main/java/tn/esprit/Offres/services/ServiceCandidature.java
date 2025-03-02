@@ -32,7 +32,7 @@ public class ServiceCandidature implements IService<Candidature> {
 
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            // 🟢 Insérer les données du candidat
+            //  Insérer les données du candidat
             preparedStatement.setInt(1, candidature.getCandidat().getIdCandidat());
             preparedStatement.setString(2, candidature.getCandidat().getNom());
             preparedStatement.setString(3, candidature.getCandidat().getPrenom());
@@ -70,6 +70,71 @@ public class ServiceCandidature implements IService<Candidature> {
                     System.out.println("✅ Candidature ajoutée avec succès ! ID : " + candidature.getIdCandidature());
                 }
             }
+        }
+    }
+
+    public int ajouterCandidature(Candidature candidature) {
+        String sql = "INSERT INTO candidature (idCandidat, nom, prenom, email, phone, " +
+                "experienceInterne, competence, disponibilite, idOffre, titreOffre) " + // Suppression de la virgule après titreOffre
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            // Vérification et affichage des valeurs avant l'insertion
+            System.out.println("🔍 Vérification des données de la candidature avant insertion :");
+            System.out.println("📌 ID Candidat: " + candidature.getCandidat().getIdCandidat());
+            System.out.println("📌 Nom: " + candidature.getCandidat().getNom());
+            System.out.println("📌 Prénom: " + candidature.getCandidat().getPrenom());
+            System.out.println("📌 Email: " + candidature.getCandidat().getEmail());
+            System.out.println("📌 Téléphone: " + candidature.getCandidat().getPhone());
+            System.out.println("📌 Expérience Interne: " + candidature.getCandidat().getExperienceInterne());
+            System.out.println("📌 Compétences: " + candidature.getCandidat().getCompetence());
+
+            // Vérification et assignation d'une valeur par défaut si la disponibilité est NULL
+            if (candidature.getCandidat().getDisponibilite() == null) {
+                System.out.println("⚠ Disponibilité NULL, assignation à IMMEDIATE par défaut.");
+                candidature.getCandidat().setDisponibilite(Candidat.Disponibilite.IMMEDIATE);
+            }
+            System.out.println("📌 Disponibilité: " + candidature.getCandidat().getDisponibilite().name());
+
+            // Vérification et affichage des valeurs de l'offre
+            System.out.println("📌 ID Offre: " + candidature.getOffre().getIdOffre());
+            System.out.println("📌 Titre Offre: " + candidature.getOffre().getTitrePoste());
+
+            // Insertion des données du candidat
+            preparedStatement.setInt(1, candidature.getCandidat().getIdCandidat());
+            preparedStatement.setString(2, candidature.getCandidat().getNom());
+            preparedStatement.setString(3, candidature.getCandidat().getPrenom());
+            preparedStatement.setString(4, candidature.getCandidat().getEmail());
+            preparedStatement.setString(5, candidature.getCandidat().getPhone());
+            preparedStatement.setString(6, candidature.getCandidat().getExperienceInterne());
+            preparedStatement.setString(7, candidature.getCandidat().getCompetence());
+            preparedStatement.setString(8, candidature.getCandidat().getDisponibilite().name());
+
+            // Insertion des données de l’offre
+            preparedStatement.setInt(9, candidature.getOffre().getIdOffre());
+            preparedStatement.setString(10, candidature.getOffre().getTitrePoste());
+
+            // Exécution de la requête
+            int affectedRows = preparedStatement.executeUpdate();
+            if (affectedRows == 0) {
+                throw new SQLException("❌ Échec de l'ajout de la candidature, aucune ligne affectée.");
+            }
+
+            // Récupération de l'ID généré
+            try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    int idCandidature = generatedKeys.getInt(1);
+                    candidature.setIdCandidature(idCandidature);
+                    System.out.println("✅ Candidature ajoutée avec succès ! ID : " + idCandidature);
+                    return idCandidature;
+                } else {
+                    throw new SQLException("❌ Échec de l'ajout de la candidature, aucun ID généré.");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("⚠ Erreur SQL lors de l'ajout de la candidature : " + e.getMessage());
+            return -1; // Indiquer un échec
         }
     }
 
@@ -150,14 +215,15 @@ public class ServiceCandidature implements IService<Candidature> {
                                 rs.getString("titrePoste"),
                                 rs.getString("description"),
                                 rs.getDate("datePublication"),
-                                rs.getString("statut"),
-                                rs.getString("departement"),
+                                Offre.StatutOffre.valueOf(rs.getString("statuOffre")), // Convertit la valeur ENUM de SQL vers Java
+                                rs.getString("departement"), // Le département reste une String
                                 rs.getString("recruteurResponsable")
                         );
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
                 });
+
 
                 Candidature candidature = new Candidature(
                         rs.getInt("idCandidature"),

@@ -22,7 +22,7 @@ public class AjoutController {
     private TextField rec;
 
     @FXML
-    private TextField stat;
+    private ComboBox<Offre.StatutOffre> statutComboBox; // Remplacé TextField par ComboBox
 
     @FXML
     private TextField titre;
@@ -31,7 +31,7 @@ public class AjoutController {
     private Button ajoutButton;
 
     @FXML
-    private TextField dep;
+    private ComboBox<String> departementComboBox; // Remplacé TextField par ComboBox
 
     @FXML
     private TextArea desc;
@@ -40,6 +40,10 @@ public class AjoutController {
 
     @FXML
     private void initialize() {
+        // Remplir les ComboBox avec les valeurs ENUM et Liste de Départements
+        statutComboBox.getItems().setAll(Offre.StatutOffre.values());
+        departementComboBox.getItems().addAll(Offre.LISTE_DEPARTEMENTS);
+
         ajoutButton.setOnAction(event -> ajouterOffre());
     }
 
@@ -49,8 +53,9 @@ public class AjoutController {
             Offre offre = new Offre();
             offre.setTitrePoste(titre.getText());
             offre.setDescription(desc.getText());
-            offre.setStatuOffre(stat.getText());
-            offre.setDepartement(dep.getText());
+            offre.setStatuOffre(statutComboBox.getValue()); // ✅ Correct : Affecte un Enum directement
+            offre.setDepartement(departementComboBox.getValue()); // Prend la valeur sélectionnée
+
             offre.setRecruteurResponsable(rec.getText());
 
             try {
@@ -61,23 +66,23 @@ public class AjoutController {
                 return;
             }
 
+
             if (offre.getTitrePoste() == null || offre.getTitrePoste().trim().isEmpty() ||
                     offre.getDescription() == null || offre.getDescription().trim().isEmpty() ||
-                    offre.getStatuOffre() == null || offre.getStatuOffre().trim().isEmpty() ||
-                    offre.getDepartement() == null || offre.getDepartement().trim().isEmpty() ||
+                    offre.getStatuOffre() == null || offre.getDepartement() == null ||
                     offre.getRecruteurResponsable() == null || offre.getRecruteurResponsable().trim().isEmpty()) {
                 showAlert(Alert.AlertType.WARNING, "Champs manquants", "Veuillez remplir tous les champs obligatoires.");
                 return;
             }
 
-            serviceOffres.ajouterModel(offre);
+            serviceOffres.ajouter(offre);
             System.out.println("Offre ajoutée avec succès !");
 
             showAlert(Alert.AlertType.INFORMATION, "Succès", "L'offre a été ajoutée avec succès !");
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/tn/esprit/Offres/views/NouvelleVue.fxml"));
             Parent root = loader.load();
-            ViewController nouvelleVueController = loader.getController();
+            ViewOfferController nouvelleVueController = loader.getController();
             nouvelleVueController.initialize();
 
             Scene currentScene = ajoutButton.getScene();

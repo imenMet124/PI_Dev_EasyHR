@@ -1,25 +1,38 @@
 package tn.esprit.Offres.entities;
 
-import java.time.LocalDate;
 import java.util.Date;
-
+import java.util.Arrays;
+import java.util.List;
 
 public class Offre {
     private int idOffre;
     private String titrePoste;
     private String description;
-    private Date datePublication ;
+    private Date datePublication;
     private Date dateAcceptation;
     private int timeToHire;
     private int timeToFill;
-    private String statuOffre;
+    private StatutOffre statuOffre;
     private String departement;
     private String recruteurResponsable;
 
+    public Offre(String idOffre, String titrePoste, String description, java.sql.Date datePublication, java.sql.Date dateAcceptation, int timeToHire, int timeToFill, StatutOffre statut, String departement, String recruteurResponsable) {
+    }
+
+    public enum StatutOffre {
+        EN_COURS, OUVERT, FERME
+    }
+
+    // Liste des départements possibles
+    public static final List<String> LISTE_DEPARTEMENTS = Arrays.asList(
+            "Informatique", "RH", "Marketing", "Finance", "Logistique", "Production"
+    );
+
     public Offre() {
     }
+
     public Offre(int idOffre, String titrePoste, String description, Date datePublication,
-                 String statuOffre, String departement, String recruteurResponsable) {
+                 StatutOffre statuOffre, String departement, String recruteurResponsable) {
         this.idOffre = idOffre;
         this.titrePoste = titrePoste;
         this.description = description;
@@ -28,7 +41,8 @@ public class Offre {
         this.departement = departement;
         this.recruteurResponsable = recruteurResponsable;
     }
-    public Offre(String titrePoste, String description, Date datePublication, String statuOffre, String departement, String recruteurResponsable) {
+
+    public Offre(String titrePoste, String description, Date datePublication, StatutOffre statuOffre, String departement, String recruteurResponsable) {
         this.titrePoste = titrePoste;
         this.description = description;
         this.datePublication = datePublication;
@@ -37,7 +51,7 @@ public class Offre {
         this.recruteurResponsable = recruteurResponsable;
     }
 
-    public Offre(String titrePoste, String description, Date datePublication, Date dateAcceptation, int timeToHire, int timeToFill, String statuOffre, String departement, String recruteurResponsable) {
+    public Offre(String titrePoste, String description, Date datePublication, Date dateAcceptation, int timeToHire, int timeToFill, StatutOffre statuOffre, String departement, String recruteurResponsable) {
         this.titrePoste = titrePoste;
         this.description = description;
         this.datePublication = datePublication;
@@ -48,24 +62,6 @@ public class Offre {
         this.departement = departement;
         this.recruteurResponsable = recruteurResponsable;
     }
-
-    public Offre(int idOffre, String titrePoste, String description, Date datePublication, Date dateAcceptation, int timeToHire, int timeToFill, String statuOffre, String departement, String recruteurResponsable) {
-        this.idOffre = idOffre;
-        this.titrePoste = titrePoste;
-        this.description = description;
-        this.datePublication = datePublication;
-        this.dateAcceptation = dateAcceptation;
-        this.timeToHire = timeToHire;
-        this.timeToFill = timeToFill;
-        this.statuOffre = statuOffre;
-        this.departement = departement;
-        this.recruteurResponsable = recruteurResponsable;
-    }
-
-    public Offre(String titrePoste, String description, java.sql.Date datePublication, String statuOffre, String departement, String recruteurResponsable) {
-    }
-
-
 
     public int getIdOffre() {
         return idOffre;
@@ -78,7 +74,6 @@ public class Offre {
     public java.sql.Date getDatePublication() {
         return (java.sql.Date) (java.util.Date) datePublication;
     }
-
     public String getDescription() {
         return description;
     }
@@ -86,6 +81,8 @@ public class Offre {
     public java.sql.Date getDateAcceptation() {
         return (java.sql.Date) (java.util.Date) dateAcceptation;
     }
+
+
 
     public int getTimeToHire() {
         return timeToHire;
@@ -95,7 +92,7 @@ public class Offre {
         return timeToFill;
     }
 
-    public String getStatuOffre() {
+    public StatutOffre getStatuOffre() {
         return statuOffre;
     }
 
@@ -135,7 +132,7 @@ public class Offre {
         this.timeToFill = timeToFill;
     }
 
-    public void setStatuOffre(String statuOffre) {
+    public void setStatuOffre(StatutOffre statuOffre) {
         this.statuOffre = statuOffre;
     }
 
@@ -149,7 +146,7 @@ public class Offre {
 
     @Override
     public String toString() {
-        return "Offres{" +
+        return "Offre{" +
                 "id=" + idOffre +
                 ", titrePoste='" + titrePoste + '\'' +
                 ", description='" + description + '\'' +
@@ -157,7 +154,7 @@ public class Offre {
                 ", dateAcceptation=" + dateAcceptation +
                 ", timeToHire=" + timeToHire +
                 ", timeToFill=" + timeToFill +
-                ", statuOffre='" + statuOffre + '\'' +
+                ", statuOffre=" + statuOffre +
                 ", departement='" + departement + '\'' +
                 ", recruteurResponsable='" + recruteurResponsable + '\'' +
                 '}';
