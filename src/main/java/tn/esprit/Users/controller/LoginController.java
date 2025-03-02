@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -16,10 +17,15 @@ public class LoginController {
 
     @FXML
     private TextField emailField;
+
     @FXML
     private PasswordField passwordField;
+
     @FXML
     private Label errorLabel;
+
+    @FXML
+    private Hyperlink forgotPasswordLink; // Add this line
 
     private final ServiceUsers serviceUsers = new ServiceUsers();
 
@@ -63,6 +69,29 @@ public class LoginController {
         } catch (Exception e) {
             e.printStackTrace();
             errorLabel.setText("⚠ An error occurred while logging in.");
+        }
+    }
+
+    @FXML
+    private void handleForgotPassword() {
+        System.out.println("Forgot Password clicked!");
+
+        try {
+            // Load the ForgotPassword.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ForgotPassword.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window)
+            Stage stage = (Stage) forgotPasswordLink.getScene().getWindow();
+
+            // Set the new scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Forgot Password");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("⚠ An error occurred while loading the forgot password page.");
         }
     }
 }

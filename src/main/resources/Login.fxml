@@ -4,40 +4,68 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.LoginController">
-    <padding>
-        <Insets top="40" right="40" bottom="40" left="40"/>
-    </padding>
+    <!-- Background Image -->
+    <ImageView fitWidth="800" fitHeight="600" preserveRatio="false">
+        <image>
+            <Image url="@/images/mobile-password-forgot.png"/> <!-- Add a background image -->
+        </image>
+    </ImageView>
 
-    <children>
-        <VBox spacing="20" alignment="CENTER">
-            <!-- Title -->
-            <Label text="User Login" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: white; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.8), 10, 0.9, 2, 2);"/>
+    <!-- Main Content -->
+    <VBox spacing="30" alignment="CENTER" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 15; -fx-padding: 40;">
+        <!-- Title -->
+        <Label text="Welcome Back" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;">
+            <font>
+                <Font name="Arial" size="32"/>
+            </font>
+        </Label>
 
-            <!-- Form fields in GridPane -->
-            <GridPane vgap="15" hgap="10" alignment="CENTER">
-                <children>
-                    <!-- Username -->
-                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
-                    <TextField fx:id="emailField" promptText="Enter your email" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="250" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-border-radius: 10px; -fx-padding: 10px;"/>
+        <!-- Subtitle -->
+        <Label text="Sign in to continue" style="-fx-font-size: 16px; -fx-text-fill: #7F8C8D;">
+            <font>
+                <Font name="Arial" size="16"/>
+            </font>
+        </Label>
 
-                    <!-- Password -->
-                    <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-text-fill: white; -fx-font-size: 14px;"/>
-                    <PasswordField fx:id="passwordField" promptText="Enter your password" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="250" style="-fx-background-color: rgba(255, 255, 255, 0.8); -fx-border-radius: 10px; -fx-padding: 10px;"/>
+        <!-- Form Container -->
+        <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
+            <!-- Email Field -->
+            <TextField fx:id="emailField" promptText="Enter your email" prefWidth="300" style="-fx-background-color: white; -fx-border-color: #BDC3C7; -fx-border-radius: 5; -fx-padding: 10;">
+                <font>
+                    <Font name="Arial" size="14"/>
+                </font>
+            </TextField>
 
-                    <!-- Login Button -->
-                    <Button fx:id="loginButton" text="Login" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleLogin"
-                            style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-padding: 10px 20px; -fx-font-size: 16px; -fx-border-radius: 8px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.6), 5, 0.5, 2, 2);"/>
-                </children>
-            </GridPane>
+            <!-- Password Field -->
+            <PasswordField fx:id="passwordField" promptText="Enter your password" prefWidth="300" style="-fx-background-color: white; -fx-border-color: #BDC3C7; -fx-border-radius: 5; -fx-padding: 10;">
+                <font>
+                    <Font name="Arial" size="14"/>
+                </font>
+            </PasswordField>
 
-            <!-- Error Message -->
-            <Label fx:id="errorLabel" style="-fx-text-fill: red; -fx-font-size: 14px;"/>
+            <!-- Login Button -->
+            <Button fx:id="loginButton" text="Login" onAction="#handleLogin" prefWidth="300" style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12; -fx-border-radius: 5; -fx-cursor: hand;">
+                <font>
+                    <Font name="Arial" size="16"/>
+                </font>
+            </Button>
 
-            <!-- Image -->
-            <ImageView fx:id="backgroundImage" fitWidth="300" fitHeight="200" style="-fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 5, 5);"/>
+            <!-- Forgot Password Link -->
+            <Hyperlink fx:id="forgotPasswordLink" text="Forgot Password?" onAction="#handleForgotPassword" style="-fx-text-fill: #3498DB; -fx-font-size: 14px; -fx-underline: true; -fx-cursor: hand;">                <font>
+                    <Font name="Arial" size="14"/>
+                </font>
+            </Hyperlink>
         </VBox>
-    </children>
+
+        <!-- Error Message -->
+        <Label fx:id="errorLabel" style="-fx-text-fill: #E74C3C; -fx-font-size: 14px; -fx-font-weight: bold;">
+            <font>
+                <Font name="Arial" size="14"/>
+            </font>
+        </Label>
+    </VBox>
 </StackPane>

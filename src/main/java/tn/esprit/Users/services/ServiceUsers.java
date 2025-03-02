@@ -389,6 +389,49 @@ public class ServiceUsers implements IService<User> {
         return false; // Email not found
     }
 
+    public User getUserByPhoneNumber(String phoneNumber) throws SQLException {
+        String query = "SELECT * FROM `user` WHERE `iyedPhoneUser` = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, phoneNumber); // Set the phone number parameter
+
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    // Build and return the User object
+                    return new User(
+                            rs.getInt("iyedIdUser"),
+                            rs.getString("iyedNomUser"),
+                            rs.getString("iyedEmailUser"),
+                            rs.getString("iyedPhoneUser"),
+                            rs.getString("iyedPasswordUser"), // Hashed password
+                            UserRole.valueOf(rs.getString("iyedRoleUser")), // Convert string to enum
+                            rs.getString("iyedPositionUser"),
+                            rs.getDouble("iyedSalaireUser"),
+                            rs.getDate("iyedDateEmbaucheUser"),
+                            UserStatus.valueOf(rs.getString("iyedStatutUser")), // Convert string to enum
+                            fetchDepartment(rs.getInt("iyedIdDepUser")) // Fetch department details
+                    );
+                }
+            }
+        }
+
+        return null; // Return null if no user is found with the given phone number
+    }
+    public boolean updatePassword(String phoneNumber, String newPassword) throws SQLException {
+        // Hash the new password before storing it in the database
+        String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+        String query = "UPDATE `user` SET `iyedPasswordUser` = ? WHERE `iyedPhoneUser` = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, hashedPassword); // Set the hashed password
+            preparedStatement.setString(2, phoneNumber);   // Set the phone number
+
+            int rowsUpdated = preparedStatement.executeUpdate();
+            return rowsUpdated > 0; // Return true if the password was updated successfully
+        }
+    }
+
 
 
 

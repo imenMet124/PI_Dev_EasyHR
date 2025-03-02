@@ -2,7 +2,9 @@ package tn.esprit.Users.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import tn.esprit.Users.entities.Department;
 import tn.esprit.Users.entities.User;
 
@@ -111,5 +113,46 @@ public class SceneController {
 
     public static void openUserProfileScene() {
         loadPage("/UserProfile.fxml"); // Load the profile page
+    }
+    public static void openLoginScene() {
+        try {
+            // Load the Login.fxml file
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/Login.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window)
+            Stage stage = new Stage(); // Create a new stage for the login scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Login");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("Error loading Login.fxml: " + e.getMessage());
+        }
+    }
+    public static void openVerificationCodeScene(String verificationCode) {
+        try {
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/VerificationCode.fxml"));
+            Parent root = loader.load();
+            VerificationCodeController controller = loader.getController();
+            controller.setVerificationCode(verificationCode); // Pass the verification code
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void openNewPasswordScene() {
+        try {
+            Parent root = FXMLLoader.load(SceneController.class.getResource("/NewPassword.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
