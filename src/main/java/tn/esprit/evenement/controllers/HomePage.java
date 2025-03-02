@@ -1,75 +1,91 @@
 package tn.esprit.evenement.controllers;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class HomePage extends Application {
+
     @FXML
     private ImageView logoImage;
 
     @FXML
-    public void initialize() {
-        try {
-            if (logoImage != null) {
-                // Charger l'image depuis le dossier resources/images/
-                Image image = new Image(getClass().getResource("/logo.jpg").toExternalForm());
-                logoImage.setImage(image);
-            } else {
-                System.out.println("ERREUR: `logoImage` est NULL ! Vérifie le `fx:id` dans le FXML.");
-            }
-        } catch (Exception e) {
-            System.out.println("Erreur lors du chargement du logo : " + e.getMessage());
-        }
-    }
+    private StackPane contentArea; // Conteneur où les vues seront chargées
+
+    private AnchorPane dashboardView;
+    private AnchorPane eventsView;
+
     @Override
     public void start(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/IndexView.fxml"));
             AnchorPane root = loader.load();
-
-            Scene scene = new Scene(root, 800, 600);
-          //  scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
-
-            primaryStage.setTitle("Liste des événements");
+            Scene scene = new Scene(root, 1200, 800);
+            primaryStage.setTitle("Application RH");
             primaryStage.setScene(scene);
-
             primaryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Erreur lors du chargement de IndexView.fxml");
+        }
+    }
+
+    @FXML
+    public void initialize() {
+        try {
+            if (logoImage != null) {
+                Image image = new Image(getClass().getResource("/logo.jpg").toExternalForm());
+                logoImage.setImage(image);
+            }
+        } catch (Exception e) {
+            System.out.println("Erreur lors du chargement du logo : " + e.getMessage());
+        }
+
+        showDashboard();
+    }
+
+    @FXML
+    public void showDashboard() {
+        try {
+            if (dashboardView == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/DashboardView.fxml"));
+                dashboardView = loader.load(); // ✅ Ne pas caster en VBox
+
+            }
+
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(dashboardView);
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Erreur lors du chargement du Dashboard.");
         }
     }
-    public void handleListEvent(ActionEvent actionEvent) {
+
+    @FXML
+    public void handleListEvent() {
         try {
+            if (eventsView == null) {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminEventsView.fxml"));
+                eventsView = loader.load();
+            }
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AdminEventsView.fxml"));
-            AnchorPane root = loader.load();
-
-//// Vérification que le contrôleur est bien initialisé
-//            AdminEventsController controller = loader.getController();
-//            if (controller == null) {
-//                System.out.println("ERREUR: Le contrôleur AdminEventsController n'a pas été chargé !");
-//            } else {
-//                System.out.println("SUCCESS: Le contrôleur AdminEventsController est bien initialisé.");
-//            }
-
-            Scene scene = new Scene(root, 800, 600);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.show();
-        } catch (
-                Exception e) {
+            contentArea.getChildren().clear();
+            contentArea.getChildren().add(eventsView);
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Erreur lors du chargement des événements.");
         }
     }
+
     public static void main(String[] args) {
         launch(args);
     }

@@ -4,6 +4,7 @@ import tn.esprit.evenement.entities.Evenement;
 import tn.esprit.evenement.utils.MyDataBase;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,15 +20,14 @@ public class ServiceEvenement implements IService<Evenement> {
     public void ajouter(Evenement evenement) throws SQLException {
         String sql = "INSERT INTO `evenement`(`titre`, `description`, `date`, `heure`, `lieu`, `capacite`, `nombreParticipants`, `image_path`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setString(1, evenement.getTitre());
-        ps.setString(2, evenement.getDescription());
-        ps.setDate(3, evenement.getDate());
-        ps.setTime(4, evenement.getHeure()); // Nouveau champ heure
-        ps.setString(5, evenement.getLieu());
-        ps.setInt(6, evenement.getCapacite());
-        ps.setInt(7, evenement.getNombreParticipants());
+        ps.setString(1 , evenement.getTitre());
+        ps.setString(2 , evenement.getDescription());
+        ps.setDate(3 , evenement.getDate());
+        ps.setTime(4 , evenement.getHeure()); // Nouveau champ heure
+        ps.setString(5 , evenement.getLieu());
+        ps.setInt(6 , evenement.getCapacite());
+        ps.setInt(7 , evenement.getNombreParticipants());
         ps.setString(8, evenement.getImagePath()); // Nouveau champ image_path
-
         ps.executeUpdate();
     }
 
@@ -86,4 +86,58 @@ public class ServiceEvenement implements IService<Evenement> {
         ps.setInt(1, evenementId);
         ps.executeUpdate();
     }
+    public List<Evenement> getEventsByDay(LocalDate date) throws SQLException {
+        List<Evenement> evenements = new ArrayList<>();
+        String sql = "SELECT * FROM `evenement` WHERE DATE(`date`) = ?";
+
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setDate(1, java.sql.Date.valueOf(date));
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Evenement evenement = new Evenement(
+                    rs.getInt("Id"),
+                    rs.getString("Titre"),
+                    rs.getString("Description"),
+                    rs.getDate("Date"),
+                    rs.getTime("Heure"),
+                    rs.getString("Lieu"),
+                    rs.getInt("Capacite"),
+                    rs.getInt("NombreParticipants"),
+                    rs.getString("image_path")
+            );
+            evenements.add(evenement);
+        }
+        return evenements;
+    }
+    public List<Evenement> getEventsByWeek(LocalDate startOfWeek) throws SQLException {
+        List<Evenement> evenements = new ArrayList<>();
+
+        LocalDate endOfWeek = startOfWeek.plusDays(6);
+        String sql = "SELECT * FROM evenement WHERE DATE(date) BETWEEN ? AND ? ORDER BY date, heure";
+
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setDate(1, java.sql.Date.valueOf(startOfWeek));
+        ps.setDate(2, java.sql.Date.valueOf(endOfWeek));
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Evenement evenement = new Evenement(
+                    rs.getInt("Id"),
+                    rs.getString("Titre"),
+                    rs.getString("Description"),
+                    rs.getDate("Date"),
+                    rs.getTime("Heure"),
+                    rs.getString("Lieu"),
+                    rs.getInt("Capacite"),
+                    rs.getInt("NombreParticipants"),
+                    rs.getString("image_path")
+            );
+            evenements.add(evenement);
+        }
+        return evenements;
+    }
+
+
+
 }

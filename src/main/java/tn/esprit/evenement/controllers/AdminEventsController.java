@@ -22,13 +22,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import tn.esprit.evenement.entities.Evenement;
+import tn.esprit.evenement.entities.Utilisateur;
+import tn.esprit.evenement.services.EmailService;
 import tn.esprit.evenement.services.ServiceEvenement;
+import tn.esprit.evenement.services.ServiceUtilisateur;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class AdminEventsController implements Initializable {
     @FXML
@@ -38,6 +43,8 @@ public class AdminEventsController implements Initializable {
     private ImageView logoImage;
 
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
+    private final EmailService emailService = new EmailService();
+    private final ServiceUtilisateur serviceUtilisateur = new ServiceUtilisateur();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -170,13 +177,44 @@ public class AdminEventsController implements Initializable {
 
     private void handleDeleteEvent(Evenement event) {
         try {
+
             serviceEvenement.supprimer(event.getId());
+            List<String> adminRhEmails = serviceUtilisateur.getAllUtilisateurs()
+                    .stream()
+                    .filter(utilisateur -> utilisateur.getRole() == Utilisateur.Role.AdminRH) // Filtrer les AdminRH
+                    .map(Utilisateur::getEmail)
+                    .collect(Collectors.toList());
+
+            if (!adminRhEmails.isEmpty()) {
+
+                String sujet = "⚠️ Suppression d’un événement : " + event.getTitre();
+                String contenu = "L'événement suivant a été supprimé :\n\n" +
+                        "📅 Date : " + event.getDate() + "\n" +
+                        "⏰ Heure : " + event.getHeure() + "\n" +
+                        "📍 Lieu : " + event.getLieu() + "\n\n" +
+                        "📝 Description : " + event.getDescription() + "\n\n" +
+                        "❗ Cette suppression a été effectuée par l'administration RH.\n\n" +
+                        "💼 Pour toute question, veuillez contacter l’équipe RH.";
+
+                new Thread(() -> {
+                    for (String email : adminRhEmails) {
+                        emailService.envoyerEmail(email, sujet, contenu);
+                    }
+                }).start();
+            }
+
             loadEvents();
-            showAlert("Succès", "Événement supprimé avec succès!");
+
+            showAlert("Succès", "Événement supprimé et notification envoyée aux Admin RH !");
+
         } catch (SQLException e) {
             showAlert("Erreur", "Erreur lors de la suppression: " + e.getMessage());
+        } catch (Exception e) {
+            showAlert("Avertissement", "L'événement a été supprimé, mais l'envoi des e-mails a échoué.");
+            e.printStackTrace();
         }
     }
+
 
     private void handleDetailsEvent(Evenement event) {
         try {

@@ -40,7 +40,7 @@ public class AddEventController {
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private String imagePath = null;
 
-//    @FXML
+    //    @FXML
 //    private void handleAjouterEvent() {
 //        if (!validateFields()) {
 //            showAlert("Erreur", "Veuillez remplir tous les champs.");
@@ -65,59 +65,59 @@ public class AddEventController {
 //            showAlert("Erreur", "Problème lors de l'ajout : " + e.getMessage());
 //        }
 //    }
-@FXML
-private void handleAjouterEvent() {
-    if (!validateFields()) {
-        showAlert("Erreur", "Veuillez remplir tous les champs.");
-        return;
+    @FXML
+    private void handleAjouterEvent() {
+        if (!validateFields()) {
+            showAlert("Erreur", "Veuillez remplir tous les champs.");
+            return;
+        }
+
+        Evenement newEvent = new Evenement(
+                titreField.getText(),
+                descriptionField.getText(),
+                Date.valueOf(datePicker.getValue()),
+                Time.valueOf(heureField.getText()),
+                lieuField.getText(),
+                Integer.parseInt(capaciteField.getText()),
+                imagePath
+        );
+
+        try {
+            // Ajouter l'événement à la base de données
+            serviceEvenement.ajouter(newEvent);
+
+            // Récupérer les e-mails des utilisateurs
+            List<String> emails = serviceUtilisateur.getAllUtilisateurs()
+                    .stream()
+                    .map(Utilisateur::getEmail)
+                    .collect(Collectors.toList());
+
+            // Construire le message de l’événement
+            String sujet = "📢 Nouveau événement : " + newEvent.getTitre();
+            String contenu = "Un nouvel événement a été ajouté :\n\n" +
+                    "📅 Date : " + newEvent.getDate() + "\n" +
+                    "⏰ Heure : " + newEvent.getHeure() + "\n" +
+                    "📍 Lieu : " + newEvent.getLieu() + "\n\n" +
+                    "📝 Description : " + newEvent.getDescription() + "\n\n" +
+                    "💼 Merci de consulter la plateforme RH pour plus d’informations.";
+
+            // Envoyer les e-mails en arrière-plan
+            new Thread(() -> {
+                for (String email : emails) {
+                    emailService.envoyerEmail(email, sujet, contenu);
+                }
+            }).start();
+
+            showAlert("Succès", "Événement ajouté et e-mails envoyés !");
+            closeWindow();
+
+        } catch (SQLException e) {
+            showAlert("Erreur", "Problème lors de l'ajout : " + e.getMessage());
+        } catch (Exception e) {
+            showAlert("Avertissement", "L'événement a été ajouté, mais l'envoi des e-mails a échoué.");
+            e.printStackTrace();
+        }
     }
-
-    Evenement newEvent = new Evenement(
-            titreField.getText(),
-            descriptionField.getText(),
-            Date.valueOf(datePicker.getValue()),
-            Time.valueOf(heureField.getText()),
-            lieuField.getText(),
-            Integer.parseInt(capaciteField.getText()),
-            imagePath
-    );
-
-    try {
-        // Ajouter l'événement à la base de données
-        serviceEvenement.ajouter(newEvent);
-
-        // Récupérer les e-mails des utilisateurs
-        List<String> emails = serviceUtilisateur.getAllUtilisateurs()
-                .stream()
-                .map(Utilisateur::getEmail)
-                .collect(Collectors.toList());
-
-        // Construire le message de l’événement
-        String sujet = "📢 Nouveau événement : " + newEvent.getTitre();
-        String contenu = "Un nouvel événement a été ajouté :\n\n" +
-                "📅 Date : " + newEvent.getDate() + "\n" +
-                "⏰ Heure : " + newEvent.getHeure() + "\n" +
-                "📍 Lieu : " + newEvent.getLieu() + "\n\n" +
-                "📝 Description : " + newEvent.getDescription() + "\n\n" +
-                "💼 Merci de consulter la plateforme RH pour plus d’informations.";
-
-        // Envoyer les e-mails en arrière-plan
-        new Thread(() -> {
-            for (String email : emails) {
-                emailService.envoyerEmail(email, sujet, contenu);
-            }
-        }).start();
-
-        showAlert("Succès", "Événement ajouté et e-mails envoyés !");
-        closeWindow();
-
-    } catch (SQLException e) {
-        showAlert("Erreur", "Problème lors de l'ajout : " + e.getMessage());
-    } catch (Exception e) {
-        showAlert("Avertissement", "L'événement a été ajouté, mais l'envoi des e-mails a échoué.");
-        e.printStackTrace();
-    }
-}
 
     private boolean validateFields() {
         return !titreField.getText().isEmpty() &&

@@ -18,7 +18,7 @@
 
     <HBox spacing="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
     <!-- Sidebar -->
-    <VBox styleClass="sidebar" spacing="10" alignment="TOP_LEFT" prefWidth="250.0">
+    <VBox styleClass="sidebar" spacing="10" alignment="TOP_LEFT" prefWidth="250.0" visible="false" managed="false">
         <ImageView fx:id="logoImage" fitHeight="600" fitWidth="200" preserveRatio="true" styleClass="logo" />
         <Button text="Dashboard" styleClass="sidebar-button" onAction="#goToIndex" />
         <Button text="Evenements" styleClass="sidebar-button" />
