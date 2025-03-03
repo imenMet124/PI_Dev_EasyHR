@@ -1,0 +1,164 @@
+/* ✅ Style général */
+.details-container {
+    -fx-background-color: linear-gradient(to right, #F0F2F5, #FFFFFF);
+    -fx-padding: 40;
+    -fx-spacing: 20;
+    -fx-alignment: center;
+    -fx-pref-width: 100%;
+    -fx-pref-height: 100%;
+}
+
+/* ✅ Conteneur du formulaire */
+.form-container {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 30;
+    -fx-border-radius: 15;
+    -fx-border-color: #748CF1;
+    -fx-border-width: 2;
+    -fx-alignment: center;
+    -fx-max-width: 800px;
+    -fx-pref-width: 60%;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+/* ✅ Titre principal */
+.details-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #748CF1;
+    -fx-alignment: center;
+}
+
+/* ✅ Organisation du formulaire */
+.form-grid {
+    -fx-padding: 20;
+    -fx-background-color: #FFFFFF;
+    -fx-border-radius: 10;
+    -fx-border-color: #748CF1;
+    -fx-border-width: 2;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+/* ✅ Labels */
+.form-grid Label {
+    -fx-text-fill: #FD9999;
+    -fx-font-weight: bold;
+}
+
+/* ✅ Champs de texte et DatePicker */
+TextField, TextArea, DatePicker {
+    -fx-pref-height: 45;
+    -fx-background-color: #F9FAFC;
+    -fx-border-color: #748CF1;
+    -fx-border-radius: 10;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-pref-width: 100%;
+}
+
+/* ✅ Effet interactif sur les champs */
+TextField:focused, TextArea:focused, DatePicker:focused {
+    -fx-border-color: #748CF1;
+    -fx-border-width: 2;
+    -fx-effect: dropshadow(three-pass-box, rgba(116, 140, 241, 0.5), 10, 0, 0, 0);
+}
+
+/* ✅ ImageView */
+#eventImageView {
+    -fx-border-color: #748CF1;
+    -fx-border-radius: 10;
+    -fx-border-width: 3;
+    -fx-padding: 10;
+    -fx-background-color: #FFFFFF;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 5);
+}
+
+/* ✅ Bouton Upload */
+.upload-button {
+    -fx-background-color: #748CF1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+    -fx-padding: 10 20;
+    -fx-pref-width: 100%;
+}
+
+.upload-button:hover {
+    -fx-background-color: #5A73D1;
+}
+
+/* ✅ Conteneur des boutons */
+.button-container {
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+/* ✅ Bouton Annuler */
+.cancel-button {
+    -fx-background-color: #748CF1;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+    -fx-padding: 12;
+    -fx-pref-width: 160px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #5A73D1;
+}
+
+/* ✅ Bouton Enregistrer */
+.save-button {
+    -fx-background-color: #FD9999;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+    -fx-padding: 12;
+    -fx-pref-width: 160px;
+}
+
+.save-button:hover {
+    -fx-background-color: #E07A7A;
+}
+/* ✅ Style du conteneur de l'upload */
+.image-upload-container {
+    -fx-alignment: center;
+    -fx-spacing: 10;
+}
+
+/* ✅ Champ texte du chemin de l'image */
+#imagePathField {
+    -fx-pref-height: 40;
+    -fx-background-color: #F9FAFC;
+    -fx-border-color: #748CF1;
+    -fx-border-radius: 10;
+    -fx-font-size: 14px;
+    -fx-padding: 10;
+    -fx-pref-width: 250px;
+}
+
+/* ✅ Bouton Upload */
+.upload-button {
+    -fx-background-color: #748CF1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 10;
+    -fx-padding: 10 15;
+    -fx-font-size: 14px;
+    -fx-alignment: center;
+    -fx-min-width: 120px;
+}
+
+/* ✅ Icône du bouton Upload */
+.upload-button .graphic {
+    -fx-font-size: 16px;
+    -fx-fill: white;
+}
+
+/* ✅ Effet au survol */
+.upload-button:hover {
+    -fx-background-color: #5A73D1;
+}

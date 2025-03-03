@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.formations.controllers.ModifierFormationController">
+    <children>
+        <Label layoutX="50.0" layoutY="20.0" text="Modify Formation" />
+        <TextField fx:id="titreField" layoutX="50.0" layoutY="60.0" promptText="Title" prefWidth="500.0" />
+        <TextArea fx:id="descriptionArea" layoutX="50.0" layoutY="100.0" promptText="Description"
+                  prefHeight="100.0" prefWidth="500.0" />
+        <TextField fx:id="filePathField" layoutX="50.0" layoutY="220.0" promptText="File Path" prefWidth="500.0" />
+        <Label layoutX="50.0" layoutY="260.0" text="Associated Quiz:" />
+        <ComboBox fx:id="quizComboBox" layoutX="150.0" layoutY="260.0" prefWidth="400.0" />
+        <Button layoutX="400.0" layoutY="360.0" onAction="#handleModifier" text="Save" />
+        <Button layoutX="500.0" layoutY="360.0" onAction="#handleCancel" text="Cancel" />
+    </children>
+</AnchorPane>

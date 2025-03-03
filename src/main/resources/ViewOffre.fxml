@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import java.awt.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="root" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.AjoutController">
+
+   <stylesheets>
+      <String fx:value="listOffre.css" />
+      <String fx:value="styles.css" />
+   </stylesheets>
+   <children>
+   
+      <HBox spacing="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+      <children>
+            <!-- Sidebar -->
+            <VBox alignment="TOP_LEFT" prefWidth="250.0" spacing="10" styleClass="sidebar" stylesheets="@styles.css">
+               <children>
+                  <ImageView fx:id="logoImage" fitHeight="600" fitWidth="200" preserveRatio="true" styleClass="logo" />
+                  <Button onAction="#goToIndex" styleClass="sidebar-button" stylesheets="@style1.css" text="Dashboard" />
+                  <Button styleClass="sidebar-button" text="Evenements" />
+                  <Button styleClass="sidebar-button" text="Taches" />
+                  <Button styleClass="sidebar-button" text="Offres" />
+                  <Button styleClass="sidebar-button" text="Formations" />
+                  <Button styleClass="sidebar-button" text="Utilisateurs" />
+               </children>
+            </VBox>
+      
+            <!-- Main Content -->
+            <VBox spacing="20" styleClass="main-content" stylesheets="@listOffre.css" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20" HBox.hgrow="ALWAYS">
+         <children>
+         
+                  <!-- Header Section -->
+                  <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header-container">
+            <children>
+                        <Text styleClass="header-title" text="Gestion des Offres" />
+            
+                        <Region HBox.hgrow="ALWAYS" />
+            
+                        <Button onAction="#handleAddOffer" style="-fx-background-color: #fbaa00;" styleClass="action-button" text="Ajouter Offre">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="PLUS" size="16" styleClass="action-icon" />
+                           </graphic>
+                        </Button>
+            
+                        <Button onAction="#handleRefresh" styleClass="action-button" text="Actualiser">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="REFRESH" size="16" styleClass="action-icon" />
+                           </graphic>
+                        </Button>
+            </children>
+                  </HBox>
+         
+                  <!-- Offer List Section -->
+                  <ListView fx:id="offerListView" maxHeight="Infinity" prefHeight="600" styleClass="offer-list" VBox.vgrow="ALWAYS">
+                     <stylesheets>
+                        <URL value="@listOffre.css" />
+                        <URL value="@styles.css" />
+                     </stylesheets>
+                  </ListView>
+         </children>
+            </VBox>
+      </children>
+   
+      </HBox>
+   </children>
+</AnchorPane>

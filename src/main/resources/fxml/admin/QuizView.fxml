@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.formations.controllers.QuizView">
+    <children>
+        <Label layoutX="310.0" layoutY="59.0" prefHeight="53.0" prefWidth="181.0" text="Quizzes">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableQuizzes" layoutX="101.0" layoutY="154.0" prefHeight="315.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="titleColumn" prefWidth="600.0" text="Title" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnAjouter" layoutX="128.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Ajouter" onAction="#handleAjouterQuiz" />
+        <Button fx:id="btnModifier" layoutX="240.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Modifier" onAction="#handleModifierQuiz" />
+        <Button fx:id="btnSupprimer" layoutX="352.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Supprimer" onAction="#handleSupprimerQuiz" />
+        <Button fx:id="btnDetails" layoutX="463.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Détails" onAction="#handleDetailsQuiz" />
+        <Button fx:id="btnBack" layoutX="575.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Back" onAction="#handleBack" />
+    </children>
+</AnchorPane>

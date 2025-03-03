@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="600.0" prefWidth="800.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.formations.controllers.AdminView">
+    <children>
+        <Label layoutX="310.0" layoutY="59.0" prefHeight="53.0" prefWidth="181.0" text="Formations">
+            <font>
+                <Font size="36.0" />
+            </font>
+        </Label>
+        <TableView fx:id="tableFormations" layoutX="101.0" layoutY="154.0" prefHeight="315.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="titreColumn" prefWidth="157.0" text="Titre" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="286.0" text="Description" />
+                <TableColumn fx:id="quizColumn" prefWidth="157.0" text="Quiz" />
+            </columns>
+        </TableView>
+        <Button fx:id="btnAjouter" layoutX="128.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Ajouter" onAction="#handleAjouterFormation" />
+        <Button fx:id="btnModifier" layoutX="240.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Modifier" onAction="#handleModifierFormation" />
+        <Button fx:id="btnSupprimer" layoutX="352.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Supprimer" onAction="#handleSupprimerFormation" />
+        <Button fx:id="btnDetails" layoutX="463.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Détails" onAction="#handleDetailsFormation" />
+        <Button fx:id="btnOuvrir" layoutX="575.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Ouvrir" onAction="#handleOuvrirFormation" />
+        <Button fx:id="btnRefresh" layoutX="686.0" layoutY="503.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Refresh" onAction="#handleRefresh" />
+        <Button fx:id="btnQuizzes" layoutX="50.0" layoutY="100.0" mnemonicParsing="false"
+                prefHeight="46.0" prefWidth="97.0" text="Quizzes" onAction="#handleQuizzes" />
+    </children>
+</AnchorPane>

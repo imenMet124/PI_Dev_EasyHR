@@ -1,140 +1,169 @@
 package tn.esprit.Offres.entities;
 
 import java.util.Date;
+import java.util.Arrays;
+import java.util.List;
 
 public class Offre {
-    private int id_offre;
-    private String titre_poste;
+    private int idOffre;
+    private String titrePoste;
     private String description;
-    private Date date_publication ;
-    private Date date_acceptation;
-    private int time_to_hire;
-    private int time_to_fill;
-    private String statu_offre;
+    private Date datePublication;
+    private Date dateAcceptation;
+    private int timeToHire;
+    private int timeToFill;
+    private StatutOffre statuOffre;
     private String departement;
-    private String recruteur_responsable;
+    private String recruteurResponsable;
+
+    public Offre(String idOffre, String titrePoste, String description, java.sql.Date datePublication, java.sql.Date dateAcceptation, int timeToHire, int timeToFill, StatutOffre statut, String departement, String recruteurResponsable) {
+    }
+
+    public enum StatutOffre {
+        EN_COURS, OUVERT, FERME;
+        public static StatutOffre fromString(String statut) {
+            try {
+                return StatutOffre.valueOf(statut);
+            } catch (IllegalArgumentException | NullPointerException e) {
+                return EN_COURS; // Default value
+            }
+        }
+    }
+
+    // Liste des départements possibles
+    public static final List<String> LISTE_DEPARTEMENTS = Arrays.asList(
+            "Informatique", "RH", "Marketing", "Finance", "Logistique", "Production"
+    );
 
     public Offre() {
     }
 
-    public Offre(String titre_poste, String description, Date date_publication, Date date_acceptation, int time_to_hire, int time_to_fill, String statu_offre, String departement, String recruteur_responsable) {
-        this.titre_poste = titre_poste;
+    public Offre(int idOffre, String titrePoste, String description, Date datePublication,
+                 StatutOffre statuOffre, String departement, String recruteurResponsable) {
+        this.idOffre = idOffre;
+        this.titrePoste = titrePoste;
         this.description = description;
-        this.date_publication = date_publication;
-        this.date_acceptation = date_acceptation;
-        this.time_to_hire = time_to_hire;
-        this.time_to_fill = time_to_fill;
-        this.statu_offre = statu_offre;
+        this.datePublication = datePublication;
+        this.statuOffre = statuOffre;
         this.departement = departement;
-        this.recruteur_responsable = recruteur_responsable;
+        this.recruteurResponsable = recruteurResponsable;
     }
 
-    public Offre(int id_offre, String titre_poste, String description, Date date_publication, Date date_acceptation, int time_to_hire, int time_to_fill, String statu_offre, String departement, String recruteur_responsable) {
-        this.id_offre = id_offre;
-        this.titre_poste = titre_poste;
+    public Offre(String titrePoste, String description, Date datePublication, StatutOffre statuOffre, String departement, String recruteurResponsable) {
+        this.titrePoste = titrePoste;
         this.description = description;
-        this.date_publication = date_publication;
-        this.date_acceptation = date_acceptation;
-        this.time_to_hire = time_to_hire;
-        this.time_to_fill = time_to_fill;
-        this.statu_offre = statu_offre;
+        this.datePublication = datePublication;
+        this.statuOffre = statuOffre;
         this.departement = departement;
-        this.recruteur_responsable = recruteur_responsable;
+        this.recruteurResponsable = recruteurResponsable;
     }
 
-    public int getId_offre() {
-        return id_offre;
+    public Offre(String titrePoste, String description, Date datePublication, Date dateAcceptation, int timeToHire, int timeToFill, StatutOffre statuOffre, String departement, String recruteurResponsable) {
+        this.titrePoste = titrePoste;
+        this.description = description;
+        this.datePublication = datePublication;
+        this.dateAcceptation = dateAcceptation;
+        this.timeToHire = timeToHire;
+        this.timeToFill = timeToFill;
+        this.statuOffre = statuOffre;
+        this.departement = departement;
+        this.recruteurResponsable = recruteurResponsable;
     }
 
-    public String getTitre_poste() {
-        return titre_poste;
+    public int getIdOffre() {
+        return idOffre;
     }
 
-    public java.sql.Date getDate_publication() {
-        return (java.sql.Date) (java.util.Date) date_publication;
+    public String getTitrePoste() {
+        return titrePoste;
     }
 
+    public java.sql.Date getDatePublication() {
+        return (java.sql.Date) (java.util.Date) datePublication;
+    }
     public String getDescription() {
         return description;
     }
 
-    public java.sql.Date getDate_acceptation() {
-        return (java.sql.Date) (java.util.Date) date_acceptation;
+    public java.sql.Date getDateAcceptation() {
+        return (java.sql.Date) (java.util.Date) dateAcceptation;
     }
 
-    public int getTime_to_hire() {
-        return time_to_hire;
+
+
+    public int getTimeToHire() {
+        return timeToHire;
     }
 
-    public int getTime_to_fill() {
-        return time_to_fill;
+    public int getTimeToFill() {
+        return timeToFill;
     }
 
-    public String getStatu_offre() {
-        return statu_offre;
+    public StatutOffre getStatuOffre() {
+        return statuOffre;
     }
 
     public String getDepartement() {
         return departement;
     }
 
-    public String getRecruteur_responsable() {
-        return recruteur_responsable;
+    public String getRecruteurResponsable() {
+        return recruteurResponsable;
     }
 
-    public void setId(int id_offre) {
-        this.id_offre = id_offre;
+    public void setIdOffre(int idOffre) {
+        this.idOffre = idOffre;
     }
 
-    public void setTitre_poste(String titre_poste) {
-        this.titre_poste = titre_poste;
+    public void setTitrePoste(String titrePoste) {
+        this.titrePoste = titrePoste;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public void setDate_publication(Date date_publication) {
-        this.date_publication = date_publication;
+    public void setDatePublication(Date datePublication) {
+        this.datePublication = datePublication;
     }
 
-    public void setDate_acceptation(Date date_acceptation) {
-        this.date_acceptation = date_acceptation;
+    public void setDateAcceptation(Date dateAcceptation) {
+        this.dateAcceptation = dateAcceptation;
     }
 
-    public void setTime_to_hire(int time_to_hire) {
-        this.time_to_hire = time_to_hire;
+    public void setTimeToHire(int timeToHire) {
+        this.timeToHire = timeToHire;
     }
 
-    public void setTime_to_fill(int time_to_fill) {
-        this.time_to_fill = time_to_fill;
+    public void setTimeToFill(int timeToFill) {
+        this.timeToFill = timeToFill;
     }
 
-    public void setStatu_offre(String statu_offre) {
-        this.statu_offre = statu_offre;
+    public void setStatuOffre(StatutOffre statuOffre) {
+        this.statuOffre = statuOffre;
     }
 
     public void setDepartement(String departement) {
         this.departement = departement;
     }
 
-    public void setRecruteur_responsable(String recruteur_responsable) {
-        this.recruteur_responsable = recruteur_responsable;
+    public void setRecruteurResponsable(String recruteurResponsable) {
+        this.recruteurResponsable = recruteurResponsable;
     }
 
     @Override
     public String toString() {
-        return "Offres{" +
-                "id=" + id_offre +
-                ", titre_poste='" + titre_poste + '\'' +
+        return "Offre{" +
+                "id=" + idOffre +
+                ", titrePoste='" + titrePoste + '\'' +
                 ", description='" + description + '\'' +
-                ", date_publication=" + date_publication +
-                ", date_acceptation=" + date_acceptation +
-                ", time_to_hire=" + time_to_hire +
-                ", time_to_fill=" + time_to_fill +
-                ", statu_offre='" + statu_offre + '\'' +
+                ", datePublication=" + datePublication +
+                ", dateAcceptation=" + dateAcceptation +
+                ", timeToHire=" + timeToHire +
+                ", timeToFill=" + timeToFill +
+                ", statuOffre=" + statuOffre +
                 ", departement='" + departement + '\'' +
-                ", recruteur_responsable='" + recruteur_responsable + '\'' +
+                ", recruteurResponsable='" + recruteurResponsable + '\'' +
                 '}';
     }
 }
