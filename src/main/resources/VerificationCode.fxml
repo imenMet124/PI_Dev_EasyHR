@@ -3,29 +3,29 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.ForgotPasswordController">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<StackPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.Users.controller.VerificationCodeController">
     <!-- Background Image -->
     <ImageView fitWidth="800" fitHeight="600" preserveRatio="false">
         <image>
-            <Image url="@/images/Forgot password-bro.png"/> <!-- Use the same background image as the login page -->
+            <Image url="@/images/mobile-password-forgot.png"/>
         </image>
     </ImageView>
 
     <!-- Main Content -->
     <VBox spacing="30" alignment="CENTER" style="-fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 15; -fx-padding: 40;">
         <!-- Title -->
-        <Label text="Forgot Password" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;">
+        <Label text="Verify Code" style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;">
             <font>
                 <Font name="Arial" size="32"/>
             </font>
         </Label>
 
         <!-- Subtitle -->
-        <Label text="Enter your phone number to reset your password" style="-fx-font-size: 16px; -fx-text-fill: #7F8C8D;">
+        <Label text="Enter the verification code sent to your phone" style="-fx-font-size: 16px; -fx-text-fill: #7F8C8D;">
             <font>
                 <Font name="Arial" size="16"/>
             </font>
@@ -33,26 +33,19 @@
 
         <!-- Form Container -->
         <VBox spacing="20" alignment="CENTER" style="-fx-padding: 20;">
-            <!-- Phone Number Field -->
-            <TextField fx:id="phoneField" promptText="Enter your phone number" prefWidth="300" style="-fx-background-color: white; -fx-border-color: #BDC3C7; -fx-border-radius: 5; -fx-padding: 10;">
+            <!-- Verification Code Field -->
+            <TextField fx:id="codeField" promptText="Enter verification code" prefWidth="300" style="-fx-background-color: white; -fx-border-color: #BDC3C7; -fx-border-radius: 5; -fx-padding: 10;">
                 <font>
                     <Font name="Arial" size="14"/>
                 </font>
             </TextField>
 
             <!-- Submit Button -->
-            <Button text="Send SMS" onAction="#handleSendSMS" prefWidth="300" style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12; -fx-border-radius: 5; -fx-cursor: hand;">
+            <Button text="Verify Code" onAction="#handleVerifyCode" prefWidth="300" style="-fx-background-color: #3498DB; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold; -fx-padding: 12; -fx-border-radius: 5; -fx-cursor: hand;">
                 <font>
                     <Font name="Arial" size="16"/>
                 </font>
             </Button>
-
-            <!-- Back to Login Link -->
-            <Hyperlink text="Back to Login" onAction="#handleBackToLogin" style="-fx-text-fill: #3498DB; -fx-font-size: 14px; -fx-underline: true; -fx-cursor: hand;">
-                <font>
-                    <Font name="Arial" size="14"/>
-                </font>
-            </Hyperlink>
         </VBox>
 
         <!-- Error Message -->

@@ -9,6 +9,7 @@ import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import tn.esprit.Users.entities.User;
@@ -239,4 +240,17 @@ public class SignUpController {
         }
         return false;
     }
+    @FXML
+    private void handleLoginRedirect() {
+        // Release the webcam if it's open
+        releaseWebcam();
+
+        // Get the current stage and close it
+        Stage stage = (Stage) errorLabel.getScene().getWindow();
+        stage.close();
+
+        // Open the login scene
+        SceneController.openLoginScene();
+    }
+
 }

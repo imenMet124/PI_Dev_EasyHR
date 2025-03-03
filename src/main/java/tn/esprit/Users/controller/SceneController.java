@@ -133,7 +133,7 @@ public class SceneController {
     }
     public static void openVerificationCodeScene(String verificationCode) {
         try {
-            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/ClockInOut.fxml"));
+            FXMLLoader loader = new FXMLLoader(SceneController.class.getResource("/VerificationCode.fxml"));
             Parent root = loader.load();
             VerificationCodeController controller = loader.getController();
             controller.setVerificationCode(verificationCode); // Pass the verification code

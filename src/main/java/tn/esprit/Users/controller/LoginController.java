@@ -14,6 +14,9 @@ import tn.esprit.Users.services.ServiceUsers;
 import tn.esprit.Users.model.UserSession;
 
 public class LoginController {
+    @FXML
+    private Hyperlink signUpLink;
+
 
     @FXML
     private TextField emailField;
@@ -94,4 +97,29 @@ public class LoginController {
             errorLabel.setText("⚠ An error occurred while loading the forgot password page.");
         }
     }
+    @FXML
+    private void handleSignUpRedirect() {
+        System.out.println("Sign Up clicked!");
+
+        try {
+            // Load the SignUp.fxml file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/signUp.fxml"));
+            Parent root = loader.load();
+
+            // Get the current stage (window)
+            Stage stage = (Stage) signUpLink.getScene().getWindow(); // Assuming your hyperlink has fx:id="signUpLink"
+
+            // Set the new scene
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Sign Up");
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            errorLabel.setText("⚠ An error occurred while loading the sign-up page.");
+        }
+    }
+
+
+
 }

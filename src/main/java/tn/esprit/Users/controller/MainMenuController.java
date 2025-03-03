@@ -2,11 +2,20 @@ package tn.esprit.Users.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 public class MainMenuController {
 
     @FXML
     private BorderPane mainPane; // Reference from FXML
+
+    private Stage stage; // Reference to the stage
+
+    // Method to set the stage (called from the main application or SceneController)
+    public void setStage(Stage stage) {
+        this.stage = stage;
+        configureStage(); // Configure the stage when it's set
+    }
 
     @FXML
     public void initialize() {
@@ -14,6 +23,15 @@ public class MainMenuController {
             SceneController.setMainPane(mainPane); // Link mainPane to SceneController
         } else {
             System.err.println("mainPane is null in MainMenuController!");
+        }
+    }
+
+    // Configure the stage to be full screen or maximized
+    private void configureStage() {
+        if (stage != null) {
+            stage.setMaximized(true); // Maximize the window to fit the screen
+            stage.setFullScreen(true); // Uncomment this line to make it full screen
+            stage.setFullScreenExitHint("Press ESC to exit full screen"); // Hint for exiting full screen
         }
     }
 
