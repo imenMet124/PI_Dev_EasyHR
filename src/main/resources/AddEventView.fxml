@@ -3,15 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-
 <?import java.lang.String?>
+
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="tn.esprit.evenement.controllers.AddEventController">
     <stylesheets>
         <String fx:value="styleAdd.css"/>
     </stylesheets>
 
-    <VBox spacing="15" prefWidth="900" prefHeight="600" styleClass="container">
+    <VBox spacing="15" prefWidth="900" prefHeight="600" styleClass="container"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
 
         <Label text="Ajouter un événement" styleClass="title-label"/>
 
@@ -31,28 +33,29 @@
             <DatePicker fx:id="datePicker" GridPane.columnIndex="1" prefWidth="300" GridPane.rowIndex="2"/>
 
             <Label text="Heure:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-            <TextField fx:id="heureField" promptText="HH:MM:SS"  prefWidth="300" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+            <TextField fx:id="heureField" promptText="HH:MM:SS" prefWidth="300" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 
+            <!-- Champ Lieu -->
             <Label text="Lieu:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
-            <TextField fx:id="lieuField" GridPane.columnIndex="1" prefWidth="300" GridPane.rowIndex="4"/>
+            <TextField fx:id="lieuField" promptText="Entrez un lieu..." prefWidth="300"
+                       GridPane.columnIndex="1" GridPane.rowIndex="4"/>
 
             <Label text="Capacité:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
             <TextField fx:id="capaciteField" GridPane.columnIndex="1" prefWidth="300" GridPane.rowIndex="5"/>
 
-
             <Label text="Image:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
-            <VBox GridPane.columnIndex="1" GridPane.rowIndex="6"  >
+            <VBox GridPane.columnIndex="1" GridPane.rowIndex="6">
                 <ImageView fx:id="eventImageView" fitHeight="150" fitWidth="200" preserveRatio="true"/>
                 <Label fx:id="imageUploadLabel" text="📸 Upload l'image" styleClass="image-label" onMouseClicked="#handleUploadImage"/>
-
             </VBox>
         </GridPane>
-
-
 
         <HBox spacing="20" alignment="CENTER">
             <Button text="❌ Annuler" onAction="#handleCancel" styleClass="cancel-button"/>
             <Button text="✅ Ajouter" onAction="#handleAjouterEvent" styleClass="save-button"/>
         </HBox>
     </VBox>
+
+    <!-- ListView pour les suggestions, placé indépendamment -->
+    <ListView fx:id="suggestionsListView" maxHeight="200" prefWidth="250" visible="false"/>
 </AnchorPane>
