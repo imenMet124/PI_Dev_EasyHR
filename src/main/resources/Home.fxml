@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.HomeController">
+   <children>
+    <AnchorPane layoutX="356.0" layoutY="-40.0" minHeight="0.0" minWidth="0.0" prefHeight="374.0" prefWidth="0.0" />
+      <VBox layoutX="8.0" layoutY="5.0" prefHeight="391.0" prefWidth="100.0" styleClass="vbox-container" stylesheets="@Style.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <children>
+            <ImageView fitHeight="48.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Logo.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <ImageView fitHeight="45.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon1.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="30.0" />
+               </VBox.margin>
+            </ImageView>
+            <ImageView fitHeight="43.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon2.png" />
+               </image>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </ImageView>
+            <ImageView fitHeight="49.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="53.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icon4.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="60.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+      <HBox layoutX="108.0" layoutY="5.0" prefHeight="36.0" prefWidth="556.0" styleClass="hbox-style" stylesheets="@Style.css">
+         <children>
+            <SVGPath content="M21 12H9" />
+         </children>
+      </HBox>
+      <SVGPath content="M21 12H9" layoutX="249.0" layoutY="205.0" strokeWidth="3.0" />
+      <BorderPane fx:id="ajoutC" layoutX="130.0" layoutY="59.0" onMouseClicked="#ouvrirNouvellePageA" prefHeight="132.0" prefWidth="247.0" styleClass="borderpane-style" stylesheets="@Style.css">
+         <right>
+            <ImageView fitHeight="94.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@images/Ajout.png" />
+               </image>
+            </ImageView>
+         </right>
+         <center>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Offre" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="candidatureC" layoutX="386.0" layoutY="59.0" onMouseClicked="#ouvrirNouvellePageC" prefHeight="132.0" prefWidth="234.0" styleClass="borderpane-style">
+         <right>
+            <ImageView fitHeight="99.0" fitWidth="111.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@images/voir.png" />
+               </image>
+            </ImageView>
+         </right>
+         <center>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Examiner Offre" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="entretienC" layoutX="130.0" layoutY="217.0" onMouseClicked="#ouvrirNouvellePageE" prefHeight="152.0" prefWidth="247.0" styleClass="borderpane-style">
+         <right>
+            <ImageView fitHeight="95.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@images/E.png" />
+               </image>
+            </ImageView>
+         </right>
+         <center>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enchainer Entertien" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+      <BorderPane fx:id="statC" layoutX="394.0" layoutY="217.0" onMouseClicked="#ouvrirNouvellePageS" prefHeight="152.0" prefWidth="254.0" styleClass="borderpane-style">
+         <right>
+            <ImageView fitHeight="94.0" fitWidth="127.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@images/Stat.png" />
+               </image>
+            </ImageView>
+         </right>
+         <center>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Voir Staistiques" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
