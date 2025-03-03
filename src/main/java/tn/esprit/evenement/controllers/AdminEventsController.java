@@ -28,6 +28,7 @@ import tn.esprit.evenement.services.ServiceEvenement;
 import tn.esprit.evenement.services.ServiceUtilisateur;
 
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -93,6 +94,22 @@ public class AdminEventsController implements Initializable {
                 logoImage.setImage(image);
 
                 HBox container = new HBox(15);
+
+                // Charger l'image de l'événement
+                ImageView eventImageView = new ImageView();
+                container.getChildren().add(eventImageView);
+
+                eventImageView.setFitWidth(100); // Largeur de l'image
+                eventImageView.setFitHeight(75); // Hauteur de l'image
+                eventImageView.setPreserveRatio(true);
+
+                if (event.getImagePath() != null && !event.getImagePath().isEmpty()) {
+                    File file = new File(event.getImagePath());
+                    if (file.exists()) {
+                        eventImageView.setImage(new Image(file.toURI().toString()));
+                    }
+                }
+
                 container.getStyleClass().add("event-container");
                 container.setAlignment(Pos.CENTER_LEFT);
 
