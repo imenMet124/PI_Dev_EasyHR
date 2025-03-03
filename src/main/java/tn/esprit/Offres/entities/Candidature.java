@@ -1,10 +1,13 @@
 package tn.esprit.Offres.entities;
 
+import java.io.File;
 import java.time.LocalDate;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.text.PDFTextStripper;
+
 import java.io.IOException;
 public class Candidature {
 
@@ -154,6 +157,35 @@ public class Candidature {
     public void setRecruteurResponsable(String recruteurResponsable) {
         this.recruteurResponsable = recruteurResponsable;
     }
+    @Override
+    public String toString() {
+        return "🆔 ID: " + idCandidature +
+                " | 👤 " + (candidat != null ? candidat.getNom() + " " + candidat.getPrenom() : "N/A") +
+                " | 📧 " + (candidat != null ? candidat.getEmail() : "N/A") +
+                " | 📞 " + (candidat != null ? candidat.getPhone() : "N/A") +
+                " | 💼 Expérience: " + extractTextFromPDF(candidat != null ? candidat.getExperienceInterne() : null) +
+                " | 🛠️ Compétences: " + extractTextFromPDF(candidat != null ? candidat.getCompetence() : null) +
+                " | 📌 Offre: " + (offre != null ? offre.getTitrePoste() : "N/A");
+    }
+    private String extractTextFromPDF(String pdfPath) {
+        if (pdfPath == null || pdfPath.isEmpty()) {
+            return "N/A";
+        }
+
+        File pdfFile = new File(pdfPath);
+        if (!pdfFile.exists()) {
+            return "File Not Found";
+        }
+
+        try (PDDocument document = PDDocument.load(pdfFile)) {
+            PDFTextStripper pdfStripper = new PDFTextStripper();
+            return pdfStripper.getText(document).trim();
+        } catch (IOException e) {
+            return "Error Reading PDF";
+        }
+    }
+
+
     public void generatePdfReport(Candidature candidature) {
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
@@ -172,8 +204,7 @@ public class Candidature {
             contentStream.setFont(PDType1Font.HELVETICA, 12);
             contentStream.showText("ID Candidature: " + candidature.getIdCandidature());
             contentStream.newLine();
-            contentStream.showText("Nom: " + candidature.getCandidat().getIdCandidat());
-            contentStream.newLine();
+
             contentStream.showText("Nom: " + candidature.getCandidat().getNom());
             contentStream.newLine();
 
@@ -183,6 +214,8 @@ public class Candidature {
             contentStream.newLine();
 
             contentStream.showText("Compétences: " + candidature.getCandidat().getCompetence());
+            contentStream.newLine();
+            contentStream.showText("Expérience Interne: " + candidature.getCandidat().getExperienceInterne());
             contentStream.newLine();
             contentStream.showText("Disponibilité: " + candidature.getCandidat().getDisponibilite());
             contentStream.newLine();
