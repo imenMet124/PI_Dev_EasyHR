@@ -1,21 +1,26 @@
 package tn.esprit.Users.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.services.ServiceUsers;
 import tn.esprit.Users.model.UserSession;
 
+
+
 public class LoginController {
     @FXML
     private Hyperlink signUpLink;
+
+    @FXML
+    private Button togglePasswordButton;
 
 
     @FXML
@@ -23,14 +28,25 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private TextField visiblePassword;
 
     @FXML
     private Label errorLabel;
 
     @FXML
+    private ImageView eyeIcon;
+
+
+    @FXML
     private Hyperlink forgotPasswordLink; // Add this line
 
     private final ServiceUsers serviceUsers = new ServiceUsers();
+
+
+    public void initialize() {
+        passwordField.textProperty().bindBidirectional(visiblePassword.textProperty());
+        eyeIcon.setImage(closedEye);}
 
     @FXML
     private void handleLogin() {
@@ -121,5 +137,27 @@ public class LoginController {
     }
 
 
+    private boolean passwordVisible = false;
+    private final Image openEye = new Image(getClass().getResourceAsStream("/images/eye-open.png"));
+    private final Image closedEye = new Image(getClass().getResourceAsStream("/images/eye-closed.png"));
+    @FXML
+    void togglePasswordVisibility(ActionEvent event) {
+        passwordVisible = !passwordVisible;
 
+        if (passwordVisible) {
+            // Show plain text
+            passwordField.setVisible(false);
+            passwordField.setManaged(false);
+            visiblePassword.setVisible(true);
+            visiblePassword.setManaged(true);
+            eyeIcon.setImage(openEye);
+        } else {
+            // Hide plain text
+            visiblePassword.setVisible(false);
+            visiblePassword.setManaged(false);
+            passwordField.setVisible(true);
+            passwordField.setManaged(true);
+            eyeIcon.setImage(closedEye);
+        }
+    }
 }

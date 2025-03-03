@@ -148,19 +148,37 @@ public class SignUpController {
 
         // Validate fields
         if (name.isEmpty() || email.isEmpty() || phone.isEmpty() || password.isEmpty()) {
-            errorLabel.setText("Please fill in all fields.");
+            errorLabel.setText("All fields must be filled!");
+            return;
+        }
+
+        // Email validation
+        if (!email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$")) {
+            errorLabel.setText("Invalid email format!");
+            return;
+        }
+
+        // Phone number validation (8-15 digits)
+        if (!phone.matches("\\d{8,15}")) {
+            errorLabel.setText("Phone number must be 8-15 digits long!");
+            return;
+        }
+
+        // Password length check
+        if (password.length() < 6) {
+            errorLabel.setText("Password must be at least 6 characters long!");
             return;
         }
 
         // Check if passwords match
         if (!password.equals(confirmPassword)) {
-            errorLabel.setText("Passwords do not match.");
+            errorLabel.setText("Passwords do not match!");
             return;
         }
 
-        // Check if the email is already taken
+        // Check if email is already taken
         if (serviceUsers.isEmailTaken(email)) {
-            errorLabel.setText("Email is already taken.");
+            errorLabel.setText("Email is already taken!");
             return;
         }
 
@@ -170,39 +188,30 @@ public class SignUpController {
             return;
         }
 
-        // Hash the password before storing it
+        // Hash password
         String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-        System.out.println("🔑 Hashed password before inserting into DB: " + hashedPassword);
 
-        // Create a new User object (without photo)
+        // Create user object
         User newUser = new User(0, name, email, phone, hashedPassword, UserRole.EMPLOYE, "New Position", 3000.00, null, UserStatus.ACTIVE, null);
 
         try {
-            // Add the user to the database
+            // Add user to database
             serviceUsers.ajouter(newUser);
-
-            // Get the newly created user ID
             int userId = serviceUsers.getLastInsertedUserId();
             if (userId <= 0) {
                 errorLabel.setText("Error retrieving user ID.");
                 return;
             }
 
-
-
-            // Define the path to save the image (inside src/main/resources)
+            // Save image
             String imagePath = "src/main/resources/images/users/" + userId + ".jpg";
             File destinationFile = new File(imagePath);
-
-
-            // Save the captured image to the file
             ImageIO.write(ImageIO.read(capturedImageFile), "jpg", destinationFile);
 
-            // Store image path in the UserPhoto table or as part of the User entity (depending on how you set it up)
-            UserPhotoService userPhotoService = new UserPhotoService();
-            userPhotoService.addUserPhoto(userId, imagePath); // Store the image path in the database
+            // Store image path in the database
+            userPhotoService.addUserPhoto(userId, imagePath);
 
-            successLabel.setText("User signed up and image saved successfully!");
+            successLabel.setText("User signed up successfully!");
             releaseWebcam();
         } catch (SQLException | IOException e) {
             errorLabel.setText("Error during sign-up: " + e.getMessage());
