@@ -1,7 +1,5 @@
 package tn.esprit.Offres.entities;
 
-import tn.esprit.Offres.entities.User; // Importez l'entité User
-
 public class Candidat {
     private int idCandidat;
     private User user;// Référence à l'utilisateur (employé)

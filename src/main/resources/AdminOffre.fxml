@@ -9,38 +9,44 @@
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.AdminOffresController">
     <children>
         <!-- Barre latérale du dashboard -->
-        <VBox prefHeight="666.0" prefWidth="200" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
+        <VBox prefHeight="703.0" prefWidth="200" style="-fx-background-color: #72A0C1; -fx-padding: 20;" styleClass="vbox-container" stylesheets="@Style.css">
             <children>
-                <ImageView fitHeight="87.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="132.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@images/Logo.png" />
+                        <Image url="@images/logoFinal.png" />
                     </image>
                     <VBox.margin>
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </ImageView>
 
-                <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard" />
-
-                <Button fx:id="accueil" mnemonicParsing="false" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Accueil">
+                <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin></Button>
+                  <Insets bottom="20.0" />
+               </VBox.margin></Label>
 
-                <Button fx:id="ajout" mnemonicParsing="false" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
+                <Button fx:id="accueil" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Accueil">
+                    <VBox.margin>
+                        <Insets top="10.0" />
+                    </VBox.margin></Button>
 
-                <Button fx:id="gestion" mnemonicParsing="false" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
+                <Button fx:id="ajout" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Button>
 
-                <Button fx:id="afficherCandidaturesButton" mnemonicParsing="false" onAction="#afficherCandidatures" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin></Button>
+                <Button fx:id="gestion" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Button>
+
+                <Button fx:id="afficherCandidaturesButton" mnemonicParsing="false" onAction="#afficherCandidatures" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Button>
             </children>
         </VBox>
 
@@ -50,13 +56,13 @@
                 <!-- Barre de recherche -->
                 <HBox spacing="10" style="-fx-padding: 10;">
                     <children>
-                        <TextField fx:id="searchField" prefWidth="600" promptText="Rechercher une offre..." />
-                        <Button style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Rechercher" />
+                        <TextField fx:id="searchField" prefWidth="600" promptText="Rechercher une offre..." style="-fx-background-radius: 5; -fx-border-radius: 5;" />
+                        <Button style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Rechercher" />
                     </children>
                 </HBox>
 
                 <!-- Liste des offres -->
-                <ScrollPane fitToWidth="true" prefHeight="600.0">
+                <ScrollPane fitToWidth="true" prefHeight="618.0" prefWidth="671.0" style="-fx-background-color: white;">
                     <content>
                         <VBox fx:id="offresContainer" spacing="15" style="-fx-padding: 20; -fx-background-color: #f4f4f4;">
                             <children>

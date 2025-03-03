@@ -27,18 +27,21 @@ public class CandidaturesController {
     @FXML
     public void initialize() {
         chargerCandidatures();
+
+
     }
+
 
 
     private void chargerCandidatures() {
         try {
-            // ✅ Retrieve List<Candidature>
+            //  Retrieve List<Candidature>
             List<Candidature> candidatures = serviceCandidature.afficherCandidaturesFormatees();
 
-            // ✅ Convert List<Candidature> to ObservableList<Candidature>
+            //  Convert List<Candidature> to ObservableList<Candidature>
             ObservableList<Candidature> observableCandidatures = FXCollections.observableArrayList(candidatures);
 
-            // ✅ Ensure ListView supports Candidature objects
+            // Ensure ListView supports Candidature objects
             candidaturesListView.setItems(observableCandidatures);
 
         } catch (SQLException e) {

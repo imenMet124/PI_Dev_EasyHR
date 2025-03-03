@@ -12,11 +12,11 @@
         <HBox prefHeight="600.0" prefWidth="900.0" spacing="0">
             <children>
                 <!-- ✅ Barre latérale avec logo et boutons -->
-                <VBox prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
+                <VBox prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #72A0C1; -fx-padding: 20;" styleClass="vbox-container" stylesheets="@Style.css">
                     <children>
-                        <ImageView fitHeight="87.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="123.0" fitWidth="379.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@images/Logo.png" />
+                                <Image url="@images/logoFinal.png" />
                             </image>
                             <VBox.margin>
                                 <Insets bottom="20.0" />
@@ -28,22 +28,22 @@
                                 <Insets bottom="20.0" />
                             </VBox.margin></Label>
 
-                        <Button fx:id="accueil" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Accueil">
+                        <Button fx:id="accueil" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Accueil">
                             <VBox.margin>
                                 <Insets bottom="20.0" />
                             </VBox.margin></Button>
 
-                        <Button fx:id="ajout" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
+                        <Button fx:id="ajout" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
                             <VBox.margin>
                                 <Insets bottom="20.0" />
                             </VBox.margin></Button>
 
-                        <Button fx:id="gestion" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
+                        <Button fx:id="gestion" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
                             <VBox.margin>
                                 <Insets bottom="20.0" />
                             </VBox.margin></Button>
 
-                        <Button fx:id="candidature" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures" />
+                        <Button fx:id="candidature" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures" />
                     </children>
                 </VBox>
 
@@ -60,7 +60,10 @@
                                 <!-- ✅ Image -->
                                 <VBox>
                                     <children>
-                                        <ImageView fx:id="eventImageView" fitHeight="300.0" fitWidth="300.0" />
+                                        <ImageView fx:id="eventImageView" fitHeight="262.0" fitWidth="246.0">
+                                 <image>
+                                    <Image url="@images/b.jpg" />
+                                 </image></ImageView>
                                     </children>
                                 </VBox>
 
@@ -69,8 +72,9 @@
                                     <children>
                                         <GridPane hgap="10" vgap="10">
                                             <columnConstraints>
-                                                <ColumnConstraints minWidth="150" prefWidth="200" />
-                                                <ColumnConstraints hgrow="ALWAYS" />
+                                                <ColumnConstraints maxWidth="171.0" minWidth="63.0" prefWidth="106.0" />
+                                                <ColumnConstraints hgrow="ALWAYS" maxWidth="225.0" minWidth="111.0" prefWidth="156.0" />
+                                    <ColumnConstraints maxWidth="121.0" minWidth="86.0" prefWidth="112.0" />
                                             </columnConstraints>
                                             <rowConstraints>
                                                 <RowConstraints />
@@ -84,37 +88,37 @@
                                             </rowConstraints>
                                             <children>
                                                 <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                                                <TextField fx:id="nomC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                                <TextField fx:id="nomC" editable="false" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                                                 <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                                                <TextField fx:id="emailC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <TextField fx:id="emailC" editable="false" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                                                 <Label text="Téléphone:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                                                <TextField fx:id="telC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="telC" editable="false" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                                                 <Label text="Poste Actuel:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                                                <TextField fx:id="posteC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="posteC" editable="false" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 
                                                 <Label text="Département:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-                                                <TextField fx:id="depC" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <TextField fx:id="depC" editable="false" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
 
                                                 <Label text="Expérience Interne:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-                                                <TextField fx:id="expC" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                                                <Button text="Upload Experience Interne" onAction="#handleUploadExperienceInterne" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                                                <TextField fx:id="expC" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <Button onAction="#handleUploadExperienceInterne" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 12px; -fx-font-weight: bold; -fx-padding: 8px;" text="Upload Experience Interne" GridPane.columnIndex="2" GridPane.rowIndex="5" />
 
                                                 <Label text="Compétence:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-                                                <TextField fx:id="compC" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                                <Button text="Upload Competence" onAction="#handleUploadCompetence" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                                                <TextField fx:id="compC" prefHeight="25.0" prefWidth="129.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <Button onAction="#handleUploadCompetence" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-background-radius: 12px; -fx-font-weight: bold; -fx-padding: 8px;" text="Upload Competence" GridPane.columnIndex="2" GridPane.rowIndex="6" />
 
                                                 <Label text="Disponibilité:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-                                                <ComboBox fx:id="dispC" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                <ComboBox fx:id="dispC" prefHeight="42.0" prefWidth="156.0" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                             </children>
                                         </GridPane>
 
                                         <!-- ✅ Bouton Confirmer -->
                                         <HBox alignment="CENTER" spacing="20">
                                             <children>
-                                                <Button fx:id="confirmerC" style="-fx-background-color: #E67E22; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-padding: 10 20;" text="✅ Confirmer Mes Informations" />
+                                                <Button fx:id="confirmerC" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold; -fx-padding: 10 20;" text=" Confirmer Mes Informations" />
                                             </children>
                                         </HBox>
                                     </children>

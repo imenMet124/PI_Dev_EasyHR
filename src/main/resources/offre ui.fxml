@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -13,18 +14,48 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.ImageView?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="tn.esprit.Offres.controllers.OffresController">
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.OffresController">
     <children>
         <!-- Barre latérale du dashboard -->
-        <VBox prefHeight="665.0" prefWidth="200" style="-fx-background-color: #2C3E50; -fx-padding: 20;">
-           <children>
-               <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard" />
-               <Button style="-fx-background-color: transparent; -fx-text-fill: white;" text="Accueil" />
-               <Button style="-fx-background-color: transparent; -fx-text-fill: white;" text="Offres d'Emploi" />
-               <Button style="-fx-background-color: transparent; -fx-text-fill: white;" text="Paramètres" />
+        <VBox prefHeight="703.0" prefWidth="200" style="-fx-background-color: #72A0C1; -fx-padding: 20;" styleClass="vbox-container" stylesheets="@Style.css">
+            <children>
+                <ImageView fitHeight="132.0" fitWidth="140.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@images/logoFinal.png" />
+                    </image>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin>
+                </ImageView>
 
+                <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
+                    <VBox.margin>
+                        <Insets bottom="20.0" />
+                    </VBox.margin></Label>
 
-           </children>
+                <Button fx:id="accueil" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Accueil">
+                    <VBox.margin>
+                  <Insets />
+                    </VBox.margin></Button>
+
+                <Button fx:id="ajout" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Button>
+
+                <Button fx:id="gestion" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Button>
+
+                <Button fx:id="afficherCandidaturesButton" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin></Button>
+            </children>
         </VBox>
 
         <!-- Contenu principal -->
@@ -33,9 +64,9 @@
                <!-- Barre de recherche -->
        <HBox spacing="10" style="-fx-padding: 10;">
            <children>
-               <TextField fx:id="searchField" prefWidth="400" promptText="Rechercher une offre..." />
-               <ComboBox fx:id="statutComboBox" promptText="Sélectionner un statut" prefWidth="180"/>
-               <Button fx:id="searchButton" style="-fx-background-color: #3498DB; -fx-text-fill: white;" text="Rechercher" />
+               <TextField fx:id="searchField" prefWidth="400"  style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" promptText="Rechercher une offre..." />
+               <ComboBox fx:id="statutComboBox" prefWidth="180" promptText="Sélectionner un statut" style="-fx-background-color: white; -fx-border-color: #AAAAAA; -fx-border-radius: 8px; -fx-padding: 5px; -fx-font-size: 14px;" />
+               <Button fx:id="searchButton" prefHeight="38.0" prefWidth="51.0" style="-fx-background-color: #3498DB; -fx-text-fill: white;" text="Rechercher" />
            </children>
        </HBox>
 
