@@ -245,27 +245,49 @@ public class ServiceCandidature implements IService<Candidature> {
         }
         return candidatures;
     }
-    public List<String> afficherCandidaturesFormatees() throws SQLException {
-        List<String> formattedCandidatures = new ArrayList<>();
-        List<Candidature> candidatures = afficher();
 
-        for (Candidature candidature : candidatures) {
-            String details = String.format(
-                    "🆔 ID Candidat: %d | 👤 %s %s | 📧 %s | 📞 %s | 💼 Exp: %s | 🛠️ Comp: %s | 🟢 Dispo: %s | 📌 Offre: %s",
-                    candidature.getCandidat().getIdCandidat(),
-                    candidature.getCandidat().getNom(),
-                    candidature.getCandidat().getPrenom(),
-                    candidature.getCandidat().getEmail(),
-                    candidature.getCandidat().getPhone(),
-                    candidature.getCandidat().getExperienceInterne(),
-                    candidature.getCandidat().getCompetence(),
-                    candidature.getCandidat().getDisponibilite(),
-                    candidature.getOffre().getTitrePoste()
-            );
-            formattedCandidatures.add(details);
+    public List<Candidature> afficherCandidaturesFormatees() throws SQLException {
+        List<Candidature> candidatures = new ArrayList<>();
+        String sql = "SELECT c.idCandidature, " +
+                "ca.nomCandidat, ca.prenomCandidat, ca.emailCandidat, ca.telephoneCandidat, " +
+                "ca.posteActuel, ca.departement, ca.experienceInterne, ca.competence, ca.disponibilite, " +
+                "o.titrePoste " +
+                "FROM candidature c " +
+                "JOIN candidat ca ON c.idCandidat = ca.idCandidat " +
+                "JOIN offre_emploi o ON c.idOffre = o.idOffre";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet rs = preparedStatement.executeQuery()) {
+
+            while (rs.next()) {
+                // ✅ Création de l'objet Candidat avec seulement les attributs nécessaires
+                Candidat candidat = new Candidat();
+                candidat.setNom(rs.getString("nomCandidat"));
+                candidat.setPrenom(rs.getString("prenomCandidat"));
+                candidat.setEmail(rs.getString("emailCandidat"));
+                candidat.setPhone(rs.getString("telephoneCandidat"));
+                candidat.setPosition(rs.getString("posteActuel"));
+                candidat.setDepartment(rs.getString("departement"));
+                candidat.setExperienceInterne(rs.getString("experienceInterne"));
+                candidat.setCompetence(rs.getString("competence"));
+                candidat.setDisponibilite(Candidat.Disponibilite.valueOf(rs.getString("disponibilite")));
+
+                // ✅ Création de l'objet Offre (uniquement le titre de l’offre)
+                Offre offre = new Offre();
+                offre.setTitrePoste(rs.getString("titrePoste"));
+
+                // ✅ Création de l'objet Candidature
+                Candidature candidature = new Candidature();
+                candidature.setIdCandidature(rs.getInt("idCandidature"));
+                candidature.setCandidat(candidat);
+                candidature.setOffre(offre);
+
+                candidatures.add(candidature);
+            }
         }
 
-        return formattedCandidatures;
+        return candidatures;
     }
+
 
 }

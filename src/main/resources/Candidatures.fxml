@@ -9,6 +9,6 @@
    <Label text="📋 Liste des Candidatures" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
 
    <ListView fx:id="candidaturesListView" prefHeight="400" prefWidth="600"/>
-
+   <Button fx:id="generatePdfButton" text="Generate PDF Report" onAction="#handleGeneratePdfReport"/>
    <Button text="Fermer" onAction="#fermerFenetre"/>
 </VBox>

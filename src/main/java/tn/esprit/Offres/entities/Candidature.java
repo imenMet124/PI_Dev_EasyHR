@@ -1,7 +1,11 @@
 package tn.esprit.Offres.entities;
 
 import java.time.LocalDate;
-
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import java.io.IOException;
 public class Candidature {
 
     private int idCandidature;
@@ -149,5 +153,52 @@ public class Candidature {
 
     public void setRecruteurResponsable(String recruteurResponsable) {
         this.recruteurResponsable = recruteurResponsable;
+    }
+    public void generatePdfReport(Candidature candidature) {
+        PDDocument document = new PDDocument();
+        PDPage page = new PDPage();
+        document.addPage(page);
+
+        try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
+            contentStream.beginText();
+            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
+            contentStream.setLeading(14.5f);
+            contentStream.newLineAtOffset(25, 700);
+
+            contentStream.showText("Candidature Report");
+            contentStream.newLine();
+            contentStream.newLine();
+
+            contentStream.setFont(PDType1Font.HELVETICA, 12);
+            contentStream.showText("ID Candidature: " + candidature.getIdCandidature());
+            contentStream.newLine();
+            contentStream.showText("Nom: " + candidature.getCandidat().getIdCandidat());
+            contentStream.newLine();
+            contentStream.showText("Nom: " + candidature.getCandidat().getNom());
+            contentStream.newLine();
+
+            contentStream.showText("Email: " + candidature.getCandidat().getEmail());
+            contentStream.newLine();
+            contentStream.showText("Téléphone: " + candidature.getCandidat().getPhone());
+            contentStream.newLine();
+
+            contentStream.showText("Compétences: " + candidature.getCandidat().getCompetence());
+            contentStream.newLine();
+            contentStream.showText("Disponibilité: " + candidature.getCandidat().getDisponibilite());
+            contentStream.newLine();
+            contentStream.showText("Offre: " + candidature.getOffre().getTitrePoste());
+            contentStream.newLine();
+
+            contentStream.endText();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            document.save("Candidature_Report.pdf");
+            document.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
