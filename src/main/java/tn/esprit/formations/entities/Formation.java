@@ -1,51 +1,30 @@
 package tn.esprit.formations.entities;
 
-import tn.esprit.formations.entities.CompetencesCibles;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import java.time.LocalDateTime;
 
 public class Formation {
-
-    int id;
+    private int id;
     private String titre;
     private String description;
-    private List<Module> modules = new ArrayList<>();
-    private Set<Inscription> Inscriptions = new HashSet<>();
-    private List<CompetencesCibles> competencesCibles = new ArrayList<>();
-    private int idQuizFinal;
+    private String filePath;
+    private LocalDateTime dateCreation;
+    private Quiz quiz;
 
-    // Constructeurs
-
-    public Formation(int id, String titre, String description, List<Module> modules, Set<Inscription> inscriptions, List<CompetencesCibles> competencesCibles, int idQuizFinal) {
+    public Formation(int id, String titre, String description, String filePath, LocalDateTime dateCreation) {
         this.id = id;
         this.titre = titre;
         this.description = description;
-        this.modules = modules;
-        Inscriptions = inscriptions;
-        this.competencesCibles = competencesCibles;
-        this.idQuizFinal = idQuizFinal;
+        this.filePath = filePath;
+        this.dateCreation = dateCreation;
     }
 
-    public Formation() {
-        
-    }
-
-    public Formation(int id, String titre, String description) {
-        this.id = id;
+    public Formation(String titre, String description, String filePath, LocalDateTime dateCreation) {
         this.titre = titre;
         this.description = description;
+        this.filePath = filePath;
+        this.dateCreation = LocalDateTime.now();
     }
 
-    public Formation(String titre, String description) {
-        this.titre = titre;
-        this.description = description;
-    }
-
-    // Getters/Setters
     public int getId() {
         return id;
     }
@@ -70,48 +49,42 @@ public class Formation {
         this.description = description;
     }
 
-    public List<Module> getModules() {
-        return modules;
+    public String getFilePath() {
+        return filePath;
     }
 
-    public void setModules(List<Module> modules) {
-        this.modules = modules;
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
     }
 
-    public Set<Inscription> getInscriptions() {
-        return Inscriptions;
+    public LocalDateTime getDateCreation() {
+        return dateCreation;
     }
 
-    public void setInscriptions(Set<Inscription> inscriptions) {
-        Inscriptions = inscriptions;
+    public void setDateCreation(LocalDateTime dateCreation) {
+        this.dateCreation = dateCreation;
     }
 
-    public List<CompetencesCibles> getCompetencesCibles() {
-        return competencesCibles;
+    public Quiz getQuiz() {
+        return quiz;
     }
 
-    public void setCompetencesCibles(List<CompetencesCibles> competencesCibles) {
-        this.competencesCibles = competencesCibles;
-    }
-
-    public int getIdQuizFinal() {
-        return idQuizFinal;
-    }
-
-    public void setIdQuizFinal(int idQuizFinal) {
-        this.idQuizFinal = idQuizFinal;
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
     }
 
     @Override
-    public String toString() {
-        return "Formation{" +
-                "id=" + id +
-                ", titre='" + titre + '\'' +
-                ", description='" + description + '\'' +
-                ", modules=" + modules +
-                ", Inscriptions=" + Inscriptions +
-                ", competencesCibles=" + competencesCibles +
-                ", idQuizFinal=" + idQuizFinal +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Formation formation = (Formation) o;
+
+        return id == formation.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }

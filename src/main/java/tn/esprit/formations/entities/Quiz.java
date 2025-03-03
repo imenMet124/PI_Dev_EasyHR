@@ -1,29 +1,38 @@
 package tn.esprit.formations.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Quiz {
     private int id;
-    private String titre;
-    private quiz_type type;
-    private List<Question> questions = new ArrayList<>();
-    private int scoreMinReussite;
+    private String title;
+    private List<Question> questions;
+    private Float passingscore;
 
-    enum quiz_type{MODULE,FORMATION}
-
-    public Quiz() {}
-
-    public Quiz(int id, List<Question> questions, int scoreMinReussite) {
+    // Constructor with all fields
+    public Quiz(int id, String title, List<Question> questions) {
         this.id = id;
+        this.title = title;
         this.questions = questions;
-        this.scoreMinReussite = scoreMinReussite;
+        calculatePassingScore();
     }
 
-    public boolean estReussi(int scoreUtilisateur) {
-        return scoreUtilisateur >= scoreMinReussite;
+    // Constructor without ID (for creating new quizzes)
+    public Quiz(String title, List<Question> questions) {
+        this.title = title;
+        this.questions = questions;
+        calculatePassingScore();
     }
 
+    // Calculate passing score as total questions / 2
+    private void calculatePassingScore() {
+        if (questions != null && !questions.isEmpty()) {
+            this.passingscore = (float) questions.size() / 2;
+        } else {
+            this.passingscore = 0.0f;
+        }
+    }
+
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -32,27 +41,24 @@ public class Quiz {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public List<Question> getQuestions() {
         return questions;
     }
 
     public void setQuestions(List<Question> questions) {
         this.questions = questions;
+        calculatePassingScore();
     }
 
-    public int getScoreMinReussite() {
-        return scoreMinReussite;
+    public Float getPassingscore() {
+        return passingscore;
     }
-
-    public void setScoreMinReussite(int scoreMinReussite) {
-        this.scoreMinReussite = scoreMinReussite;
-    }
-
-    @Override
-    public String toString() {
-        return "Quiz{" +
-                "id=" + id +
-                ", questions=" + questions.size() +
-                ", scoreMinReussite=" + scoreMinReussite +
-                '}';
-}}
+}

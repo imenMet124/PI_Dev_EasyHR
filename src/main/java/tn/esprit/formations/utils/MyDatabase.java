@@ -10,7 +10,7 @@ public class MyDatabase {
 
     private final String url = "jdbc:mysql://localhost:3306/esprit";
     private final String user = "root";
-    private final String password = "root";
+    private final String password = "";
 
     private MyDatabase() {
         try {

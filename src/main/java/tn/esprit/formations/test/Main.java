@@ -1,22 +1,26 @@
 package tn.esprit.formations.test;
 
-import tn.esprit.formations.entities.Formation;
-import tn.esprit.formations.services.ServiceFormation;
-import tn.esprit.formations.utils.MyDatabase;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.sql.SQLException;
+import java.io.IOException;
 
-public class Main {
-    public static void main(String[] args){
-        ServiceFormation serviceFormation = new ServiceFormation();
-        try{
-            serviceFormation.afficher();
-            System.out.println("affiche");
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-
+public class Main extends Application {
+    @Override
+    public void start(Stage stage) throws IOException {
+         //FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/admin/AdminView.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/user/UserView.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setTitle("User Panel");
+        stage.show();
     }
 
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

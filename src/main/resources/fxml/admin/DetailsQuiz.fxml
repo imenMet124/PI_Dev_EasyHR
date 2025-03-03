@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.formations.controllers.DetailsQuizController">
+    <children>
+        <!-- Title -->
+        <Label layoutX="50.0" layoutY="30.0" text="Quiz Details" style="-fx-font-size: 18px;" />
+
+        <!-- Title Label -->
+        <Label layoutX="50.0" layoutY="70.0" text="Title:" style="-fx-font-size: 14px;" />
+        <Label fx:id="titleLabel" layoutX="150.0" layoutY="70.0" prefWidth="400.0" style="-fx-font-size: 14px;" />
+
+        <!-- Number of Questions Label -->
+        <Label layoutX="50.0" layoutY="110.0" text="Number of Questions:" style="-fx-font-size: 14px;" />
+        <Label fx:id="questionsCountLabel" layoutX="150.0" layoutY="110.0" prefWidth="400.0" style="-fx-font-size: 14px;" />
+
+        <!-- Buttons -->
+        <Button layoutX="350.0" layoutY="330.0" prefHeight="40.0" prefWidth="120.0"
+                onAction="#handleManageQuestions" text="Manage Questions" />
+        <Button layoutX="480.0" layoutY="330.0" prefHeight="40.0" prefWidth="120.0"
+                onAction="#handleBack" text="Back" />
+    </children>
+</AnchorPane>
