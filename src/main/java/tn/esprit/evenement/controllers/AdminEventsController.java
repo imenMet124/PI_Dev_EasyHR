@@ -144,7 +144,7 @@ public class AdminEventsController implements Initializable {
                 deleteButton.setOnAction(e -> handleDeleteEvent(event));
                 detailsButton.setOnAction(e -> handleDetailsEvent(event));
 
-                actionBox.getChildren().addAll(modifyButton, deleteButton, detailsButton);
+                actionBox.getChildren().addAll(modifyButton, deleteButton);
 
                 // Assemblage final
                 container.getChildren().addAll(textContainer, actionBox);
