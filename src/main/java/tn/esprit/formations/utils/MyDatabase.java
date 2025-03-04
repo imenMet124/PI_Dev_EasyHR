@@ -8,7 +8,7 @@ public class MyDatabase {
     private static MyDatabase instance;
     private Connection connection;
 
-    private final String url = "jdbc:mysql://localhost:3306/esprit";
+    private final String url = "jdbc:mysql://localhost:3306/base";
     private final String user = "root";
     private final String password = "";
 

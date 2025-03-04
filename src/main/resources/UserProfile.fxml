@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.formations.controllers.UserProfileController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <!-- Main Container -->
+    <VBox spacing="15" alignment="TOP_CENTER" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <!-- Header -->
+        <HBox spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 10;">
+            <Label text="EasyHR - User Profile" style="-fx-text-fill: white; -fx-font-size: 18px;"/>
+        </HBox>
+
+        <!-- Profile Section -->
+        <VBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
+            <Label text="User Profile" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <!-- User Details Grid -->
+            <GridPane hgap="10" vgap="10">
+                <!-- Column 0: Labels -->
+                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label text="Phone:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label text="Role:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label text="Position:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label text="Salary:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label text="Date of Hire:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <Label text="Status:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <Label text="Department:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+
+                <!-- Column 1: Values -->
+                <Label fx:id="lblName" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label fx:id="lblEmail" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label fx:id="lblPhone" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label fx:id="lblRole" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Label fx:id="lblPosition" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                <Label fx:id="lblSalaire" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                <Label fx:id="lblDateEmbauche" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                <Label fx:id="lblStatut" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                <Label fx:id="lblDepartment" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- Change Password Button -->
+            <Button text="Change Password" onAction="#handleChangePassword"/>
+        </VBox>
+    </VBox>
+</AnchorPane>

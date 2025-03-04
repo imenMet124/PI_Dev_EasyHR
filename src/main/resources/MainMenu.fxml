@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.formations.controllers.MainMenuController">
+
+    <!-- ✅ Top Header -->
+    <top>
+        <HBox id="header" spacing="10" alignment="CENTER" style="-fx-background-color: #3498DB; -fx-padding: 0;">
+            <!-- Logo -->
+            <ImageView fx:id="logo" fitHeight="150" fitWidth="150" preserveRatio="true">
+                <image>
+                    <Image url="@/images/logoEasyHR.png"/> <!-- Add your logo here -->
+                </image>
+            </ImageView>
+
+            <!-- Title -->
+            <Label style="-fx-text-fill: white; -fx-font-size: 24px; -fx-font-weight: bold;" text="User and Department Management" />
+
+            <!-- Spacer to push the logout button to the right -->
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Logout Button -->
+            <Button id="logoutButton" onAction="#handleLogout" style="-fx-background-color: #E74C3C; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 8 16; -fx-border-radius: 5; -fx-cursor: hand;" text="Logout" />
+        </HBox>
+    </top>
+
+    <!-- ✅ Sidebar Navigation -->
+    <left>
+        <VBox id="sidebar" spacing="10" style="-fx-background-color: #2C3E50; -fx-padding: 15;">
+            <children>
+                <!-- Sidebar Buttons -->
+                <Button maxWidth="200" onAction="#goToAjouterUser" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="Ajouter User" />
+                <Button maxWidth="200" onAction="#goToAfficherUsers" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="Afficher Users" />
+                <Button maxWidth="200" onAction="#goToAjouterDepartment" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="Ajouter Department" />
+                <Button maxWidth="200" onAction="#goToAfficherDepartments" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="Afficher Departments" />
+                <Button maxWidth="200" onAction="#goToUserProfile" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="User Profile" />
+                <Button maxWidth="200" onAction="#goToClockInOut" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="Clock In/Out" />
+                <!-- New Admin View Button -->
+                <Button maxWidth="200" onAction="#goToAdminView" style="-fx-background-color: #34495E; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10; -fx-border-radius: 5; -fx-cursor: hand;" text="Admin View" />
+            </children>
+        </VBox>
+    </left>
+
+    <!-- ✅ Dynamic Content Area -->
+    <center>
+        <BorderPane fx:id="mainPane" prefHeight="3799.0" prefWidth="10082.0" />
+    </center>
+
+</BorderPane>

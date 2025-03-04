@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      spacing="5" style="-fx-padding: 10; -fx-border-color: #ddd;">
+
+    <Label fx:id="lblName" style="-fx-font-weight: bold;"/>
+    <Label fx:id="lblEmail"/>
+    <Label fx:id="lblPhone"/>
+    <Label fx:id="lblRole"/>
+    <Label fx:id="lblPosition"/>
+    <Label fx:id="lblSalary"/>
+    <Label fx:id="lblStatus"/>
+    <Label fx:id="lblHireDate"/>
+    <Label fx:id="lblDepartment"/>
+
+</VBox>

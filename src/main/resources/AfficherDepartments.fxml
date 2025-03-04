@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.formations.controllers.AfficherDepartmentsController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <VBox spacing="10" alignment="TOP_CENTER" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <!-- Search Bar -->
+        <HBox spacing="10">
+            <Label text="Search:"/>
+            <TextField fx:id="searchField" promptText="Enter department name..."/>
+            <Button text="Search" onAction="#handleSearch"/>
+        </HBox>
+
+        <!-- ListView for Departments -->
+        <ListView fx:id="departmentListView" prefHeight="400.0">
+            <!-- The items will be populated dynamically from the controller -->
+        </ListView>
+
+        <!-- Buttons for CRUD Operations -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Add Department" fx:id="btnAdd" onAction="#handleAdd"/>
+            <Button text="Edit Department" fx:id="btnEdit" onAction="#handleEdit"/>
+            <Button text="Delete Department" fx:id="btnDelete" onAction="#handleDelete"/>
+        </HBox>
+    </VBox>
+</AnchorPane>
