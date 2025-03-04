@@ -1,33 +1,27 @@
-/* Apply background color to the whole window */
+/* styles.css - Custom JavaFX Theme */
 .root {
-    -fx-background-color: #f4f4f4;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-base: #2b2b2b;
+    -fx-background-color: #ffffff;
 }
 
-/* Style for buttons */
 .button {
-    -fx-background-color: #007bff;
+    -fx-background-color: linear-gradient(to bottom, #4CAF50, #45a049);
     -fx-text-fill: white;
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 10px 20px;
-    -fx-border-radius: 5px;
-    -fx-cursor: hand;
+    -fx-background-radius: 8px;
 }
 
 .button:hover {
-    -fx-background-color: #0056b3;
+    -fx-background-color: linear-gradient(to bottom, #3e8e41, #45a049);
 }
 
-/* Style for labels */
-.label {
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
+.table-view {
+    -fx-background-color: #f4f4f4;
+    -fx-border-color: #ddd;
 }
 
-/* Style for text fields and text areas */
-.text-field, .text-area {
-    -fx-font-size: 14px;
-    -fx-padding: 10px;
-    -fx-border-color: #ccc;
-    -fx-border-radius: 5px;
+.table-row-cell:filled:selected {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
 }

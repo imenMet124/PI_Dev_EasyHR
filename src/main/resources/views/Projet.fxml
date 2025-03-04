@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.tache.controllers.ProjetController"
+            style="-fx-background-color: #F4F6F7;">
+
+    <!-- ✅ Styled Title at the Top -->
+    <top>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 15;">
+            <Label text="📌 Gestion des Projets"
+                   style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;
+                          -fx-padding: 5; -fx-underline: true;"/>
+        </VBox>
+    </top>
+
+    <!-- ✅ Styled TableView in Center -->
+    <center>
+        <StackPane style="-fx-background-color: white; -fx-padding: 15; -fx-border-radius: 6;
+                         -fx-background-radius: 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);">
+            <TableView fx:id="projetTable" style="-fx-background-color: white;" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="50"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <TableColumn fx:id="nomCol" text="Nom" prefWidth="200"
+                                 style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <TableColumn fx:id="descCol" text="Description" prefWidth="250"
+                                 style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <!-- ✅ Status Column with Emojis -->
+                    <TableColumn fx:id="statutCol" text="Statut" prefWidth="120"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;">
+                    </TableColumn>
+
+                    <TableColumn fx:id="debutCol" text="Date Début" prefWidth="120"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <TableColumn fx:id="finCol" text="Date Fin" prefWidth="120"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                </columns>
+            </TableView>
+        </StackPane>
+    </center>
+
+    <!-- ✅ Styled Buttons in Footer -->
+    <bottom>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #ECF0F1;">
+            <Button fx:id="addProjetBtn" text="➕ Ajouter Projet" onAction="#ajouterProjet"
+                    style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-padding: 8 15;
+                           -fx-font-size: 14px; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+
+            <Button fx:id="editProjetBtn" text="✏️ Modifier Projet" onAction="#modifierProjet"
+                    style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-padding: 8 15;
+                           -fx-font-size: 14px; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+
+            <Button fx:id="deleteProjetBtn" text="🗑️ Supprimer Projet" onAction="#supprimerProjet"
+                    style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-padding: 8 15;
+                           -fx-font-size: 14px; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

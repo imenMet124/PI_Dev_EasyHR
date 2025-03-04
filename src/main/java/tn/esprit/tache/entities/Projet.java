@@ -1,35 +1,76 @@
 package tn.esprit.tache.entities;
+
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "projet")
 public class Projet {
-    private int id;
-    private String nom;
-    private String description;
-    private String statut;
-    private Date dateDebut;
-    private Date dateFin;
 
-    public Projet(int id, String nom, String description, String statut, Date dateDebut, Date dateFin) {
-        this.id = id;
-        this.nom = nom;
-        this.description = description;
-        this.statut = statut;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idProjet;
+
+    @Column(nullable = false, length = 150)
+    private String nomProjet;
+
+    private String descProjet;
+    private String statutProjet;
+
+    @Temporal(TemporalType.DATE)
+    private Date dateDebutProjet;
+
+    @Temporal(TemporalType.DATE)
+    private Date dateFinProjet;
+
+    @OneToMany(mappedBy = "projet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Tache> taches;
+
+    // ✅ Default Constructor (Required for JPA)
+    public Projet() {}
+
+    // ✅ Constructor for Creating New Projects (Without ID)
+    public Projet(String nomProjet, String descProjet, String statutProjet, Date dateDebutProjet, Date dateFinProjet) {
+        this.nomProjet = nomProjet;
+        this.descProjet = descProjet;
+        this.statutProjet = statutProjet;
+        this.dateDebutProjet = dateDebutProjet;
+        this.dateFinProjet = dateFinProjet;
     }
 
-    public int getId() { return id; }
-    public String getNom() { return nom; }
-    public String getDescription() { return description; }
-    public String getStatut() { return statut; }
-    public Date getDateDebut() { return dateDebut; }
-    public Date getDateFin() { return dateFin; }
-    public void setStatut(String statut) {
-        this.statut = statut;
+    // ✅ Constructor to Fix the Error (Includes `idProjet` and `nomProjet`)
+    public Projet(int idProjet, String nomProjet) {
+        this.idProjet = idProjet;
+        this.nomProjet = nomProjet;
     }
 
-    @Override
-    public String toString() {
-        return "Projet{" + "id=" + id + ", nom='" + nom + "', statut='" + statut + "'}";
+    // ✅ Full Constructor (All Attributes)
+    public Projet(int idProjet, String nomProjet, String descProjet, String statutProjet, Date dateDebutProjet, Date dateFinProjet) {
+        this.idProjet = idProjet;
+        this.nomProjet = nomProjet;
+        this.descProjet = descProjet;
+        this.statutProjet = statutProjet;
+        this.dateDebutProjet = dateDebutProjet;
+        this.dateFinProjet = dateFinProjet;
     }
+
+    // ✅ Getters and Setters
+    public int getIdProjet() { return idProjet; }
+    public void setIdProjet(int idProjet) { this.idProjet = idProjet; }
+
+    public String getNomProjet() { return nomProjet; }
+    public void setNomProjet(String nomProjet) { this.nomProjet = nomProjet; }
+
+    public String getDescProjet() { return descProjet; }
+    public void setDescProjet(String descProjet) { this.descProjet = descProjet; }
+
+    public String getStatutProjet() { return statutProjet; }
+    public void setStatutProjet(String statutProjet) { this.statutProjet = statutProjet; }
+
+    public Date getDateDebutProjet() { return dateDebutProjet; }
+    public void setDateDebutProjet(Date dateDebutProjet) { this.dateDebutProjet = dateDebutProjet; }
+
+    public Date getDateFinProjet() { return dateFinProjet; }
+    public void setDateFinProjet(Date dateFinProjet) { this.dateFinProjet = dateFinProjet; }
 }

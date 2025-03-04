@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.tache.controllers.TacheController">
+    <VBox spacing="20" alignment="CENTER" prefWidth="800" prefHeight="600"
+          AnchorPane.topAnchor="20" AnchorPane.bottomAnchor="20"
+          AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20">
+
+        <!-- ✅ Title (Professional Look) -->
+        <Label text="⚡ Gestion des Tâches"
+               style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2C3E50; -fx-padding: 10;
+                      -fx-underline: true; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 4, 0, 0, 2);"/>
+
+        <!-- ✅ TableView in a Styled Pane -->
+        <StackPane style="-fx-background-color: white; -fx-border-radius: 6; -fx-background-radius: 6;
+                         -fx-padding: 15; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);">
+            <TableView fx:id="tacheTable" style="-fx-background-color: white;" prefHeight="400">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="50"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TableColumn fx:id="titreCol" text="Titre" prefWidth="200"
+                                 style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <!-- ✅ Status Column with Colors & Emojis -->
+                    <TableColumn fx:id="statutCol" text="Statut" prefWidth="120"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                    <TableColumn fx:id="projetCol" text="Projet" prefWidth="200"
+                                 style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                    <TableColumn fx:id="deadlineCol" text="Deadline" prefWidth="120"
+                                 style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+                </columns>
+            </TableView>
+        </StackPane>
+
+        <!-- ✅ Buttons (Styled and Always Visible) -->
+        <HBox spacing="15" alignment="CENTER">
+            <Button text="➕ Ajouter" onAction="#ajouterTache"
+                    style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-padding: 10 20;
+                           -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px;"/>
+
+            <Button text="✏️ Modifier" onAction="#modifierTache"
+                    style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-padding: 10 20;
+                           -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px;"/>
+
+            <Button text="🗑️ Supprimer" onAction="#supprimerTache"
+                    style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-padding: 10 20;
+                           -fx-border-radius: 6; -fx-background-radius: 6; -fx-font-size: 14px;"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

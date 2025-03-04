@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.tache.controllers.EmployeFormController">
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+            <Label text="Formulaire Employé" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+            <GridPane hgap="10" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" minWidth="100"/>
+                    <ColumnConstraints minWidth="200"/>
+                </columnConstraints>
+
+                <!-- 🔹 Nom -->
+                <Label text="Nom:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nomField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <!-- 🔹 Email -->
+                <Label text="Email:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="emailField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <!-- 🔹 Rôle -->
+                <Label text="Rôle:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="roleCombo" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <!-- 🔹 Position -->
+                <Label text="Position:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="positionField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <!-- 🔹 Date d'Embauche -->
+                <Label text="Date Embauche:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="dateEmbauchePicker" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <!-- 🔹 Statut -->
+                <Label text="Statut:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="statutCombo" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <!-- 🔹 Département -->
+                <Label text="Département:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="departementCombo" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <!-- 🔹 Buttons -->
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="saveButton" text="Enregistrer" onAction="#saveEmploye" style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                <Button fx:id="cancelButton" text="Annuler" onAction="#cancel" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </center>
+
+</BorderPane>

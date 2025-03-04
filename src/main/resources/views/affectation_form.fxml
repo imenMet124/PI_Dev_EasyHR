@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.tache.controllers.AffectationFormController">
+
+    <VBox spacing="10">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label text="Formulaire d'Affectation" style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="10">
+            <Label text="Employé:"/>
+            <ComboBox fx:id="employeCombo" promptText="Sélectionnez un employé"/>
+        </HBox>
+
+        <HBox spacing="10">
+            <Label text="Tâche:"/>
+            <ComboBox fx:id="tacheCombo" promptText="Sélectionnez une tâche"/>
+        </HBox>
+
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Enregistrer" fx:id="saveBtn" onAction="#saveAffectation" style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+            <Button text="Annuler" fx:id="cancelBtn" onAction="#closeForm" style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+        </HBox>
+    </VBox>
+</AnchorPane>

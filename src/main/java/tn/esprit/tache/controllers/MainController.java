@@ -1,61 +1,76 @@
 package tn.esprit.tache.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class MainController {
 
-    @FXML private ImageView logoImage;
+    @FXML private BorderPane mainPane;
+    @FXML private ImageView logo; // ✅ Logo ImageView
 
     @FXML
     public void initialize() {
-        // Charger l'image correctement
-        Image logo = new Image(getClass().getResourceAsStream("/images/logo.png"));
-        logoImage.setImage(logo);
+        // ✅ Load logo image
+        Image logoImage = new Image(getClass().getResourceAsStream("/images/EasyHR-Logo.png"));
+        logo.setImage(logoImage);
+        openEmployeView();
+
     }
 
     @FXML
-    private void afficherTaches() {
-        chargerVue("/views/TacheView.fxml");
+    private void openEmployeView() {
+        loadView("/views/employe.fxml");
     }
 
     @FXML
-    private void afficherProjets() {
-        chargerVue("/views/ProjetView.fxml");
+    private void openProjetView() {
+        loadView("/views/projet.fxml");
     }
 
     @FXML
-    private void afficherEmployes() {
-        chargerVue("/views/EmployeView.fxml");
+    private void openTacheView() {
+        loadView("/views/tache.fxml");
     }
 
     @FXML
-    private void afficherAffectations() {
-        chargerVue("/views/AffectationView.fxml");
+    private void openAffectationView() {
+        loadView("/views/affectation.fxml");
     }
 
-    @FXML
-    private void afficherCommentaires() {
-        chargerVue("/views/CommentaireView.fxml");
-    }
-
-    private void chargerVue(String cheminFXML) {
+    private void loadView(String fxmlPath) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(cheminFXML));
-            Stage stage = (Stage) logoImage.getScene().getWindow(); // Get the current stage
-            stage.setScene(new Scene(root));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent view = loader.load();
+            mainPane.setCenter(view);
         } catch (IOException e) {
-            System.err.println("❌ Erreur lors du chargement de la vue : " + cheminFXML);
             e.printStackTrace();
         }
     }
 
+    // ✅ Handle Logout Action
+    @FXML
+    private void handleLogout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText("Are you sure you want to logout?");
+        alert.setContentText("Click OK to confirm logout.");
 
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            // ✅ Close Application Window
+            Stage stage = (Stage) mainPane.getScene().getWindow();
+            stage.close();
+        }
+    }
 }
