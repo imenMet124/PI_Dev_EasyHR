@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class HuggingFaceChatService {
-    private static final String API_URL = "https://api-inference.huggingface.co/models/HuggingFaceH4/zephyr-7b-beta";
-    private static final String API_KEY = "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"; // 🔹 Replace with your real API key!
+    private static final String API_URL = "place_holder";
+    private static final String API_KEY = "place_holder"; // 🔹 Replace with your real API key!
 
     public static String sendMessage(String message) throws IOException {
         OkHttpClient client = new OkHttpClient.Builder()
