@@ -66,8 +66,8 @@ public class LoginController {
 
                 System.out.println("✅ Login successful! Welcome, " + user.getIyedNomUser());
 
-                // Load the MainMenu.fxml
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainMenu.fxml"));
+                // Load Acceuil.fxml instead of MainMenu.fxml
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Acceuil.fxml"));
                 Parent root = loader.load();
 
                 // Get the current stage (window)
@@ -76,12 +76,8 @@ public class LoginController {
                 // Set the new scene
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
-                stage.setTitle("Main Menu");
+                stage.setTitle("Acceuil");
                 stage.show();
-
-                // Now that MainMenu.fxml is loaded, the mainPane should be set in MainMenuController
-                MainMenuController mainMenuController = loader.getController();
-                mainMenuController.initialize(); // Ensure mainPane is set
             } else {
                 errorLabel.setText("❌ Invalid email or password.");
             }
@@ -90,6 +86,7 @@ public class LoginController {
             errorLabel.setText("⚠ An error occurred while logging in.");
         }
     }
+
 
     @FXML
     private void handleForgotPassword() {

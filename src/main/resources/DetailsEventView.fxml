@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.TextFlow?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.evenement.controllers.DetailsEventsController">
+
+    <stylesheets>
+        <String fx:value="styleDetails.css"/>
+    </stylesheets>
+
+    <VBox spacing="15" prefWidth="900" prefHeight="600" styleClass="container"
+          AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+
+
+        <Label text="Détails de l'événement" styleClass="title-label"/>
+
+
+        <ScrollPane fitToWidth="true" fitToHeight="true"
+                    AnchorPane.topAnchor="50" AnchorPane.bottomAnchor="50"
+                    AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10">
+            <VBox spacing="20" styleClass="scroll-content">
+
+
+                <VBox spacing="10" alignment="TOP_LEFT">
+
+
+                    <ImageView fx:id="eventImageView" fitHeight="200" fitWidth="300" preserveRatio="true"/>
+
+                    <Label fx:id="titreLabel" styleClass="event-title-bold"/>
+
+                </VBox>
+                <VBox spacing="5" alignment="CENTER_LEFT">
+                    <Label text="Description :" styleClass="label-description"/>
+                    <TextFlow fx:id="descriptionContainer" styleClass="description-text"/>
+
+                    <!-- Sélection de la langue -->
+                    <HBox spacing="10">
+                        <Label text="Traduire en :" styleClass="label-translate"/>
+                        <ChoiceBox fx:id="languageChoiceBox">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Anglais"/>
+                                    <String fx:value="Espagnol"/>
+                                    <String fx:value="Allemand"/>
+                                </FXCollections>
+                            </items>
+                        </ChoiceBox>
+                    </HBox>
+
+                    <!-- Bouton de traduction -->
+                    <Button fx:id="translateButton" text="🔄 Traduire" onAction="#handleTranslate" styleClass="translate-button"/>
+                </VBox>
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="150" prefWidth="150"/>
+                        <ColumnConstraints minWidth="300" prefWidth="300"/>
+                    </columnConstraints>
+
+                    <Label text="Date :" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                    <Label fx:id="dateLabel" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                    <Label text="Heure :" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                    <Label fx:id="heureLabel" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                    <Label text="Lieu :" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                    <Label fx:id="lieuLabel" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+                    <Label text="Capacité :" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    <Label fx:id="capaciteLabel" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+                    <Label text="Participants :" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                    <Label fx:id="participantsLabel" styleClass="value-label" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                </GridPane>
+
+
+
+
+
+            </VBox>
+        </ScrollPane>
+
+
+        <HBox spacing="20" alignment="CENTER" AnchorPane.bottomAnchor="20">
+            <Button fx:id="closeButton" text="Fermer" onAction="#handleClose" styleClass="close-button-custom"/>
+        </HBox>
+
+    </VBox>
+</AnchorPane>

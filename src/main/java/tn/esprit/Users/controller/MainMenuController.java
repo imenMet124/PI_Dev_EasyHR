@@ -14,7 +14,7 @@ public class MainMenuController {
     // Method to set the stage (called from the main application or SceneController)
     public void setStage(Stage stage) {
         this.stage = stage;
-        configureStage(); // Configure the stage when it's set
+        //configureStage(); // Configure the stage when it's set
     }
 
     @FXML
@@ -27,13 +27,13 @@ public class MainMenuController {
     }
 
     // Configure the stage to be full screen or maximized
-    private void configureStage() {
-        if (stage != null) {
-            stage.setMaximized(true); // Maximize the window to fit the screen
-            stage.setFullScreen(true); // Uncomment this line to make it full screen
-            stage.setFullScreenExitHint("Press ESC to exit full screen"); // Hint for exiting full screen
-        }
-    }
+//    private void configureStage() {
+//        if (stage != null) {
+//            stage.setMaximized(true); // Maximize the window to fit the screen
+//           // stage.setFullScreen(true); // Uncomment this line to make it full screen
+//            stage.setFullScreenExitHint("Press ESC to exit full screen"); // Hint for exiting full screen
+//        }
+//    }
 
     @FXML
     private void goToAjouterUser() {

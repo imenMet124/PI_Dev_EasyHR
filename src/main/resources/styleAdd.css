@@ -31,3 +31,133 @@
     -fx-background-color: #FD9999;
     -fx-text-fill: white;
 }
+
+/* 🌟 Style général */
+.root {
+    -fx-background-color: #F4F5FA;
+    -fx-padding: 20px;
+    -fx-font-family: 'Arial';
+}
+
+/* 📌 Conteneur principal */
+.container {
+    -fx-background-color: white;
+    -fx-border-radius: 10px;
+    -fx-border-color: #E5E5E5;
+    -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.1), 10, 0, 0, 3);
+    -fx-padding: 20px;
+}
+
+/* 📝 Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
+}
+
+/* 📦 Champs de texte */
+.text-field, .text-area, .date-picker {
+    -fx-background-color: white;
+    -fx-border-color: #E5E5E5;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused, .text-area:focused, .date-picker:focused {
+    -fx-border-color: #6A5ACD;
+}
+
+/* ✅ Champ d'image stylisé */
+.input-field {
+    -fx-background-color: white;
+    -fx-border-color: #E5E5E5;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+/* 📸 Bouton "Ajouter une image" aligné comme un champ */
+.upload-field-button {
+    -fx-background-color: #FF758C;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+}
+
+.upload-field-button:hover {
+    -fx-background-color: #FF5A7A;
+}
+
+/* 🔘 Boutons Annuler & Ajouter */
+.cancel-button {
+    -fx-background-color: #5867DD;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #4857C2;
+}
+
+.save-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
+}
+
+.save-button:hover {
+    -fx-background-color: #45A049;
+}
+
+/* 🌟 Effet ombre */
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+/* ✅ Champ Image */
+.image-pane {
+    -fx-alignment: left;
+}
+
+.input-field {
+    -fx-background-color: white;
+    -fx-border-color: #E5E5E5;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+.upload-field-button {
+    -fx-background-color: #FF758C;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+}
+
+.upload-field-button:hover {
+    -fx-background-color: #FF5A7A;
+}
+.image-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0078D7;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.image-label:hover {
+    -fx-text-fill: #005A9E;
+    -fx-underline: true;
+}
+.title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold; /* ✅ Met le texte en gras */
+    -fx-text-fill: #333; /* ✅ Couleur foncée pour une meilleure lisibilité */
+    -fx-padding: 10px 0;
+}
+

@@ -10,8 +10,8 @@ import com.github.sarxos.webcam.WebcamPanel;
 import javafx.embed.swing.SwingNode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import org.json.JSONArray;
-import org.json.JSONObject;
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
@@ -221,34 +221,34 @@ public class SignUpController {
 
 
     // Helper method to check if the enrollment was successful
-    private boolean isEnrollmentSuccessful(String kairosResponse) {
-        try {
-            JSONObject jsonResponse = new JSONObject(kairosResponse);
-            // Check if the response contains an "images" array
-            if (jsonResponse.has("images")) {
-                JSONArray images = jsonResponse.getJSONArray("images");
-                if (images.length() > 0) {
-                    JSONObject firstImage = images.getJSONObject(0);
-                    // Check if the transaction status is "success"
-                    if (firstImage.has("transaction") && firstImage.getJSONObject("transaction").has("status")) {
-                        String status = firstImage.getJSONObject("transaction").getString("status");
-                        return "success".equalsIgnoreCase(status);
-                    }
-                }
-            }
-            // Check for errors in the response
-            if (jsonResponse.has("Errors")) {
-                JSONArray errors = jsonResponse.getJSONArray("Errors");
-                if (errors.length() > 0) {
-                    JSONObject firstError = errors.getJSONObject(0);
-                    System.err.println("Kairos Error: " + firstError.getString("Message"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+//    private boolean isEnrollmentSuccessful(String kairosResponse) {
+//        try {
+//            JSONObject jsonResponse = new JSONObject(kairosResponse);
+//            // Check if the response contains an "images" array
+//            if (jsonResponse.has("images")) {
+//                JSONArray images = jsonResponse.getJSONArray("images");
+//                if (images.length() > 0) {
+//                    JSONObject firstImage = images.getJSONObject(0);
+//                    // Check if the transaction status is "success"
+//                    if (firstImage.has("transaction") && firstImage.getJSONObject("transaction").has("status")) {
+//                        String status = firstImage.getJSONObject("transaction").getString("status");
+//                        return "success".equalsIgnoreCase(status);
+//                    }
+//                }
+//            }
+//            // Check for errors in the response
+//            if (jsonResponse.has("Errors")) {
+//                JSONArray errors = jsonResponse.getJSONArray("Errors");
+//                if (errors.length() > 0) {
+//                    JSONObject firstError = errors.getJSONObject(0);
+//                    System.err.println("Kairos Error: " + firstError.getString("Message"));
+//                }
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
     @FXML
     private void handleLoginRedirect() {
         // Release the webcam if it's open

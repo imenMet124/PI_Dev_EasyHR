@@ -21,29 +21,24 @@
                 </ImageView>
 
                 <Label style="-fx-font-size: 20; -fx-text-fill: white; -fx-font-weight: bold;" text="Dashboard">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets bottom="20.0" />
-               </VBox.margin></Label>
-
-                <Button fx:id="accueil" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Accueil">
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets>
                     <VBox.margin>
-                        <Insets top="10.0" />
-                    </VBox.margin></Button>
+                        <Insets bottom="20.0" />
+                    </VBox.margin></Label>
 
-                <Button fx:id="ajout" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
+                <Button fx:id="ajout" mnemonicParsing="false" onAction="#afficherAjout" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin></Button>
 
-                <Button fx:id="gestion" mnemonicParsing="false" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
+                <Button fx:id="gestion" mnemonicParsing="false" onAction="#afficherOffres" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin></Button>
 
-                <Button fx:id="afficherCandidaturesButton" mnemonicParsing="false" onAction="#afficherCandidatures" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
+                <Button fx:id="afficherCandidaturesButton" mnemonicParsing="false" onAction="#afficherCandidatures" onDragDetected="#afficherCandidatures" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures">
                     <VBox.margin>
                         <Insets top="20.0" />
                     </VBox.margin></Button>
@@ -67,6 +62,14 @@
                         <VBox fx:id="offresContainer" spacing="15" style="-fx-padding: 20; -fx-background-color: #f4f4f4;">
                             <children>
                                 <Label style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #333;" text="Gestion des Offres d'Emploi" />
+                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="/images/ff.png" />
+                                    </image>
+                                    <VBox.margin>
+                                        <Insets left="200.0" />
+                                    </VBox.margin>
+                                </ImageView>
 
                                 <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: white; -fx-background-radius: 10; -fx-box-shadow: 2px 2px 10px rgba(0,0,0,0.1);">
                                     <children>

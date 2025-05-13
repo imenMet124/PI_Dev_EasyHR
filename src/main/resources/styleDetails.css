@@ -1,69 +1,193 @@
-/* Fond général */
-AnchorPane {
-    -fx-background-color: #F4F7FA;
+/* 🌟 Style général */
+.root {
+    -fx-background-color: #F4F5FA;
+    -fx-padding: 20px;
+    -fx-font-family: 'Arial';
 }
 
-/* Conteneur des détails */
-.details-container {
-    -fx-background-color: #FFFFFF;
-    -fx-padding: 30;
-    -fx-border-radius: 15;
-    -fx-border-color: #DDE6F1;
-    -fx-border-width: 2;
-    -fx-spacing: 15;
-    -fx-pref-width: 400px;
+/* 📌 Conteneur principal */
+.container {
+    -fx-background-color: transparent;  /* ✅ Supprime la couleur de fond */
+    -fx-border-width: 0;  /* ✅ Supprime la bordure */
+    -fx-padding: 20px;
 }
 
-/* Titre principal */
-.details-title {
-    -fx-font-size: 22px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #748CF1;
+
+/* 📝 Labels */
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
 }
 
-/* Labels */
-.label-field {
-    -fx-font-weight: bold;
-    -fx-text-fill: #748CF1;
-}
-
-/* Valeurs des labels */
-.value-field {
-    -fx-text-fill: #333333;
+.text-area {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 10px;
     -fx-font-size: 14px;
 }
 
-/*  Description */
-.description-area {
-    -fx-pref-height: 100px;
-    -fx-wrap-text: true;
-    -fx-border-color: #DDE6F1;
-    -fx-border-radius: 10;
-    -fx-padding: 10;
+
+.text-field:focused, .text-area:focused, .date-picker:focused {
+    -fx-border-color: #6A5ACD;
 }
 
-/*  Image */
-.image-container {
-    -fx-alignment: center;
-    -fx-padding: 20;
+
+
+
+.cancel-button {
+    -fx-background-color: #5867DD;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
+}
+
+.cancel-button:hover {
+    -fx-background-color: #4857C2;
+}
+
+.save-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
+}
+
+.save-button:hover {
+    -fx-background-color: #45A049;
+}
+
+/* 🌟 Effet ombre */
+.shadow {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+/* ✅ Champ Image */
+.image-pane {
+    -fx-alignment: left;
+}
+
+.input-field {
+    -fx-background-color: white;
+    -fx-border-color: #E5E5E5;
+    -fx-border-radius: 5px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+}
+
+.upload-field-button {
+    -fx-background-color: #FF758C;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+}
+
+.upload-field-button:hover {
+    -fx-background-color: #FF5A7A;
+}
+.image-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: #0078D7;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.image-label:hover {
+    -fx-text-fill: #005A9E;
+    -fx-underline: true;
+}
+.title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10px 0;
+}
+
+/* ✅ Supprime la bordure du champ description */
+.description-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-padding: 10px;
+}
+
+/* ✅ Met le titre en gras */
+.event-title-bold {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+.close-button-custom {
+    -fx-background-color: #064fd8;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 20px;
+    -fx-background-radius: 5px;
+}
+
+.close-button-custom:hover {
+    -fx-background-color: #c9302c;
+}
+.container {
+    -fx-padding: 20px;
+    -fx-background-color: #F8F9FA;
+}
+
+.title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
 }
 
 .event-title {
     -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: #2D3E50;
+    -fx-text-fill: #222;
 }
 
-/* Bouton Fermer */
+.description-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #555;
+    -fx-wrap-text: true;
+    -fx-background-color: transparent;
+}
+
+.value-field {
+    -fx-font-size: 14px;
+    -fx-text-fill: #444;
+}
+
+.details-container {
+    -fx-padding: 10px;
+}
+
 .close-button {
-    -fx-background-color: #FD9999;
+    -fx-background-color: #007BFF;
     -fx-text-fill: white;
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-border-radius: 10;
-    -fx-padding: 10;
+    -fx-padding: 8px 16px;
+    -fx-background-radius: 5px;
 }
 
 .close-button:hover {
-    -fx-background-color: #E07A7A;
+    -fx-background-color: #0056b3;
 }
+.description-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-padding: 5px;
+}
+.translate-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.translate-button:hover {
+    -fx-background-color: #2980b9;
+}
+

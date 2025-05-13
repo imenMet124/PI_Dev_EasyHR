@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.tache.controllers.MainController">
+
+    <!-- ✅ Top Header with Logo -->
+    <top>
+        <HBox style="-fx-background-color: #2C3E50; -fx-padding: 15px; -fx-alignment: center-left; -fx-spacing: 15px;">
+            <ImageView fx:id="logo" fitHeight="50" fitWidth="50"/>
+            <Label text="EasyHR Dashboard"
+                   style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Pane HBox.hgrow="ALWAYS"/> <!-- Spacer to push logout button to the right -->
+            <Button text="Logout" onAction="#handleLogout"
+                    style="-fx-background-color: linear-gradient(to right, #E74C3C, #C0392B);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 10px 20px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+        </HBox>
+    </top>
+
+    <!-- ✅ Sidebar Navigation -->
+    <left>
+        <VBox style="-fx-background-color: #34495E; -fx-padding: 20px; -fx-spacing: 15px;">
+            <Label text="Navigation"
+                   style="-fx-text-fill: #ECF0F1; -fx-font-size: 20px; -fx-font-weight: bold;
+                          -fx-underline: true; -fx-padding: 10px 0;"/>
+
+            <Button fx:id="projetButton" text="Projets" onAction="#openProjetView" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+               -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+               -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+            <Button fx:id="tacheButton" text="Tâches" onAction="#openTacheView" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+               -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+               -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+
+            <Button text="Affectations" onAction="#openAffectationView" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+            <Button text="Tasks Chatbot" onAction="#openChatBot" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+            <Button text="Fun Chatbot" onAction="#openChatBott" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+            <Button text="Todoist" onAction="#openTodoistView" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+            <Button text="Weather" onAction="#weatherView" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+            <Button text="Quiz" onAction="#quizView" maxWidth="220"
+                    style="-fx-background-color: linear-gradient(to right, #3498DB, #2980B9);
+                           -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px;
+                           -fx-padding: 15px; -fx-border-radius: 10px; -fx-background-radius: 10px;"/>
+        </VBox>
+    </left>
+
+    <!-- ✅ Dynamic Content Area -->
+    <center>
+        <BorderPane fx:id="mainPane"/>
+    </center>
+
+</BorderPane>

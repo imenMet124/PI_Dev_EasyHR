@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.tache.controllers.QuizController"
+            style="-fx-background-color: linear-gradient(to bottom, #2C3E50, #34495E);">
+
+    <!-- Centering the Quiz Content -->
+    <StackPane alignment="CENTER">
+        <VBox spacing="25" alignment="CENTER"
+              style="-fx-background-color: white;
+                     -fx-padding: 30px;
+                     -fx-border-radius: 15px;
+                     -fx-background-radius: 15px;
+                     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 5);">
+
+            <!-- ✅ Question Text -->
+            <Text fx:id="questionText" text="Loading question..." wrappingWidth="600"
+                  style="-fx-font-size: 24px;
+                         -fx-font-weight: bold;
+                         -fx-fill: #2C3E50;
+                         -fx-text-alignment: center;"/>
+
+            <!-- ✅ Answer Choices -->
+            <VBox fx:id="optionsBox" spacing="10" alignment="CENTER">
+                <!-- Answer choices will be dynamically added here -->
+            </VBox>
+
+            <!-- ✅ Result Label with Animation Effect -->
+            <Label fx:id="resultLabel" text=""
+                   style="-fx-font-size: 18px;
+                          -fx-text-fill: #E74C3C;
+                          -fx-font-weight: bold;
+                          -fx-opacity: 0; /* Initially hidden */"/>
+
+
+
+        </VBox>
+    </StackPane>
+
+    <!-- Stretching the content to center fully in full screen -->
+    <AnchorPane.topAnchor>0.0</AnchorPane.topAnchor>
+    <AnchorPane.bottomAnchor>0.0</AnchorPane.bottomAnchor>
+    <AnchorPane.leftAnchor>0.0</AnchorPane.leftAnchor>
+    <AnchorPane.rightAnchor>0.0</AnchorPane.rightAnchor>
+
+</AnchorPane>

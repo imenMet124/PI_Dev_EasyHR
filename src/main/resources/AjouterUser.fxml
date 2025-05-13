@@ -1,31 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Users.controller.AjouterUserController">
-   <children>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.Users.controller.AjouterUserController"
+            prefHeight="400.0" prefWidth="600.0">
 
-              <TextField fx:id="nameField" layoutX="79.0" layoutY="70.0" promptText="Name" styleClass="textarea-modern" stylesheets="@Style.css" />
-        <TextField fx:id="emailField" layoutX="77.0" layoutY="121.0" promptText="Email" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-        <TextField fx:id="phoneField" layoutX="79.0" layoutY="171.0" promptText="Phone Number" styleClass="textfield-modern-white" stylesheets="@Style.css" />
+    <VBox spacing="15" alignment="TOP_CENTER"
+          AnchorPane.topAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
 
-              <ComboBox fx:id="roleBox" layoutX="299.0" layoutY="135.0" promptText="Select Role" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-        <TextField fx:id="positionField" layoutX="78.0" layoutY="287.0" promptText="Position" styleClass="textfield-modern-white" stylesheets="@Style.css" />
-        <TextField fx:id="salaryField" layoutX="77.0" layoutY="226.0" promptText="Salary" styleClass="textfield-modern-white" stylesheets="@Style.css" />
+        <!-- Title -->
+        <Label text="Add New User"
+               style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;"/>
 
-              <Button layoutX="299.0" layoutY="266.0" onAction="#handleAddUser" styleClass="button-modern" stylesheets="@Style.css" text="Add User" />
-        <ComboBox fx:id="departmentBox" layoutX="78.0" layoutY="346.0" promptText="Select Department" styleClass="combobox-modern" stylesheets="@Style.css" />
+        <!-- Form Fields -->
+        <GridPane hgap="10" vgap="10" alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                <ColumnConstraints minWidth="300"/>
+            </columnConstraints>
+            <children>
 
-              <ComboBox fx:id="statusBox" layoutX="300.0" layoutY="70.0" promptText="Select Status" styleClass="combobox-modern" stylesheets="@Style.css" />
+                <!-- Name -->
+                <Label text="Name:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nameField" promptText="Enter name"
+                           styleClass="textfield-modern-white" stylesheets="@Style.css"
+                           GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-              <DatePicker fx:id="datePicker" layoutX="299.0" layoutY="211.0" promptText="Select Hire Date" stylesheets="@Style.css" />
-       <Button layoutX="299.0" layoutY="306.0" onAction="#handleBackToAfficherUser" styleClass="button-modern" stylesheets="@Style.css" text="Back to User List" />
+                <!-- Email -->
+                <Label text="Email:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="emailField" promptText="Enter email"
+                           styleClass="textfield-modern-white" stylesheets="@Style.css"
+                           GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-       <VBox layoutX="-2.0" prefHeight="400.0" prefWidth="58.0" styleClass="hbox-style" stylesheets="@Style.css" />
-      <HBox layoutX="55.0" layoutY="2.0" prefHeight="48.0" prefWidth="544.0" styleClass="vbox-container" stylesheets="@Style.css" />
-   </children>
+                <!-- Phone -->
+                <Label text="Phone Number:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <TextField fx:id="phoneField" promptText="Enter phone number"
+                           styleClass="textfield-modern-white" stylesheets="@Style.css"
+                           GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
+                <!-- Salary -->
+                <Label text="Salary:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="salaryField" promptText="Enter salary"
+                           styleClass="textfield-modern-white" stylesheets="@Style.css"
+                           GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <!-- Position -->
+                <Label text="Position:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="positionField" promptText="Enter position"
+                           styleClass="textfield-modern-white" stylesheets="@Style.css"
+                           GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <!-- Role -->
+                <Label text="Role:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="roleBox" promptText="Select role"
+                          styleClass="combobox-modern" stylesheets="@Style.css"
+                          GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <!-- Status -->
+                <Label text="Status:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="statusBox" promptText="Select status"
+                          styleClass="combobox-modern" stylesheets="@Style.css"
+                          GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                <!-- Department -->
+                <Label text="Department:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="departmentBox" promptText="Select department"
+                          styleClass="combobox-modern" stylesheets="@Style.css"
+                          GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <!-- Hire Date -->
+                <Label text="Hire Date:" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="datePicker" promptText="Select hire date"
+                            styleClass="textfield-modern-white" stylesheets="@Style.css"
+                            GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+            </children>
+        </GridPane>
+
+        <!-- Buttons -->
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="Back" fx:id="btnBack" onAction="#handleBackToAfficherUser"
+                    styleClass="button-modern" stylesheets="@Style.css"/>
+            <Button text="Add User" fx:id="btnAdd" onAction="#handleAddUser"
+                    styleClass="button-modern" stylesheets="@Style.css"/>
+        </HBox>
+
+    </VBox>
 </AnchorPane>

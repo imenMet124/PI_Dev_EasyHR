@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.tache.controllers.EmployeController"
+      spacing="10"
+      style="-fx-padding: 20; -fx-background-color: #F4F6F7;">
+
+    <!-- ✅ Styled Title at the Top -->
+    <Label text="👥 Gestion des Employés"
+           style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2C3E50;
+                  -fx-padding: 5; -fx-underline: true;"/>
+
+    <!-- ✅ Search Bar -->
+    <HBox spacing="10" alignment="CENTER"
+          style="-fx-background-color: white; -fx-padding: 10; -fx-border-radius: 6;
+                 -fx-background-radius: 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 3);">
+        <TextField fx:id="searchField" promptText="🔍 Rechercher un employé..."
+                   style="-fx-pref-width: 250px; -fx-padding: 8; -fx-border-radius: 6;
+                          -fx-background-radius: 6; -fx-font-size: 14px;"/>
+    </HBox>
+
+    <!-- ✅ Styled TableView for Employee Management -->
+    <StackPane style="-fx-background-color: white; -fx-padding: 15; -fx-border-radius: 6;
+                     -fx-background-radius: 6; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 3);">
+        <TableView fx:id="employeTable" style="-fx-background-color: white;" prefHeight="400">
+            <columns>
+
+
+                <TableColumn fx:id="nomCol" text="Nom" prefWidth="180"
+                             style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                <TableColumn fx:id="emailCol" text="Email" prefWidth="250"
+                             style="-fx-alignment: CENTER-LEFT; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                <!-- ✅ Role Column with Emojis -->
+                <TableColumn fx:id="roleCol" text="Rôle" prefWidth="140"
+                             style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+                <TableColumn fx:id="departementCol" text="Département" prefWidth="180"
+                             style="-fx-alignment: CENTER; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            </columns>
+        </TableView>
+    </StackPane>
+
+    <!-- ✅ Styled Buttons in Footer -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 15; -fx-background-color: #ECF0F1;">
+        <Button fx:id="addEmployeBtn" text="➕ Ajouter Employé" onAction="#ajouterEmploye"
+                style="-fx-background-color: #28A745; -fx-text-fill: white; -fx-padding: 8 15;
+                       -fx-font-size: 14px; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+
+        <Button fx:id="editEmployeBtn" text="✏️ Modifier Employé" onAction="#modifierEmploye"
+                style="-fx-background-color: #FFC107; -fx-text-fill: black; -fx-padding: 8 15;
+                       -fx-font-size: 14px; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+
+        <Button fx:id="deleteEmployeBtn" text="🗑️ Supprimer Employé" onAction="#supprimerEmploye"
+                style="-fx-background-color: #DC3545; -fx-text-fill: white; -fx-padding: 8 15;
+                       -fx-font-size: 14px; -fx-border-radius: 6; -fx-background-radius: 6;"/>
+    </HBox>
+
+</VBox>

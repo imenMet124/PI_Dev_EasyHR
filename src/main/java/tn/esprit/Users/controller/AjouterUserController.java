@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 import tn.esprit.Users.entities.User;
 import tn.esprit.Users.entities.UserRole;
 import tn.esprit.Users.entities.UserStatus;
@@ -95,6 +96,8 @@ public class AjouterUserController {
             Date hireDate = Date.valueOf(datePicker.getValue());
             UserStatus status = statusBox.getValue();
             String departmentName = departmentBox.getValue();
+            String rawPassword = "Default@123"; // Temporary default password, you may allow user input
+            String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
             // Get department name
             System.out.println("Department name: " + departmentName);  // Log department name
 

@@ -18,7 +18,7 @@ public class CandidatSaver {
 
     public static void main(String[] args) {
         // Change the file path to the actual uploaded PDF path
-        File pdfFile = new File("C:\\Users\\eyaam\\Documents\\uploaded_candidat.pdf");
+        File pdfFile = new File("C:\\Users\\MSI\\Downloads\\uploaded_candidat.pdf");
 
         // Extract text from PDF
         String pdfContent = PDFExtractor.extractTextFromPDF(pdfFile);

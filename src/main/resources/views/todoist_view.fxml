@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.control.cell.CheckBoxListCell?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.DatePicker?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="tn.esprit.tache.controllers.TodoistController"
+      alignment="CENTER" spacing="15" style="-fx-padding: 20; -fx-background-color: #f4f4f4; -fx-border-radius: 10; -fx-background-radius: 10;">
+
+    <!-- Authorization & Refresh Buttons -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="authorizeButton" text="Authorize with Todoist" onAction="#startOAuthProcess"
+                style="-fx-background-color: #0078D7; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        <Button fx:id="refreshTasksButton" text="Refresh Tasks" onAction="#loadTasks"
+                style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Task Input Section -->
+    <HBox spacing="10" alignment="CENTER">
+        <TextField fx:id="taskContentField" promptText="Enter a new task" HBox.hgrow="ALWAYS"/>
+        <DatePicker fx:id="taskDatePicker" promptText="Due Date"/>
+        <Button fx:id="createTaskButton" text="Add Task" onAction="#createTask"
+                style="-fx-background-color: #ff9800; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Task List -->
+    <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" style="-fx-border-color: #ccc; -fx-border-radius: 5;"/>
+
+    <!-- Task Controls -->
+    <HBox spacing="10" alignment="CENTER">
+        <CheckBox fx:id="taskCompletionCheckBox" text="Mark as Completed" onAction="#markTaskAsCompleted"/>
+        <Button fx:id="deleteTaskButton" text="Delete Selected Task" onAction="#deleteSelectedTask"
+                style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Progress Bar -->
+    <ProgressBar fx:id="taskProgressBar" progress="0.0" prefWidth="200" style="-fx-accent: #0078D7;"/>
+
+    <!-- Calendar View -->
+    <DatePicker fx:id="calendarView" showWeekNumbers="true" promptText="View Tasks by Date"
+                style="-fx-border-color: #0078D7; -fx-border-radius: 5;"/>
+</VBox>

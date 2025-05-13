@@ -1,75 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import java.lang.String?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.Offres.controllers.AcceuilController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.Users.controller.AcceuilController">
+
+    <stylesheets>
+        <String fx:value="AcceuilView.css" />
+    </stylesheets>
 
     <children>
-        <!-- Barre latérale du menu -->
-        <VBox prefHeight="400.0" prefWidth="180.0" style="-fx-background-color: #72A0C1; -fx-padding: 15;" stylesheets="@Style.css">
+        <!-- Sidebar -->
+        <VBox styleClass="sidebar" prefHeight="600.0" prefWidth="200.0" spacing="15"
+              AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20" />
+            </padding>
             <children>
-                <!-- Logo -->
-                <ImageView fitHeight="80.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@images/logoEasyHR.png" />
-                    </image>
-                    <VBox.margin>
-                        <Insets bottom="10.0" />
-                    </VBox.margin>
-                </ImageView>
+                <StackPane styleClass="sidebar-logo-container">
+                    <ImageView fitHeight="80.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@images/logoEasyHR.png" />
+                        </image>
+                    </ImageView>
+                </StackPane>
 
-                <!-- Affichage du nom de l'utilisateur -->
-                <Label fx:id="nomUtilisateur" style="-fx-font-size: 14; -fx-text-fill: white; -fx-font-weight: bold;" text="Utilisateur: ..." />
+                <Label fx:id="nomUtilisateur" styleClass="sidebar-username" text="Utilisateur: ..." />
 
-                <Button fx:id="gestionUser" onAction="#ouvrirGestionUser" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Gestion Utilisateurs">
-                    <VBox.margin>
-                        <Insets top="12.0" />
-                    </VBox.margin>
-                </Button>
+                <!-- Sidebar Buttons -->
+                <Button fx:id="Dashboard" styleClass="sidebar-button, animated-transition" onAction="#showDashboard" text="Dashboard" />
+                <Button fx:id="gestionUser" styleClass="sidebar-button, animated-transition" onAction="#ouvrirGestionUser" text="Gestion Utilisateurs" />
+                <Button fx:id="gestionOffres" styleClass="sidebar-button, animated-transition" onAction="#ouvrirGestionOffres" text="Gestion Offres" />
+                <Button fx:id="gestionTaches" styleClass="sidebar-button, animated-transition" onAction="#ouvrirGestionTaches" text="Gestion Tâches" />
+                <Button fx:id="gestionEvenements" styleClass="sidebar-button, animated-transition" onAction="#ouvrirGestionEvenements" text="Gestion Événements" />
+                <Button fx:id="gestionFormations" styleClass="sidebar-button, animated-transition" onAction="#ouvrirGestionFormations" text="Gestion Formations" />
 
-                <Button fx:id="gestionOffres" onAction="#ouvrirGestionOffres" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Gestion Offres">
-                    <VBox.margin>
-                        <Insets top="12.0" />
-                    </VBox.margin>
-                </Button>
-
-                <Button fx:id="gestionTaches" onAction="#ouvrirGestionTaches" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Gestion Tâches">
-                    <VBox.margin>
-                        <Insets top="12.0" />
-                    </VBox.margin>
-                </Button>
-
-                <Button fx:id="gestionEvenements" onAction="#ouvrirGestionEvenements" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Gestion Événements">
-                    <VBox.margin>
-                        <Insets top="12.0" />
-                    </VBox.margin>
-                </Button>
-
-                <Button fx:id="gestionFormations" onAction="#ouvrirGestionFormations" style="-fx-background-color: #FFAA33; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-weight: bold;" text="Gestion Formations">
-                    <VBox.margin>
-                        <Insets top="12.0" />
-                    </VBox.margin>
-                </Button>
+                <Region VBox.vgrow="ALWAYS" />
+                <Label text="EasyHR v1.0" style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" />
             </children>
         </VBox>
 
-        <!-- Contenu principal -->
-        <VBox layoutX="180.0" prefHeight="400.0" prefWidth="420.0" style="-fx-padding: 15;">
-            <children>
-                <Label style="-fx-font-size: 20; -fx-font-weight: bold; -fx-text-fill: #333;" text="Bienvenue sur la page d'accueil" />
-
-                <ImageView fitHeight="300.0" fitWidth="374.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@images/mobile-password-forgot.png" />
-                    </image>
-                    <VBox.margin>
-                        <Insets top="30.0" />
-                    </VBox.margin>
-                </ImageView>
-            </children>
-        </VBox>
+        <!-- Main Content (Dynamic) -->
+        <StackPane fx:id="contentArea" styleClass="main-content" layoutX="200.0"
+                   prefHeight="600.0" prefWidth="600.0"
+                   AnchorPane.leftAnchor="200" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" AnchorPane.bottomAnchor="0">
+            <Label text="Bienvenue sur la page d'accueil" styleClass="welcome-title" />
+        </StackPane>
     </children>
 </AnchorPane>

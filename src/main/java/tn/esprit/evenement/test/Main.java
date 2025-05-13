@@ -1,13 +1,16 @@
 package tn.esprit.evenement.test;
 
 import tn.esprit.evenement.entities.Evenement;
+import tn.esprit.evenement.entities.Participation;
 import tn.esprit.evenement.services.ServiceEvenement;
+import tn.esprit.evenement.services.ServiceParticipation;
 import tn.esprit.evenement.utils.MyDataBase;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -74,15 +77,29 @@ public class Main {
 //                }
 ////
 //                // Afficher les événements futurs
-                try {
-                    List<Evenement> evenements = serviceEvenement.afficher();
-                    System.out.println("Liste des événements futurs :");
-                    for (Evenement e : evenements) {
-                        System.out.println(e);
-                    }
-                } catch (SQLException e) {
-                    System.out.println("Erreur lors de l'affichage des événements : " + e.getMessage());
-                }
+//                try {
+//                    List<Evenement> evenements = serviceEvenement.afficher();
+//                    System.out.println("Liste des événements futurs :");
+//                    for (Evenement e : evenements) {
+//                        System.out.println(e);
+//                    }
+//                } catch (SQLException e) {
+//                    System.out.println("Erreur lors de l'affichage des événements : " + e.getMessage());
+//                }
+        ServiceParticipation service = new ServiceParticipation();
+
+        // Ajouter une participation
+//        Participation p1 = new Participation(1, 1, LocalDate.now(), "En attente");
+//        service.ajouterParticipation(p1);
+
+//        // Modifier le statut d'une participation
+        //service.modifierStatut(2, "Confirmé");
+//
+//        // Récupérer les participations d'un utilisateur
+        //System.out.println("Participations de l'utilisateur 3 : " + service.getParticipationsParUtilisateur(1));
+//
+//         Supprimer une participation
+             service.supprimerParticipation(2);
             }
     }
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import java.awt.Image?>
+<?import javafx.scene.image.ImageView?>
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" styleClass="root" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.evenement.controllers.AdminEventsController">
+
+    <stylesheets>
+        <String fx:value="listEvents.css" />
+        <String fx:value="styles.css" />
+    </stylesheets>
+
+
+    <HBox spacing="0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+    <!-- Sidebar -->
+    <VBox styleClass="sidebar" spacing="10" alignment="TOP_LEFT" prefWidth="250.0" visible="false" managed="false">
+        <ImageView fx:id="logoImage" fitHeight="600" fitWidth="200" preserveRatio="true" styleClass="logo" />
+        <Button text="Dashboard" styleClass="sidebar-button" onAction="#goToIndex" />
+        <Button text="Evenements" styleClass="sidebar-button" />
+        <Button text="Taches" styleClass="sidebar-button" />
+        <Button text="Offres" styleClass="sidebar-button" />
+        <Button text="Formations" styleClass="sidebar-button" />
+        <Button text="Utilisateurs" styleClass="sidebar-button" />
+    </VBox>
+
+
+<!--    <VBox spacing="20" styleClass="fade-in" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">-->
+
+    <!-- Main Content -->
+    <VBox styleClass="main-content" HBox.hgrow="ALWAYS" spacing="20" AnchorPane.bottomAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.topAnchor="20">
+
+        <!-- Header Section -->
+        <HBox alignment="CENTER_LEFT" spacing="20" styleClass="header-container">
+            <Text styleClass="header-title" text="Gestion des Événements" />
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Button onAction="#handleAddEvent" styleClass="action-button" text="Ajouter Evenement" style="-fx-background-color: #fbaa00;">
+                <graphic>
+                    <FontAwesomeIconView glyphName="PLUS" size="16"  styleClass="action-icon"/>
+                </graphic>
+            </Button>
+
+            <Button onAction="#handleRefresh" styleClass="action-button" text="Actualiser">
+                <graphic>
+                    <FontAwesomeIconView glyphName="REFRESH" size="16" styleClass="action-icon"/>
+                </graphic>
+            </Button>
+        </HBox>
+
+
+        <!-- Event List Section -->
+        <ListView fx:id="eventListView" styleClass="event-list" VBox.vgrow="ALWAYS" prefHeight="600" maxHeight="Infinity" />
+    </VBox>
+
+</HBox>
+</AnchorPane>

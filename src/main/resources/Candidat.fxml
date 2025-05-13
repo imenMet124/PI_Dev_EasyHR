@@ -33,17 +33,17 @@
                                 <Insets bottom="20.0" />
                             </VBox.margin></Button>
 
-                        <Button fx:id="ajout" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">
-                            <VBox.margin>
-                                <Insets bottom="20.0" />
-                            </VBox.margin></Button>
+<!--                        <Button fx:id="ajout" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Ajoute Une Offre">-->
+<!--                            <VBox.margin>-->
+<!--                                <Insets bottom="20.0" />-->
+<!--                            </VBox.margin></Button>-->
 
-                        <Button fx:id="gestion" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">
-                            <VBox.margin>
-                                <Insets bottom="20.0" />
-                            </VBox.margin></Button>
+<!--                        <Button fx:id="gestion" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Les Offres">-->
+<!--                            <VBox.margin>-->
+<!--                                <Insets bottom="20.0" />-->
+<!--                            </VBox.margin></Button>-->
 
-                        <Button fx:id="candidature" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures" />
+<!--                        <Button fx:id="candidature" style="-fx-background-color: FFAA33; -fx-text-fill: white; -fx-background-radius: 10; -fx-font-weight: bold;" text="Gérer Candidatures" />-->
                     </children>
                 </VBox>
 

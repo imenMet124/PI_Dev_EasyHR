@@ -16,7 +16,7 @@ public class Candidat {
     private String experienceInterne; // Chemin du fichier d'expérience interne
     private String competence; // Chemin du fichier de compétences
     private StatuCandidat statuCandidat = StatuCandidat.EN_ATTENTE; // Statut de la candidature avec valeur initiale
-    private Disponibilite disponibilite; // Disponibilité
+    private Disponibilite disponibilite = Disponibilite.IMMEDIATE; // Disponibilité
 
     public Candidat(int idCandidat, String nomCandidat, String prenomCandidat, String emailCandidat, String telephoneCandidat, String posteActuel, String departement, String experienceInterne, String competence, StatuCandidat statuCandidat, Disponibilite disponibilite) {
     }

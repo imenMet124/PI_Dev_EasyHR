@@ -37,7 +37,7 @@ public class PDFDataParser {
     }
 
     public static void main(String[] args) {
-        File pdfFile = new File("C:\\Users\\eyaam\\Documents\\uploaded_candidat.pdf"); // Change path
+        File pdfFile = new File("C:\\Users\\MSI\\Downloads\\uploaded_candidat.pdf"); // Change path
         String pdfContent = PDFExtractor.extractTextFromPDF(pdfFile);
 
         Candidat extractedCandidat = extractCandidatInfo(pdfContent);

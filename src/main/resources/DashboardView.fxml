@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.lang.String?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.evenement.controllers.DashboardController">
+    <stylesheets>
+        <String fx:value="calendar.css"/>
+
+    </stylesheets>
+    <VBox spacing="10" style="-fx-padding: 20px;">
+        <Label text="Calendrier des événements" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+
+        <!-- Navigation entre les semaines -->
+        <HBox spacing="10">
+            <Button text="&lt;&lt; Semaine précédente" onAction="#previousWeek"/>
+            <Label fx:id="weekLabel" text="Semaine du 1er - 7 Janvier" style="-fx-font-size: 18px;"/>
+            <Button text="Semaine suivante &gt;&gt; " onAction="#nextWeek"/>
+        </HBox>
+
+
+        <!-- Tableau de l'agenda -->
+        <GridPane fx:id="calendarGrid" style="-fx-border-color: #ddd; -fx-border-radius: 10px; -fx-background-color: white; -fx-padding: 10px;"/>
+    </VBox>
+</AnchorPane>

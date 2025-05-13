@@ -1,0 +1,168 @@
+/* ============================= */
+/* 🌟 Styles Généraux du Calendrier */
+/* ============================= */
+
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* ✅ Style du conteneur principal */
+.calendar-container {
+    -fx-padding: 20px;
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dddddd;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* ✅ Style du GridPane du calendrier */
+#calendarGrid {
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px;
+    -fx-background-color: #ffffff;
+}
+
+/* ============================= */
+/* 📆 Styles des Cellules (Jours) */
+/* ============================= */
+
+.day-cell {
+    -fx-border-color: #dddddd;
+    -fx-border-width: 1px;
+    -fx-padding: 10px;
+    -fx-background-color: #f9f9f9;
+    -fx-alignment: center;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+/* ✅ Effet au survol */
+.day-cell:hover {
+    -fx-background-color: #e0f7fa;
+    -fx-cursor: hand;
+}
+
+/* ✅ Style des numéros de jours */
+.day-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ✅ Style du bouton d'ajout d'événement */
+.add-event-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.add-event-button:hover {
+    -fx-background-color: #45a049;
+}
+
+/* ============================= */
+/* 🎟️ Styles des Événements */
+/* ============================= */
+
+/* ✅ Style de la boîte des événements */
+.event-box {
+    -fx-background-color: #cdeefd;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-margin: 5px;
+}
+
+/* ✅ Style des titres des événements */
+.event-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #007acc;
+}
+
+/* ✅ Effet au survol */
+.event-label:hover {
+    -fx-text-fill: #004e8c;
+    -fx-cursor: hand;
+}
+
+/* ============================= */
+/* 📌 Titres et Textes */
+/* ============================= */
+
+.page-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+    -fx-padding: 10px;
+}
+
+/* ============================= */
+/* 🏁 Animation des boutons */
+/* ============================= */
+
+.button {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #005b99;
+}
+/* ✅ Style de la page */
+.root {
+    -fx-background-color: #f4f4f4;
+}
+
+/* ✅ Barre de navigation */
+HBox {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+/* ✅ GridPane du calendrier */
+#calendarGrid {
+    -fx-border-color: #ddd;
+    -fx-border-radius: 10px;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+}
+
+/* ✅ Entête des jours */
+#calendarGrid > .label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 5px;
+}
+
+/* ✅ Cases horaires */
+.hour-label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
+}
+
+/* ✅ Événements */
+.event-label {
+    -fx-background-color: #007acc;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+
+/* ✅ Effet au survol */
+.event-label:hover {
+    -fx-background-color: #004e8c;
+    -fx-cursor: hand;
+}
+
